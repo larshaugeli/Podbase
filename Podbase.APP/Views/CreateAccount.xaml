@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="Podbase.APP.Views.CreateAccount"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Podbase.APP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+
+    <Grid
+        x:Name="ContentArea"
+        Margin="{StaticResource MediumLeftRightMargin}">
+        <Grid
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <TextBlock HorizontalAlignment="Left" Margin="539,29,0,0" Text="Create Account" TextAlignment="Center" FontSize="50" FontWeight="ExtraBold" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="396"/>
+            <TextBox HorizontalAlignment="Left" Margin="610,142,0,0" Text="TextBox" VerticalAlignment="Top" Height="40" Width="426"/>
+            <TextBox HorizontalAlignment="Left" Margin="610,273,0,0" Text="TextBox" VerticalAlignment="Top" Height="40" Width="426"/>
+            <TextBox HorizontalAlignment="Left" Margin="610,403,0,0" Text="TextBox" VerticalAlignment="Top" Height="40" Width="426"/>
+            <PasswordBox HorizontalAlignment="Left" Margin="610,547,0,0" VerticalAlignment="Top" Height="40" Width="426"/>
+            <TextBlock HorizontalAlignment="Left" Margin="447,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="First name:" />
+            <TextBlock HorizontalAlignment="Left" Margin="447,284,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Last name:" />
+            <TextBlock HorizontalAlignment="Left" Margin="447,414,0,0" Text="Username:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="447,558,0,0" Text="Password:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <Button Content="Create Account" FontSize="24" HorizontalAlignment="Center" Margin="0,732,0,0" VerticalAlignment="Top" Height="64" Width="193"/>
+        </Grid>
+    </Grid>
+</Page>
