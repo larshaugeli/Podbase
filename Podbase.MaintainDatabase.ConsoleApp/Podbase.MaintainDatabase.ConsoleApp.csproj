@@ -13,4 +13,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Podbase.DataAccess\Podbase.DataAccess.csproj" />
+    <ProjectReference Include="..\Podbase.Model\Podbase.Model.csproj" />
+  </ItemGroup>
+
 </Project>

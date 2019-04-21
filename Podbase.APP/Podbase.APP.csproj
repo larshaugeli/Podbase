@@ -252,6 +252,10 @@
       <Project>{0994A928-5B0A-4B6C-A235-FC815AF889BA}</Project>
       <Name>Podbase.APP.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Podbase.Model\Podbase.Model.csproj">
+      <Project>{94442a40-aca7-4e9f-9942-e6fad3a25b34}</Project>
+      <Name>Podbase.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

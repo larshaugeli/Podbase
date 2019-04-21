@@ -16,12 +16,12 @@
             <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
                 Place your content here.-->
             <TextBlock Text="Login" TextAlignment="Center" FontSize="50" FontWeight="ExtraBold"/>
-            <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Margin="471,244,0,0" VerticalAlignment="Top" Height="60" Width="643"/>
-            <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="471,423,0,0" VerticalAlignment="Top" Height="60" Width="643"/>
+            <TextBox x:Name="txtLoginUsername" HorizontalAlignment="Left" Margin="471,244,0,0" VerticalAlignment="Top" Height="60" Width="643"/>
+            <PasswordBox x:Name="txtLoginPassword" HorizontalAlignment="Left" Margin="471,423,0,0" VerticalAlignment="Top" Height="60" Width="643"/>
             <TextBlock HorizontalAlignment="Left" Margin="242,258,0,0" Text="Username:" FontSize="24" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="138"/>
             <TextBlock HorizontalAlignment="Left" Margin="242,451,0,0" Text="Password:" FontSize="24" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="145" />
-            <Button Content="Log in" FontSize="24"  HorizontalAlignment="Left" Margin="405,700,0,0" VerticalAlignment="Top" Height="80" Width="239"/>
+            <Button Content="Log in" FontSize="24"  HorizontalAlignment="Left" Margin="405,700,0,0" VerticalAlignment="Top" Height="80" Width="239" Click="Button_Click"/>
             <Button Content="Create Account" FontSize="24" HorizontalAlignment="Left" Margin="791,700,0,0" VerticalAlignment="Top" Height="80" Width="230"/>
         </Grid>
     </Grid>
-
+</Page>
