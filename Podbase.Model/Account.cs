@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Podbase.Model
 {
-    class Account
+    public class Account
     {
         public int LoginId { get; set; }
         public string Username { get; set; }
