@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Podbase.APP.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,9 +23,16 @@ namespace Podbase.APP.Views
     /// </summary>
     public sealed partial class CreateAccount : Page
     {
+        public CreateAccountViewModel ViewModel { get; } = new CreateAccountViewModel();
+
         public CreateAccount()
         {
             this.InitializeComponent();
+        }
+
+        private void CreateAccountBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.CreateAccountCommand();
         }
     }
 }

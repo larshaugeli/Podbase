@@ -14,7 +14,7 @@ namespace Podbase.APP.DataAccess
         readonly HttpClient _httpClient = new HttpClient();
         static readonly Uri accountsBaseUri = new Uri("http://localhost:6289/api/accounts");
 
-        public async Task<Account[]> GetActorsAsync()
+        public async Task<Account[]> GetAccountsAsync()
         {
             HttpResponseMessage result = await _httpClient.GetAsync(accountsBaseUri);
             string json = await result.Content.ReadAsStringAsync();
