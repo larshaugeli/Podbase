@@ -30,9 +30,10 @@ namespace Podbase.APP.Views
             this.InitializeComponent();
         }
 
-        private void CreateAccountBtn_Click(object sender, RoutedEventArgs e)
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            ViewModel.CreateAccountCommand();
+            if (this.DataContext != null)
+            { ((dynamic)this.DataContext).SecurePassword = ((PasswordBox)sender).Password; }
         }
     }
 }

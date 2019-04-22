@@ -14,32 +14,77 @@ using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
 {
-    public class CreateAccountViewModel : INotifyPropertyChanged
+    public class CreateAccountViewModel : ViewModelBase
     {
-        private Account account;
-
-        public ICommand CreateAccountCommand { get; set; }
+        public RelayCommand CreateAccountCommand { get; set; }
         public ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
         private Accounts accountsDataAccess = new Accounts();
 
-        // SKJØNNER IKKE
-        //public CreateAccountViewModel()
-        //{
-        //    CreateAccountCommand = new RelayCommand()
-        //    {
-        //        var account = new Account()
-        //        {
-        //        };
-        //        if (await accountsDataAccess.AddAccountAsync(account))
-        //            Accounts.Add(account);
-        //    }
-        //}
+        public CreateAccountViewModel()
+        {
+            Accounts.Add(new Account()
+            {
+                LoginId = 1,
+                FirstName = "Lars",
+                LastName = "Haugeli",
+                Username = "larshaugeli",
+                Password = "Mjaupus"
+            });
+            CreateAccountCommand = new RelayCommand(AddNewAccount);
+        }
 
-        //internal async Task LoadAccountsAsync()
-        //{
-        //    var accounts = await accountsDataAccess.GetAccountsAsync();
-        //    foreach (Account account in accounts)
-        //        Accounts.Add(account);
-        //}
+        private void AddNewAccount()
+        {
+            Account account = new Account()
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Username = username,
+                Password = password
+            };
+            Accounts.Add(account);
+        }
+        
+        private String _firstName, _lastName, _username, _password;
+
+        public string firstName
+        {
+            get { return _firstName; }
+            set
+            {
+                _firstName = value;
+                OnPropertyChanged("firstName");
+            }
+        }
+
+        public string lastName
+        {
+            get { return _lastName; }
+            set
+            {
+                _lastName = value;
+                OnPropertyChanged("lastName");
+            }
+        }
+
+        public string username
+        {
+            get { return _username; }
+            set
+            {
+                _username = value;
+                OnPropertyChanged("username");
+            }
+        }
+
+        public string password
+        {
+            get { return _password; }
+            set
+            {
+                _password = value;
+                OnPropertyChanged("password");
+            }
+        }
     }
 }

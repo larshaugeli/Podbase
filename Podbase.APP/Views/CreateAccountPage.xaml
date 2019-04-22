@@ -14,14 +14,15 @@
         <Grid
             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <TextBlock HorizontalAlignment="Left" Margin="539,29,0,0" Text="Create Account" TextAlignment="Center" FontSize="50" FontWeight="ExtraBold" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="396"/>
-            <TextBox HorizontalAlignment="Left" Text="(Binding Account.FirstName)" x:Name="txtFirstName" Margin="610,142,0,0" VerticalAlignment="Top" Height="40" Width="426"/>
-            <TextBox HorizontalAlignment="Left" Text="(Binding Account.LastName)" x:Name="txtLastName" Margin="610,273,0,0" VerticalAlignment="Top" Height="40" Width="426"/>
-            <TextBox HorizontalAlignment="Left" Text="(Binding Account.Username)" x:Name="txtUsername" Margin="610,403,0,0" VerticalAlignment="Top" Height="40" Width="426"/>
+            <TextBox HorizontalAlignment="Left" Text="{Binding firstName}" Margin="610,142,0,0" VerticalAlignment="Top" Height="40" Width="426"/>
+            <TextBox HorizontalAlignment="Left" Text="{Binding lastName}" Margin="610,273,0,0" VerticalAlignment="Top" Height="40" Width="426"/>
+            <TextBox HorizontalAlignment="Left" Text="{Binding username}" Margin="610,403,0,0" VerticalAlignment="Top" Height="40" Width="426"/>
+            <PasswordBox HorizontalAlignment="Left" PasswordChanged="PasswordBox_PasswordChanged" Margin="610,554,0,0" VerticalAlignment="Top" Height="40" Width="426"/>
             <TextBlock HorizontalAlignment="Left" Margin="447,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="First name:" />
             <TextBlock HorizontalAlignment="Left" Margin="447,284,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Last name:" />
             <TextBlock HorizontalAlignment="Left" Margin="447,414,0,0" Text="Username:" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="447,558,0,0" Text="Password:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-            <Button x:Name="CreateAccountBtn" Command="{x:Bind ViewModel.CreateAccountCommand}" Content="Create Account" FontSize="24" HorizontalAlignment="Center" Margin="0,732,0,0" VerticalAlignment="Top" Height="64" Width="193" Click="CreateAccountBtn_Click"/>
+            <Button x:Name="CreateAccountBtn" Command="{Binding AddNewAccount}" Content="Create Account" FontSize="24" HorizontalAlignment="Center" Margin="0,732,0,0" VerticalAlignment="Top" Height="64" Width="193" Click="CreateAccountBtn_Click"/>
         </Grid>
     </Grid>
 </Page>
