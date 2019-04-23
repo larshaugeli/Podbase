@@ -15,9 +15,9 @@ namespace Podbase.APP.Views
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void CreateAccount_OnClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(CreateAccount));
         }
     }
 }
