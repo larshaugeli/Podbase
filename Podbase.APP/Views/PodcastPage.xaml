@@ -4,15 +4,34 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:Podbase.Model"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
     <Grid
         x:Name="ContentArea"
-        Margin="{StaticResource MediumLeftRightMargin}">
+        Margin="24,0,0,0">
         <Grid
-            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
-                Place your content here.-->
+            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" Margin="0,0,25,0">
+            <ListView x:Name="PodcastListView" Height="487" Margin="10,112,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965"/>
+
+            <GridView x:Name="gvActors" ItemsSource="{x:Bind ViewModel.Podcasts}" RelativePanel.Below="Commands" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Podcast">
+                        <StackPanel HorizontalAlignment="Left" Width="200" Height="100">
+                            <TextBlock Text="{x:Bind Creator}" Style="{StaticResource TitleTextBlockStyle}" />
+                            <TextBlock Text="{x:Bind Name}" Style="{StaticResource BaseTextBlockStyle}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+
+            <TextBlock HorizontalAlignment="Left" Margin="357,30,0,0" Text="Podcasts" TextAlignment="Center" FontSize="20" FontWeight="ExtraBold" TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Width="223"/>
+            <CommandBar Height="84" Margin="595,112,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                <AppBarButton x:Name="Add" Icon="Add" Label="Add" Command="{x:Bind ViewModel.AddCommand}" CommandParameter="{Binding ElementName=Fullname, Path=Text }"/>
+                <AppBarButton x:Name="Delete" Icon="Delete" Label="Delete" Command="{x:Bind ViewModel.DeleteCommand}" CommandParameter="{Binding ElementName=gvActors, Path=SelectedItem}"/>
+                <AppBarButton x:Name="Edit" Icon="Edit" Label="Edit"/>
+                <AppBarButton x:Name="Sort" Icon="Sort" Label="Sort"/>
+            </CommandBar>
         </Grid>
     </Grid>
 </Page>

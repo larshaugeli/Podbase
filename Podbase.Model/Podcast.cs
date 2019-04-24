@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Podbase.Model
 {
-    class Podcast
+    public class Podcast
     {
+        public int PodcastId { get; set; }
         public string Name { get; set; }
         public string Creator { get; set; }
         public string Genre { get; set; }
-        public string Info { get; set; }
+        public string Descripton { get; set; }
         public int Rating { get; set; }
-
     }
 }

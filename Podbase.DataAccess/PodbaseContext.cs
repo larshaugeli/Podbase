@@ -11,6 +11,7 @@ namespace Podbase.DataAccess
     public class PodbaseContext : DbContext
     {
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Podcast> Podcasts { get; set; }
 
         public PodbaseContext(DbContextOptions<PodbaseContext> options) : base(options) { }
 
