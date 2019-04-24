@@ -30,10 +30,10 @@ namespace Podbase.APP.Views
             this.InitializeComponent();
         }
 
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (this.DataContext != null)
-            { ((dynamic)this.DataContext).SecurePassword = ((PasswordBox)sender).Password; }
-        }
+        //private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        //{
+        //    if (this.DataContext != null)
+        //    { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; }
+        //}
     }
 }

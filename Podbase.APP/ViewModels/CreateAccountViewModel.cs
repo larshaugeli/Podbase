@@ -24,7 +24,6 @@ namespace Podbase.APP.ViewModels
         {
             Accounts.Add(new Account()
             {
-                LoginId = 1,
                 FirstName = "Lars",
                 LastName = "Haugeli",
                 Username = "larshaugeli",

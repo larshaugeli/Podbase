@@ -21,25 +21,25 @@ namespace Podbase.DataAccess
 
         private static void CreateDummyAccounts(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Account>().HasData(new Account() { LoginId = 1, FirstName = "Lars", LastName = "Haugeli", Username = "larshaugeli", Password = "Sofimjau123"});
-            modelBuilder.Entity<Account>().HasData(new Account() { LoginId = 2, FirstName = "Sofi", LastName = "Mjaupus", Username = "sofimjaupus", Password = "Sofimjau123"});
+            modelBuilder.Entity<Account>().HasData(new Account() { FirstName = "Lars", LastName = "Haugeli", Username = "larshaugeli", Password = "Sofimjau123" });
+            modelBuilder.Entity<Account>().HasData(new Account() { FirstName = "Sofi", LastName = "Mjaupus", Username = "sofimjaupus", Password = "Sofimjau123" });
         }
 
-        //protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
-        //    {
-        //        DataSource = "donau.hiof.no",
-        //        InitialCatalog = "lhhaugel",
-        //        UserID = "lhhaugel",
-        //        Password = "ze59EYmH"
-        //    };
+        protected void OnConfiguring(DbContextOptionsBuilder<PodbaseContext> optionsBuilder)
+        {
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
+            {
+                DataSource = "donau.hiof.no",
+                InitialCatalog = "lhhaugel",
+                UserID = "lhhaugel",
+                Password = "ze59EYmH"
+            };
 
-        //    optionsBuilder.UseSqlServer(builder.ConnectionString.ToString());
-        //}
+            optionsBuilder.UseSqlServer(builder.ConnectionString.ToString());
+        }
     }
 
-    public class EntertainmentContextFactory : IDesignTimeDbContextFactory<PodbaseContext>
+    public class PodbaseContextFactory : IDesignTimeDbContextFactory<PodbaseContext>
     {
         public PodbaseContext CreateDbContext(string[] args)
         {
