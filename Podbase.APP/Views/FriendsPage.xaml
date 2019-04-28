@@ -11,6 +11,7 @@
         Margin="{StaticResource MediumLeftRightMargin}">
         <Grid
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <TextBlock HorizontalAlignment="Center" Margin="0,320,0,0" Text="Friends page will be implemented later." FontSize="40" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
                 Place your content here.-->
         </Grid>

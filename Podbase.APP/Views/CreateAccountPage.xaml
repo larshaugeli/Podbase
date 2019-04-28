@@ -22,7 +22,7 @@
             <TextBlock HorizontalAlignment="Left" Margin="11,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Last name:" />
             <TextBlock HorizontalAlignment="Left" Margin="13,288,0,0" Text="Username:" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="17,373,0,0" Text="Password:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-            <Button Command="{Binding AddNewAccount}" Content="Create Account" FontSize="24" HorizontalAlignment="Left" Margin="131,498,0,0" VerticalAlignment="Top" Height="64" Width="193"/>
+            <Button Command="{Binding AddNewAccount}" Content="Create Account" FontSize="24" HorizontalAlignment="Left" Margin="131,498,0,0" VerticalAlignment="Top" Height="64" Width="193" Click="CreateAccount_Click"/>
         </Grid>
     </Grid>
 </Page>
