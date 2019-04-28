@@ -11,10 +11,21 @@
         Margin="24,0,24,10">
         <Grid
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" >
-            <ListView x:Name="Podcasts" HorizontalAlignment="Center" Height="860" Margin="0,130,0,0" VerticalAlignment="Top" Width="1432"/>
+            <Hub Orientation="Vertical" Margin="0,78,0,0">
+                <HubSection Header="Popular podcasts" Height="250">
+                    <DataTemplate>
+                        <Grid/>
+                    </DataTemplate>
+                </HubSection>
+                <HubSection Header="Statistics about your profile and podcasts">
+                    <DataTemplate>
+                        <Grid/>
+                    </DataTemplate>
+                </HubSection>
+            </Hub>
 
 
         </Grid>
-        <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" Text="Podcasts" FontSize="30" FontFamily="Calibri"  TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" Text="Welcome User!" FontSize="30" FontFamily="Calibri"  TextWrapping="Wrap" VerticalAlignment="Top"/>
     </Grid>
 </Page>

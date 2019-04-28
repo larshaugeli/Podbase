@@ -5,33 +5,65 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="using:Podbase.Model"
+    xmlns:viewModels="using:Podbase.APP.ViewModels"
+    xmlns:interop="using:Windows.UI.Xaml.Interop"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewModels:PodcastViewModel/>
+    </Page.DataContext>
+
     <Grid
         x:Name="ContentArea"
         Margin="24,0,0,0">
         <Grid
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" Margin="0,0,25,0">
-            <ListView x:Name="PodcastListView" Height="487" Margin="10,112,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965"/>
+            <ListView ItemsSource="{Binding PodcastsList}" Height="487" Margin="10,112,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965">
+                <ListView.HeaderTemplate >
+                    <DataTemplate>
+                        <Grid Background="Gray" Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="300" />
+                            </Grid.ColumnDefinitions>
 
-            <TextBlock HorizontalAlignment="Left" Margin="357,30,0,0" Text="Podcasts" TextAlignment="Center" FontSize="20" FontWeight="ExtraBold" TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Width="223"/>
-            <CommandBar x:Name="Commands" Height="84" Margin="595,112,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                            <TextBlock Grid.Column="0" Text="Podcast name" />
+                            <TextBlock Grid.Column="1" Text="Creator" />
+                            <TextBlock Grid.Column="2" Text="Genre" />
+                            <TextBlock Grid.Column="3" Text="Description" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Background="AliceBlue">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="300" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="{Binding Name}"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Creator}" />
+                            <TextBlock Grid.Column="2" Text="{Binding Genre}" />
+                            <TextBlock Grid.Column="3" Text="{Binding Description}" TextWrapping="Wrap" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <TextBlock HorizontalAlignment="Left" Margin="357,30,0,0" Text="Your podcasts" TextAlignment="Center" FontSize="20" FontWeight="ExtraBold" TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Width="223"/>
+            <CommandBar x:Name="Commands" Height="84" Margin="560,67,0,0" VerticalAlignment="Top">
                 <AppBarButton x:Name="Add" Icon="Add" Label="Add" Click="Add_OnClick"/>
                 <AppBarButton x:Name="Delete" Icon="Delete" Label="Delete" Command="{x:Bind ViewModel.DeleteCommand}" CommandParameter="{Binding ElementName=gvPodcasts, Path=SelectedItem}"/>
                 <AppBarButton x:Name="Edit" Icon="Edit" Label="Edit"/>
                 <AppBarButton x:Name="Sort" Icon="Sort" Label="Sort"/>
             </CommandBar>
-
-            <GridView x:Name="gvPodcasts" ItemsSource="{x:Bind ViewModel.Podcasts}" RelativePanel.Below="Commands" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" HorizontalAlignment="Stretch" Margin="0,173,410,0" VerticalAlignment="Stretch">
-                <GridView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Podcast">
-                        <StackPanel HorizontalAlignment="Left" Width="200" Height="100">
-                            <TextBlock Text="{x:Bind Creator}" Style="{StaticResource TitleTextBlockStyle}" />
-                            <TextBlock Text="{x:Bind Name}" Style="{StaticResource TitleTextBlockStyle}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-            </GridView>
 
         </Grid>
     </Grid>

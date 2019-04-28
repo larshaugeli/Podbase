@@ -16,10 +16,10 @@ namespace Podbase.APP.Views
             //Loaded += PodcastPage_LoadedAsync;
         }
 
-        private async void PodcastPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            await ViewModel.LoadPodcastsAsync();
-        }
+        //private async void PodcastPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        //{
+        //    await ViewModel.LoadPodcastsAsync();
+        //}
 
 
         private void Add_OnClick(object sender, RoutedEventArgs e)

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
 using Podbase.Model;
@@ -12,19 +13,18 @@ namespace Podbase.APP.ViewModels
 {
     public class AddPodcastViewModel : Observable
     {
-        public ObservableCollection<Podcast> Podcasts { get; set; } = new ObservableCollection<Podcast>();
+        //public ObservableCollection<Podcast> Podcasts { get; set; } = new ObservableCollection<Podcast>();
 
-        private void AddNewPodcast()
+        public void AddNewPodcast()
         {
-
-        Podcast podcast = new Podcast()
+            Podcast podcast = new Podcast()
             {
                 Name = name,
                 Creator = creator,
                 Genre = genre,
-                Description = _description
+                Description = description
             };
-            Podcasts.Add(podcast);
+            PodcastViewModel.PodcastsList.Add(podcast);
         }
 
         private String _name, _creator, _genre, _description;
