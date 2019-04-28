@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -28,7 +29,15 @@ namespace Podbase.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            var connection = @"Server=(localdb)\MSSQLLocalDB;Database=Entertainment.Database;Trusted_Connection=True;ConnectRetryCount=0";
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
+            {
+                DataSource = "donau.hiof.no",
+                InitialCatalog = "lhhaugel",
+                UserID = "lhhaugel",
+                Password = "ze59EYmH"
+            };
+
+            var connection = builder.ConnectionString.ToString();
             services.AddDbContext<PodbaseContext>(options => options.UseSqlServer(connection));
         }
 

@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Windows.UI.Xaml;
 using Podbase.APP.ViewModels;
 
 using Windows.UI.Xaml.Controls;
@@ -13,12 +13,18 @@ namespace Podbase.APP.Views
         public PodcastPage()
         {
             InitializeComponent();
-            Loaded += PodcastPage_LoadedAsync;
+            //Loaded += PodcastPage_LoadedAsync;
         }
 
         private async void PodcastPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             await ViewModel.LoadPodcastsAsync();
+        }
+
+
+        private void Add_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AddPodcast));
         }
     }
 }

@@ -14,24 +14,25 @@
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" Margin="0,0,25,0">
             <ListView x:Name="PodcastListView" Height="487" Margin="10,112,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965"/>
 
-            <GridView x:Name="gvActors" ItemsSource="{x:Bind ViewModel.Podcasts}" RelativePanel.Below="Commands" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+            <TextBlock HorizontalAlignment="Left" Margin="357,30,0,0" Text="Podcasts" TextAlignment="Center" FontSize="20" FontWeight="ExtraBold" TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Width="223"/>
+            <CommandBar x:Name="Commands" Height="84" Margin="595,112,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                <AppBarButton x:Name="Add" Icon="Add" Label="Add" Click="Add_OnClick"/>
+                <AppBarButton x:Name="Delete" Icon="Delete" Label="Delete" Command="{x:Bind ViewModel.DeleteCommand}" CommandParameter="{Binding ElementName=gvPodcasts, Path=SelectedItem}"/>
+                <AppBarButton x:Name="Edit" Icon="Edit" Label="Edit"/>
+                <AppBarButton x:Name="Sort" Icon="Sort" Label="Sort"/>
+            </CommandBar>
+
+            <GridView x:Name="gvPodcasts" ItemsSource="{x:Bind ViewModel.Podcasts}" RelativePanel.Below="Commands" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" HorizontalAlignment="Stretch" Margin="0,173,410,0" VerticalAlignment="Stretch">
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="model:Podcast">
                         <StackPanel HorizontalAlignment="Left" Width="200" Height="100">
                             <TextBlock Text="{x:Bind Creator}" Style="{StaticResource TitleTextBlockStyle}" />
-                            <TextBlock Text="{x:Bind Name}" Style="{StaticResource BaseTextBlockStyle}" />
+                            <TextBlock Text="{x:Bind Name}" Style="{StaticResource TitleTextBlockStyle}" />
                         </StackPanel>
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
 
-            <TextBlock HorizontalAlignment="Left" Margin="357,30,0,0" Text="Podcasts" TextAlignment="Center" FontSize="20" FontWeight="ExtraBold" TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Width="223"/>
-            <CommandBar Height="84" Margin="595,112,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                <AppBarButton x:Name="Add" Icon="Add" Label="Add" Command="{x:Bind ViewModel.AddCommand}" CommandParameter="{Binding ElementName=Fullname, Path=Text }"/>
-                <AppBarButton x:Name="Delete" Icon="Delete" Label="Delete" Command="{x:Bind ViewModel.DeleteCommand}" CommandParameter="{Binding ElementName=gvActors, Path=SelectedItem}"/>
-                <AppBarButton x:Name="Edit" Icon="Edit" Label="Edit"/>
-                <AppBarButton x:Name="Sort" Icon="Sort" Label="Sort"/>
-            </CommandBar>
         </Grid>
     </Grid>
 </Page>
