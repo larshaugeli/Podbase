@@ -19,8 +19,9 @@ namespace Podbase.APP.ViewModels
 {
     public class CreateAccountViewModel : ViewModelBase
     {
+
         public RelayCommand CreateAccountCommand { get; set; }
-        public static ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
+        public static List<Account> Accounts { get; set; } = new List<Account>();
         private Accounts accountsDataAccess = new Accounts();
 
         public CreateAccountViewModel()
@@ -46,7 +47,7 @@ namespace Podbase.APP.ViewModels
             Debug.WriteLine(Accounts.ToString());
         }
         
-        private String _firstName, _lastName, _username, _password;
+        private string _firstName, _lastName, _username, _password;
 
         public string firstName
         {
