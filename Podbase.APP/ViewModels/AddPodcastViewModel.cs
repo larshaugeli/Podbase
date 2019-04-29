@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,61 +12,86 @@ using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
 {
-    public class AddPodcastViewModel : Observable
+    public class AddPodcastViewModel : ViewModelBase
     {
-        //public ObservableCollection<Podcast> Podcasts { get; set; } = new ObservableCollection<Podcast>();
+        public RelayCommand CreatePodcastCommand { get; set; }
+
+        public AddPodcastViewModel()
+        {
+            CreatePodcastCommand = new RelayCommand(AddNewPodcast);
+        }
+
+        //public AddPodcastViewModel()
+        //{
+        //    Podcasts.Add(new Podcast()
+        //    {
+        //        Name = "Serial",
+        //        Creator = "This American Life",
+        //        Genre = "True Crime",
+        //        Description = "True crime podcast about a murder in USA."
+        //    });
+        //    CreatePodcastCommand = new RelayCommand(AddNewPodcast);
+        //}
 
         public void AddNewPodcast()
         {
             Podcast podcast = new Podcast()
             {
-                Name = name,
-                Creator = creator,
-                Genre = genre,
-                Description = description
+                Name = Name,
+                Creator = Creator,
+                Genre = Genre,
+                Description = Description
             };
+            PodcastViewModel.Podcasts.Add(podcast);
             PodcastViewModel.PodcastsList.Add(podcast);
+
         }
 
         private String _name, _creator, _genre, _description;
 
-        public string name
+        public string Name
         {
             get { return _name; }
             set
             {
-                _name = value;
-                OnPropertyChanged("name");
+                this._name = value;
+                OnPropertyChanged("_name");
             }
         }
 
-        public string creator
+        public string Creator
         {
             get { return _creator; }
             set
             {
-                _creator = value;
-                OnPropertyChanged("creator");
+                {
+                    this._creator = value;
+                    OnPropertyChanged("_creator");
+                }
             }
         }
 
-        public string genre
+        public string Genre
         {
             get { return _genre; }
             set
             {
-                _genre = value;
-                OnPropertyChanged("genre");
+                {
+                    this._genre = value;
+                    OnPropertyChanged("_genre");
+                }
             }
         }
 
-        public string description
+        public string Description
         {
             get { return _description; }
             set
             {
-                _description = value;
-                OnPropertyChanged("description");
+                {
+                    this._description = value;
+                    OnPropertyChanged("_description");
+                }
             }
         }
     }

@@ -28,11 +28,11 @@ namespace Podbase.APP.Views
         public AddPodcast()
         {
             this.InitializeComponent();
+            this.DataContext = ViewModel;
         }
 
         private void AddPodcast_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.AddNewPodcast();
             Frame.Navigate(typeof(PodcastPage));
         }
     }

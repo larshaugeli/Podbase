@@ -18,9 +18,6 @@ using Podbase.APP.ViewModels;
 
 namespace Podbase.APP.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class CreateAccount : Page
     {
         public CreateAccountViewModel ViewModel { get; } = new CreateAccountViewModel();
@@ -28,6 +25,7 @@ namespace Podbase.APP.Views
         public CreateAccount()
         {
             this.InitializeComponent();
+            this.DataContext = ViewModel;
         }
 
         private void CreateAccount_Click(object sender, RoutedEventArgs e)
@@ -35,10 +33,10 @@ namespace Podbase.APP.Views
             Frame.Navigate(typeof(LoginPage));
         }
 
-        //private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        //{
-        //    if (this.DataContext != null)
-        //    { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; }
-        //}
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; }
+        }
     }
 }

@@ -5,8 +5,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Podbase.APP.Views"
+    xmlns:viewModels="using:Podbase.APP.ViewModels"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewModels:LoginViewModel/>
+    </Page.DataContext>
 
     <Grid
         x:Name="ContentArea"
@@ -16,8 +21,8 @@
             <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
                 Place your content here.-->
             <TextBlock Text="Login" TextAlignment="Left" Margin="460,31,355,531" FontSize="20" FontWeight="ExtraBold"/>
-            <TextBox x:Name="txtLoginUsername" HorizontalAlignment="Center" Margin="0,112,0,0" VerticalAlignment="Top" Height="60" Width="568"/>
-            <PasswordBox x:Name="txtLoginPassword" HorizontalAlignment="Center" Margin="0,246,0,0" VerticalAlignment="Top" Height="60" Width="568"/>
+            <TextBox Text="{Binding username, Mode=TwoWay}" HorizontalAlignment="Center" Margin="0,112,0,0" VerticalAlignment="Top" Height="60" Width="568"/>
+            <PasswordBox Password="{Binding password, Mode=TwoWay}" HorizontalAlignment="Center" Margin="0,246,0,0" VerticalAlignment="Top" Height="60" Width="568"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,126,0,0" Text="Username:" FontSize="24" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="138"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,260,0,0" Text="Password:" FontSize="24" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="145" />
             <Button Content="Log in" FontSize="24"  HorizontalAlignment="Left" Margin="198,424,0,0" VerticalAlignment="Top" Height="60" Width="158"/>

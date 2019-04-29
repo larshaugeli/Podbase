@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Xaml.Controls;
+using Microsoft.Extensions.Logging;
 using Podbase.APP.Annotations;
 using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
@@ -18,18 +20,11 @@ namespace Podbase.APP.ViewModels
     public class CreateAccountViewModel : ViewModelBase
     {
         public RelayCommand CreateAccountCommand { get; set; }
-        public ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
+        public static ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
         private Accounts accountsDataAccess = new Accounts();
 
         public CreateAccountViewModel()
         {
-            Accounts.Add(new Account()
-            {
-                FirstName = "Lars",
-                LastName = "Haugeli",
-                Username = "larshaugeli",
-                Password = "Mjaupus"
-            });
             CreateAccountCommand = new RelayCommand(AddNewAccount);
         }
 
@@ -43,6 +38,12 @@ namespace Podbase.APP.ViewModels
                 Password = password
             };
             Accounts.Add(account);
+            Debug.WriteLine(Accounts.Count);
+            Debug.WriteLine("FirstName: "+ account.FirstName);
+            Debug.WriteLine("LastName: " + account.LastName);
+            Debug.WriteLine("Username: " + account.Username);
+            Debug.WriteLine("Password: " + account.Password);
+            Debug.WriteLine(Accounts.ToString());
         }
         
         private String _firstName, _lastName, _username, _password;
