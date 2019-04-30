@@ -21,18 +21,6 @@ namespace Podbase.APP.ViewModels
             CreatePodcastCommand = new RelayCommand(AddNewPodcast);
         }
 
-        //public AddPodcastViewModel()
-        //{
-        //    Podcasts.Add(new Podcast()
-        //    {
-        //        Name = "Serial",
-        //        Creator = "This American Life",
-        //        Genre = "True Crime",
-        //        Description = "True crime podcast about a murder in USA."
-        //    });
-        //    CreatePodcastCommand = new RelayCommand(AddNewPodcast);
-        //}
-
         public void AddNewPodcast()
         {
             Podcast podcast = new Podcast()

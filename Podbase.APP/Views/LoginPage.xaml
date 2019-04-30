@@ -19,8 +19,8 @@
         <Grid
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
             <TextBlock Text="Login" TextAlignment="Left" Margin="460,31,355,531" FontSize="20" FontWeight="ExtraBold"/>
-            <TextBox Text="{Binding username, Mode=TwoWay}" HorizontalAlignment="Left" Margin="204,126,0,0" VerticalAlignment="Top" Height="46" Width="385"/>
-            <PasswordBox Password="{Binding password, Mode=TwoWay}" HorizontalAlignment="Left" Margin="205,253,0,0" VerticalAlignment="Top" Height="46" Width="383"/>
+            <TextBox Text="{Binding Username, Mode=TwoWay}" HorizontalAlignment="Left" Margin="204,126,0,0" VerticalAlignment="Top" Height="46" Width="385"/>
+            <PasswordBox Password="{Binding Password, Mode=TwoWay}" HorizontalAlignment="Left" Margin="205,253,0,0" VerticalAlignment="Top" Height="46" Width="383"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,126,0,0" Text="Username:" FontSize="24" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="140"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,260,0,0" Text="Password:" FontSize="24" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="140" />
             <Button Content="Log in" Command="{Binding LoginCommand}" FontSize="24"  HorizontalAlignment="Left" Margin="198,424,0,0" VerticalAlignment="Top" Height="60" Width="158"/>

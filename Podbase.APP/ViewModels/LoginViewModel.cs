@@ -21,70 +21,70 @@ namespace Podbase.APP.ViewModels
 
         private void LoginUser()
         {
-            var accounts = CreateAccountViewModel.Accounts;
+            var accounts = Account.Accounts;
             var account = new Account
             {
-                Username = username,
-                Password = password
+                Username = Username,
+                Password = Password
             };
-            Debug.WriteLine("Username: " + account.Username + ", Password: " + account.Password);
-            bool accountInAccountsList = accounts.Any(x => x.Username == username && x.Password == password);
+
+            bool accountInAccountsList = accounts.Any(x => x.Username == Username && x.Password == Password);
             if (accountInAccountsList)
             {
-                Debug.WriteLine("Account exists");
-                createDialog(true);
                 loggedInUsername = account.Username;
                 loggedInFirstName = account.FirstName;
                 loggedInLastName = account.LastName;
+                CreateDialog("exists");
                 NavigationService.Navigate(typeof(MainPage));
 
-            } else { createDialog(false);}
+            } else {
+                CreateDialog("notExists");}
         }
 
         private String _username, _password;
 
-        public string username
+        public string Username
         {
             get { return _username; }
             set
             {
                 _username = value;
-                OnPropertyChanged("username");
+                OnPropertyChanged("Username");
             }
         }
 
-        public string password
+        public string Password
         {
             get { return _password; }
             set
             {
                 _password = value;
-                OnPropertyChanged("password");
+                OnPropertyChanged("Password");
             }
         }
 
-        private void createDialog(bool success)
+        public static void CreateDialog(string situation)
         {
-            if (success == true)
+            ContentDialog dialog = new ContentDialog();
             {
-                ContentDialog dialog = new ContentDialog
+                switch (situation)
                 {
-                    Title = "Welcome",
-                    Content = "Welcome " + username,
-                    CloseButtonText = "OK"
-                };
-                dialog.ShowAsync();
+                    case "notExists":
+                        dialog.Title = "Error";
+                        dialog.Content = "Username and password combination does not exists";
+                        break;
+                    case "exists":
+                        dialog.Title = "Welcome";
+                        dialog.Content = "Welcome " + loggedInUsername;
+                        break;
+                    case "invalidPassword":
+                        dialog.Title = "Error";
+                        dialog.Content = "Invalid password. Password must include one number, one upper case letter and must be 4 or more characters.";
+                        break;
+                }
             }
-            else if (success == false)
-            {
-                ContentDialog dialog = new ContentDialog
-                {
-                    Title = "Error",
-                    Content = "Username and password combination does not exists",
-                    CloseButtonText = "OK"
-                };
-                dialog.ShowAsync();
-            }
+            dialog.CloseButtonText = "OK";
+            dialog.ShowAsync();
         }
     }
 }

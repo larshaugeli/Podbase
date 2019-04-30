@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+using System.Data;
+using System.Text.RegularExpressions;
 using Windows.UI.Xaml.Controls;
-using Microsoft.Extensions.Logging;
-using Podbase.APP.Annotations;
 using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
+using Podbase.APP.Services;
+using Podbase.APP.Views;
 using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
@@ -21,8 +15,8 @@ namespace Podbase.APP.ViewModels
     {
 
         public RelayCommand CreateAccountCommand { get; set; }
-        public static List<Account> Accounts { get; set; } = new List<Account>();
-        private Accounts accountsDataAccess = new Accounts();
+        public List<Account> Accounts = Account.Accounts;
+        //private Accounts accountsDataAccess = new Accounts();
 
         public CreateAccountViewModel()
         {
@@ -33,60 +27,62 @@ namespace Podbase.APP.ViewModels
         {
             Account account = new Account()
             {
-                FirstName = firstName,
-                LastName = lastName,
-                Username = username,
-                Password = password
+                FirstName = FirstName,
+                LastName = LastName,
+                Username = Username,
+                Password = Password
             };
-            Accounts.Add(account);
-            Debug.WriteLine(Accounts.Count);
-            Debug.WriteLine("FirstName: "+ account.FirstName);
-            Debug.WriteLine("LastName: " + account.LastName);
-            Debug.WriteLine("Username: " + account.Username);
-            Debug.WriteLine("Password: " + account.Password);
-            Debug.WriteLine(Accounts.ToString());
+            if (Account.ValidPassword.IsMatch(account.Password))
+            {
+                Accounts.Add(account);
+                NavigationService.Navigate(typeof(LoginPage));
+            }
+            else
+            {
+                LoginViewModel.CreateDialog("invalidPassword");
+            }
         }
-        
+
         private string _firstName, _lastName, _username, _password;
 
-        public string firstName
+        public string FirstName
         {
             get { return _firstName; }
             set
             {
                 _firstName = value;
-                OnPropertyChanged("firstName");
+                OnPropertyChanged("FirstName");
             }
         }
 
-        public string lastName
+        public string LastName
         {
             get { return _lastName; }
             set
             {
                 _lastName = value;
-                OnPropertyChanged("lastName");
+                OnPropertyChanged("LastName");
             }
         }
 
-        public string username
+        public string Username
         {
             get { return _username; }
             set
             {
                 _username = value;
-                OnPropertyChanged("username");
+                OnPropertyChanged("Username");
             }
         }
 
-        public string password
+        public string Password
         {
             get { return _password; }
             set
             {
                 _password = value;
-                OnPropertyChanged("password");
+                OnPropertyChanged("Password");
             }
-        }
+        } 
     }
 }

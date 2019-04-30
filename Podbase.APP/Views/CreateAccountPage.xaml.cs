@@ -27,16 +27,5 @@ namespace Podbase.APP.Views
             this.InitializeComponent();
             this.DataContext = ViewModel;
         }
-
-        private void CreateAccount_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(LoginPage));
-        }
-
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (this.DataContext != null)
-            { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; }
-        }
     }
 }
