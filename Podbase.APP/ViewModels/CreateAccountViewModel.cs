@@ -34,13 +34,17 @@ namespace Podbase.APP.ViewModels
             };
             if (Account.ValidPassword.IsMatch(account.Password))
             {
-                Accounts.Add(account);
-                NavigationService.Navigate(typeof(LoginPage));
+                if (Account.UsernameNotTaken(account.Username))
+                {
+                    Accounts.Add(account);
+                    NavigationService.Navigate(typeof(LoginPage));
+                }
+                else
+                    LoginViewModel.CreateDialog("taken");
+
             }
             else
-            {
                 LoginViewModel.CreateDialog("invalidPassword");
-            }
         }
 
         private string _firstName, _lastName, _username, _password;

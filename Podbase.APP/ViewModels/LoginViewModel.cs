@@ -81,6 +81,10 @@ namespace Podbase.APP.ViewModels
                         dialog.Title = "Error";
                         dialog.Content = "Invalid password. Password must include one number, one upper case letter and must be 4 or more characters.";
                         break;
+                    case "taken":
+                        dialog.Title = "Error";
+                        dialog.Content = "Username already taken.";
+                        break;
                 }
             }
             dialog.CloseButtonText = "OK";

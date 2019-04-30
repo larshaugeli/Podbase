@@ -27,7 +27,7 @@ namespace Podbase.Model
         // password must be minimum 4 characters, minimum 1 upper case letter and minimum 1 number
         public static Regex ValidPassword = new Regex("(?=.*[A-Z])(?=.*[0-9])(?=.{4,})");
 
-        public static bool UsernameTaken(string username)
+        public static bool UsernameNotTaken(string username)
         {
             if (Accounts.Count == 0)
                 return true;
