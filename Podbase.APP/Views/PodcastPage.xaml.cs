@@ -24,7 +24,7 @@ namespace Podbase.APP.Views
 
         private void Add_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(AddPodcast));
+            Frame.Navigate(typeof(AddPodcastPage));
         }
     }
 }

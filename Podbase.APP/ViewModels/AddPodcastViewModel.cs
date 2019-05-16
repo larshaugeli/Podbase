@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
+using Podbase.APP.Services;
+using Podbase.APP.Views;
 using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
@@ -32,7 +34,7 @@ namespace Podbase.APP.ViewModels
             };
             PodcastViewModel.Podcasts.Add(podcast);
             PodcastViewModel.PodcastsList.Add(podcast);
-
+            NavigationService.Navigate(typeof(PodcastPage));
         }
 
         private String _name, _creator, _genre, _description;

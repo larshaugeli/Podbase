@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Xaml;
@@ -44,17 +45,22 @@ namespace Podbase.APP.ViewModels
                 Description = "To idioter og en bælfeit jævel som snakker om alt og ingenting."
                 }
             };
-            PodcastsListBox.DataContext = PodcastsList;
+            //PodcastsListBox.DataContext = PodcastsList;
 
             DeleteCommand = new RelayCommand(DeletePodcast);
-            AddCommand = new RelayCommand(GoToAddPodcast);
-            DeleteCommand = new RelayCommand(DeletePodcast);
+            AddCommand = new RelayCommand(GoToAddPodcastPage);
+            EditCommand = new RelayCommand(GoToEditPodcastPage);
 
         }
 
-        private void GoToAddPodcast()
+        private void GoToAddPodcastPage()
         {
-            NavigationService.Navigate(typeof(PodcastPage));
+            NavigationService.Navigate(typeof(AddPodcastPage));
+        }
+
+        private void GoToEditPodcastPage()
+        {
+            NavigationService.Navigate(typeof(EditPodcastPage));
         }
 
         private void DeletePodcast()

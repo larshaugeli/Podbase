@@ -25,6 +25,6 @@
         <TextBox HorizontalAlignment="Left" Text="{Binding Creator, Mode=TwoWay}" Margin="131,203,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
         <TextBox HorizontalAlignment="Left" Text="{Binding Genre, Mode=TwoWay}" Margin="130,280,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
         <TextBox HorizontalAlignment="Left" Text="{Binding Description, Mode=TwoWay}" Margin="130,357,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
-
+        <Button Content="Edit podcast" Command="{Binding EditPodcastCommand}" FontSize="24" HorizontalAlignment="Left" Margin="131,498,0,0" VerticalAlignment="Top" Height="64" Width="193"/>
     </Grid>
 </Page>
