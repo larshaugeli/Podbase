@@ -59,9 +59,9 @@
 
             <TextBlock HorizontalAlignment="Left" Margin="357,30,0,0" Text="Your podcasts" TextAlignment="Center" FontSize="20" FontWeight="ExtraBold" TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Width="223"/>
             <CommandBar x:Name="Commands" Height="84" Margin="560,67,0,0" VerticalAlignment="Top">
-                <AppBarButton x:Name="Add" Icon="Add" Label="Add" Click="Add_OnClick"/>
-                <AppBarButton x:Name="Delete" Icon="Delete" Label="Delete" Command="{x:Bind ViewModel.DeleteCommand}" CommandParameter="{Binding ElementName=gvPodcasts, Path=SelectedItem}"/>
-                <AppBarButton x:Name="Edit" Icon="Edit" Label="Edit"/>
+                <AppBarButton x:Name="Add" Icon="Add" Label="Add" Command="{x:Bind ViewModel.AddCommand}" CommandParameter="{Binding ElementName=gvPodcasts, Path=SelectedItem}" />
+                <AppBarButton x:Name="Delete" Icon="Delete" Label="Delete" Command="{x:Bind ViewModel.DeleteCommand}" CommandParameter="{Binding ElementName=gvPodcasts, Path=SelectedItem}" />
+                <AppBarButton x:Name="Edit" Icon="Edit" Label="Edit" Command="{x:Bind ViewModel.EditCommand}" CommandParameter="{Binding ElementName=gvPodcasts, Path=SelectedItem}" />
                 <AppBarButton x:Name="Sort" Icon="Sort" Label="Sort"/>
             </CommandBar>
 

@@ -12,7 +12,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Podbase.APP.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -21,14 +20,11 @@ namespace Podbase.APP.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AddPodcast : Page
+    public sealed partial class EditPodcastPage : Page
     {
-        public AddPodcastViewModel ViewModel { get; } = new AddPodcastViewModel();
-
-        public AddPodcast()
+        public EditPodcastPage()
         {
             this.InitializeComponent();
-            this.DataContext = ViewModel;
         }
     }
 }

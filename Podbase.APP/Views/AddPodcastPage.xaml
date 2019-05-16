@@ -27,7 +27,7 @@
             <TextBlock HorizontalAlignment="Left" Margin="11,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Creator: " />
             <TextBlock HorizontalAlignment="Left" Margin="11,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Genre: " />
             <TextBlock HorizontalAlignment="Left" Margin="11,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Description: " />
-            <Button Content="Add podcast" Command="{Binding CreatePodcastCommand}" FontSize="24" HorizontalAlignment="Left" Margin="131,498,0,0" VerticalAlignment="Top" Height="64" Width="193" Click="AddPodcast_Click"/>
+            <Button Content="Add podcast" Command="{Binding CreatePodcastCommand}" FontSize="24" HorizontalAlignment="Left" Margin="131,498,0,0" VerticalAlignment="Top" Height="64" Width="193"/>
         </Grid>
     </Grid>
 </Page>

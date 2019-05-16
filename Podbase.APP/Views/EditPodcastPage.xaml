@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="Podbase.APP.Views.EditPodcastPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Podbase.APP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:Podbase.APP.ViewModels"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <viewModels:EditPodcastViewModel/>
+    </Page.DataContext>
+
+    <Grid
+        x:Name="ContentArea"
+        Margin="{StaticResource MediumLeftRightMargin}">
+        <TextBlock HorizontalAlignment="Left" Margin="182,10,0,0" Text="Edit podcast" TextAlignment="Center" FontSize="20" FontWeight="ExtraBold" TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Width="223"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Podcast name:" />
+        <TextBlock HorizontalAlignment="Left" Margin="11,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Creator: " />
+        <TextBlock HorizontalAlignment="Left" Margin="11,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Genre: " />
+        <TextBlock HorizontalAlignment="Left" Margin="11,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Description: " />
+        <TextBox HorizontalAlignment="Left" Text="{Binding Name, Mode=TwoWay}" Margin="130,137,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
+        <TextBox HorizontalAlignment="Left" Text="{Binding Creator, Mode=TwoWay}" Margin="131,203,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
+        <TextBox HorizontalAlignment="Left" Text="{Binding Genre, Mode=TwoWay}" Margin="130,280,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
+        <TextBox HorizontalAlignment="Left" Text="{Binding Description, Mode=TwoWay}" Margin="130,357,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
+
+    </Grid>
+</Page>
