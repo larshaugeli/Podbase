@@ -16,6 +16,7 @@ namespace Podbase.APP.ViewModels
 {
     public class AddPodcastViewModel : ViewModelBase
     {
+        public static ObservableCollection<Podcast> AddedPodcasts = new ObservableCollection<Podcast>();
         public RelayCommand CreatePodcastCommand { get; set; }
 
         public AddPodcastViewModel()
@@ -32,9 +33,18 @@ namespace Podbase.APP.ViewModels
                 Genre = Genre,
                 Description = Description
             };
-            PodcastViewModel.Podcasts.Add(podcast);
-            PodcastViewModel.PodcastsList.Add(podcast);
+
+            AddedPodcasts.Add(podcast);
+            WritePodcastList();
             NavigationService.Navigate(typeof(PodcastPage));
+        }
+
+        private void WritePodcastList()
+        {
+            foreach (var pod in AddedPodcasts)
+            {
+                Debug.WriteLine(pod.Name + " - " + pod.Creator + " - " + pod.Description + " - " + pod.Genre);
+            }
         }
 
         private String _name, _creator, _genre, _description;

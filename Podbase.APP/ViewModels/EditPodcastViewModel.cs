@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace Podbase.APP.ViewModels
     class EditPodcastViewModel : ViewModelBase
     {
         public RelayCommand EditPodcastCommand { get; set; }
+        public static Podcast SelectedPodcast;
 
         public EditPodcastViewModel()
         {
@@ -21,15 +23,15 @@ namespace Podbase.APP.ViewModels
 
         public void EditPodcast()
         {
-            Podcast podcast = new Podcast()
+            AddPodcastViewModel.AddedPodcasts.Remove(SelectedPodcast);
+            SelectedPodcast = new Podcast()
             {
                 Name = Name,
                 Creator = Creator,
                 Genre = Genre,
                 Description = Description
             };
-            PodcastViewModel.Podcasts.Add(podcast);
-            PodcastViewModel.PodcastsList.Add(podcast);
+            AddPodcastViewModel.AddedPodcasts.Add(SelectedPodcast);
             NavigationService.Navigate(typeof(PodcastPage));
         }
 

@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.ServiceModel.Channels;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
 using Podbase.APP.Services;
@@ -15,42 +19,23 @@ using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
 {
-    public class PodcastViewModel : Observable
+    public class PodcastViewModel : ViewModelBase
     {
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
-        public static ObservableCollection<Podcast> Podcasts { get; set; } = new ObservableCollection<Podcast>();
+        public static ObservableCollection<Podcast> Podcasts { get; set; }
         //private Podcasts podcastsDataAccess = new Podcasts();
-        public static List<Podcast> PodcastsList { get; set; }
-        public static ListBox PodcastsListBox { get; set; }
+        //public static List<Podcast> PodcastsList { get; set; }
+        //public ListView PodcastListView { get; set; }
 
         public PodcastViewModel()
         {
-            PodcastsList = new List<Podcast>
-            {
-                new Podcast()
-                {
-                    Creator = "NRK",
-                    Name = "Tore Sagens Podcast",
-                    Genre = "Intervju",
-                    Description = "Tore Sagen snakker med gjester om temaer."
-                },
+            Podcasts = AddPodcastViewModel.AddedPodcasts;
 
-                new Podcast()
-                {
-                Creator = "NRK",
-                Name = "Radioresepsjonen",
-                Genre = "Lettbeint underholdning",
-                Description = "To idioter og en bælfeit jævel som snakker om alt og ingenting."
-                }
-            };
-            //PodcastsListBox.DataContext = PodcastsList;
-
-            DeleteCommand = new RelayCommand(DeletePodcast);
+            DeleteCommand = new RelayCommand<Podcast>(podcast => { Podcasts.Remove(podcast); });
             AddCommand = new RelayCommand(GoToAddPodcastPage);
-            EditCommand = new RelayCommand(GoToEditPodcastPage);
-
+            EditCommand = new RelayCommand<Podcast>(podcast => GoToEditPodcastPage(podcast));
         }
 
         private void GoToAddPodcastPage()
@@ -58,17 +43,28 @@ namespace Podbase.APP.ViewModels
             NavigationService.Navigate(typeof(AddPodcastPage));
         }
 
-        private void GoToEditPodcastPage()
+        private void GoToEditPodcastPage(Podcast pod)
         {
+            Podcast sel = pod;
+            EditPodcastViewModel.SelectedPodcast = sel;
+            ShowToastNotification("Alert", sel.Name + " selected.");
             NavigationService.Navigate(typeof(EditPodcastPage));
         }
 
-        private void DeletePodcast()
+        private void ShowToastNotification(string title, string stringContent)
         {
-            foreach (var podcast in PodcastsListBox.SelectedItems.OfType<Podcast>().ToList())
-            {
-                PodcastsListBox.Items.Remove(podcast);
-            }
+            ToastNotifier ToastNotifier = ToastNotificationManager.CreateToastNotifier();
+            Windows.Data.Xml.Dom.XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+            Windows.Data.Xml.Dom.XmlNodeList toastNodeList = toastXml.GetElementsByTagName("text");
+            toastNodeList.Item(0).AppendChild(toastXml.CreateTextNode(title));
+            toastNodeList.Item(1).AppendChild(toastXml.CreateTextNode(stringContent));
+            Windows.Data.Xml.Dom.IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
+            Windows.Data.Xml.Dom.XmlElement audio = toastXml.CreateElement("audio");
+            audio.SetAttribute("src", "ms-winsoundevent:Notification.SMS");
+
+            ToastNotification toast = new ToastNotification(toastXml);
+            toast.ExpirationTime = DateTime.Now.AddSeconds(4);
+            ToastNotifier.Show(toast);
         }
 
         //internal async Task LoadPodcastsAsync()
