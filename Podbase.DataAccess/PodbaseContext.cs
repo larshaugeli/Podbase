@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
@@ -18,26 +19,34 @@ namespace Podbase.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             CreateDummyAccounts(modelBuilder);
+            CreateDummyPodcasts(modelBuilder);
         }
 
         private static void CreateDummyAccounts(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Account>().HasData(new Account() { FirstName = "Lars", LastName = "Haugeli", Username = "larshaugeli", Password = "Sofimjau123" });
-            modelBuilder.Entity<Account>().HasData(new Account() { FirstName = "Sofi", LastName = "Mjaupus", Username = "sofimjaupus", Password = "Sofimjau123" });
+            modelBuilder.Entity<Account>().HasData(new Account() { LoginId = 1, FirstName = "Lars", LastName = "Haugeli", Username = "larshaugeli", Password = "Sofimjau123" });
+            modelBuilder.Entity<Account>().HasData(new Account() { LoginId = 2, FirstName = "Sofi", LastName = "Mjaupus", Username = "sofimjaupus", Password = "Sofimjau123" });
         }
 
-        protected void OnConfiguring(DbContextOptionsBuilder<PodbaseContext> optionsBuilder)
+        private static void CreateDummyPodcasts(ModelBuilder modelBuilder)
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
-            {
-                DataSource = "donau.hiof.no",
-                InitialCatalog = "lhhaugel",
-                UserID = "lhhaugel",
-                Password = "ze59EYmH"
-            };
-
-            optionsBuilder.UseSqlServer(builder.ConnectionString.ToString());
+            modelBuilder.Entity<Podcast>().HasData(new Podcast() { PodcastId = 1, Name = "Radioresepsjonen", Creator = "NRK", Genre = "Humor", Description = "Gøy" });
+            modelBuilder.Entity<Podcast>().HasData(new Podcast() { PodcastId = 2, Name = "Misjonen", Creator = "P4", Genre = "Humor", Description = "Hehe" });
         }
+
+        //protected void OnConfiguring(DbContextOptionsBuilder<PodbaseContext> optionsBuilder)
+        //{
+        //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
+        //    {
+        //        DataSource = "donau.hiof.no",
+        //        InitialCatalog = "lhhaugel",
+        //        UserID = "lhhaugel",
+        //        Password = "ze59EYmH"
+        //    };
+
+        //    optionsBuilder.UseSqlServer(builder.ConnectionString.ToString());
+        //}
+
     }
 
     public class PodbaseContextFactory : IDesignTimeDbContextFactory<PodbaseContext>
