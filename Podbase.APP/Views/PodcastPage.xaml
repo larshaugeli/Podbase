@@ -62,7 +62,7 @@
                 <AppBarButton x:Name="Add" Icon="Add" Label="Add" Command="{x:Bind ViewModel.AddCommand}" />
                 <AppBarButton x:Name="Delete" Icon="Delete" Label="Delete" Command="{x:Bind ViewModel.DeleteCommand}" CommandParameter="{Binding ElementName=PodcastsListView, Path=SelectedItem}" />
                 <AppBarButton x:Name="Edit" Icon="Edit" Label="Edit" Command="{x:Bind ViewModel.EditCommand}" CommandParameter="{Binding ElementName=PodcastsListView, Path=SelectedItem}" />
-                <AppBarButton x:Name="Sort" Icon="Sort" Label="Sort"/>
+                <AppBarButton x:Name="Sort" Icon="Sort" Label="Sort" Command="{Binding SortCommand}"/>
             </CommandBar>
 
         </Grid>

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -11,6 +13,7 @@ using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
 using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
 using Podbase.APP.Services;
@@ -21,6 +24,7 @@ namespace Podbase.APP.ViewModels
 {
     public class PodcastViewModel : ViewModelBase
     {
+        public ICommand SortCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
@@ -32,10 +36,26 @@ namespace Podbase.APP.ViewModels
         public PodcastViewModel()
         {
             Podcasts = AddPodcastViewModel.AddedPodcasts;
-
+            SortCommand = new RelayCommand(Sort);
             DeleteCommand = new RelayCommand<Podcast>(podcast => { Podcasts.Remove(podcast); });
             AddCommand = new RelayCommand(GoToAddPodcastPage);
             EditCommand = new RelayCommand<Podcast>(podcast => GoToEditPodcastPage(podcast));
+        }
+
+        //TODO: if sorted asc, sort desc
+        private void Sort()
+        {
+            SortPodcasts(Podcasts, podcast => podcast.Name);
+        }
+
+        public void SortPodcasts<TSource, TKey>(ObservableCollection<TSource> observableCollection, Func<TSource, TKey> keySelector)
+        {
+            var a = observableCollection.OrderBy(keySelector).ToList();
+            observableCollection.Clear();
+            foreach (var b in a)
+            {
+                observableCollection.Add(b);
+            }
         }
 
         private void GoToAddPodcastPage()
@@ -47,8 +67,15 @@ namespace Podbase.APP.ViewModels
         {
             Podcast sel = pod;
             EditPodcastViewModel.SelectedPodcast = sel;
-            ShowToastNotification("Alert", sel.Name + " selected.");
-            NavigationService.Navigate(typeof(EditPodcastPage));
+            if (sel == null)
+            {
+                ShowToastNotification("Error", "No podcast selected.");
+            }
+            else
+            {
+                ShowToastNotification("Alert", sel.Name + " selected.");
+                NavigationService.Navigate(typeof(EditPodcastPage));
+            }
         }
 
         private void ShowToastNotification(string title, string stringContent)
@@ -62,8 +89,7 @@ namespace Podbase.APP.ViewModels
             Windows.Data.Xml.Dom.XmlElement audio = toastXml.CreateElement("audio");
             audio.SetAttribute("src", "ms-winsoundevent:Notification.SMS");
 
-            ToastNotification toast = new ToastNotification(toastXml);
-            toast.ExpirationTime = DateTime.Now.AddSeconds(4);
+            ToastNotification toast = new ToastNotification(toastXml) {ExpirationTime = DateTime.Now.AddSeconds(4)};
             ToastNotifier.Show(toast);
         }
 
