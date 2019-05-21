@@ -17,6 +17,7 @@ namespace Podbase.APP.ViewModels
     public class AddPodcastViewModel : ViewModelBase
     {
         public static ObservableCollection<Podcast> AddedPodcasts = new ObservableCollection<Podcast>();
+        public static Podcasts podcastsDataAccess = new Podcasts();
         public RelayCommand CreatePodcastCommand { get; set; }
 
         public AddPodcastViewModel()
@@ -24,7 +25,7 @@ namespace Podbase.APP.ViewModels
             CreatePodcastCommand = new RelayCommand(AddNewPodcast);
         }
 
-        public void AddNewPodcast()
+        public async void AddNewPodcast()
         {
             Podcast podcast = new Podcast()
             {
@@ -33,8 +34,11 @@ namespace Podbase.APP.ViewModels
                 Genre = Genre,
                 Description = Description
             };
+            if (await podcastsDataAccess.AddPodcastAsync(podcast))
+            {
+                AddedPodcasts.Add(podcast);
+            }
 
-            AddedPodcasts.Add(podcast);
             WritePodcastList();
             NavigationService.Navigate(typeof(PodcastPage));
         }

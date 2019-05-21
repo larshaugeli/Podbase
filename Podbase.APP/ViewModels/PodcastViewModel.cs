@@ -29,7 +29,6 @@ namespace Podbase.APP.ViewModels
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public static ObservableCollection<Podcast> Podcasts { get; set; }
-        //private Podcasts podcastsDataAccess = new Podcasts();
         //public static List<Podcast> PodcastsList { get; set; }
         //public ListView PodcastListView { get; set; }
 
@@ -93,11 +92,11 @@ namespace Podbase.APP.ViewModels
             ToastNotifier.Show(toast);
         }
 
-        //internal async Task LoadPodcastsAsync()
-        //{
-        //    var podcasts = await podcastsDataAccess.GetPodcastsAsync();
-        //    foreach (Podcast podcast in podcasts)
-        //        Podcasts.Add(podcast);
-        //}
+        internal async Task LoadPodcastsAsync()
+        {
+            var podcasts = await AddPodcastViewModel.podcastsDataAccess.GetPodcastsAsync();
+            foreach (Podcast podcast in podcasts)
+                Podcasts.Add(podcast);
+        }
     }
 }
