@@ -112,6 +112,7 @@
     <Compile Include="Activation\ActivationHandler.cs" />
     <Compile Include="Behaviors\NavigationViewHeaderBehavior.cs" />
     <Compile Include="Behaviors\NavigationViewHeaderMode.cs" />
+    <Compile Include="DataAccess\AccountPodcasts.cs" />
     <Compile Include="DataAccess\Accounts.cs" />
     <Compile Include="DataAccess\Podcasts.cs" />
     <Compile Include="Helpers\Misc.cs" />

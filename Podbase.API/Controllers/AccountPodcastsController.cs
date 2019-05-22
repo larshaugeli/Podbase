@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,56 +12,56 @@ namespace Podbase.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountsController : ControllerBase
+    public class AccountPodcastsController : ControllerBase
     {
         private readonly PodbaseContext _context;
 
-        public AccountsController(PodbaseContext context)
+        public AccountPodcastsController(PodbaseContext context)
         {
             _context = context;
         }
-
-        // GET: api/Accounts
+        
+        // GET: api/AccountPodcasts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
+        public async Task<ActionResult<IEnumerable<AccountPodcast>>> GetAccountPodcasts()
         {
-            return await _context.Accounts.ToListAsync();
+            return await _context.AccountPodcasts.ToListAsync();
         }
 
-        // GET: api/Accounts/5
+        // GET: api/AccountPodcasts/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAccount([FromRoute] int id)
+        public async Task<IActionResult> GetAccountPodcast([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var account = await _context.Accounts.FindAsync(id);
+            var accountPodcast = await _context.AccountPodcasts.FindAsync(id);
 
-            if (account == null)
+            if (accountPodcast == null)
             {
                 return NotFound();
             }
 
-            return Ok(account);
+            return Ok(accountPodcast);
         }
 
-        // PUT: api/Accounts/5
+        // PUT: api/AccountPodcasts/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAccount([FromRoute] int id, [FromBody] Account account)
+        public async Task<IActionResult> PutAccountPodcast([FromRoute] int id, [FromBody] AccountPodcast accountPodcast)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != account.UserId)
+            if (id != accountPodcast.PodcastId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(account).State = EntityState.Modified;
+            _context.Entry(accountPodcast).State = EntityState.Modified;
 
             try
             {
@@ -70,7 +69,7 @@ namespace Podbase.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccountExists(id))
+                if (!AccountPodcastExists(id))
                 {
                     return NotFound();
                 }
@@ -83,45 +82,45 @@ namespace Podbase.API.Controllers
             return NoContent();
         }
 
-        // POST: api/Accounts
+        // POST: api/AccountPodcasts
         [HttpPost]
-        public async Task<IActionResult> PostAccount([FromBody] Account account)
+        public async Task<IActionResult> PostAccountPodcast([FromBody] AccountPodcast accountPodcast)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Accounts.Add(account);
+            _context.AccountPodcasts.Add(accountPodcast);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAccount", new { id = account.UserId }, account);
+            return CreatedAtAction("GetAccountPodcast", new { id = accountPodcast.PodcastId }, accountPodcast);
         }
 
-        // DELETE: api/Accounts/5
+        // DELETE: api/AccountPodcasts/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAccount([FromRoute] int id)
+        public async Task<IActionResult> DeleteAccountPodcast([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var account = await _context.Accounts.FindAsync(id);
-            if (account == null)
+            var accountPodcast = await _context.AccountPodcasts.FindAsync(id);
+            if (accountPodcast == null)
             {
                 return NotFound();
             }
 
-            _context.Accounts.Remove(account);
+            _context.AccountPodcasts.Remove(accountPodcast);
             await _context.SaveChangesAsync();
 
-            return Ok(account);
+            return Ok(accountPodcast);
         }
 
-        private bool AccountExists(int id)
+        private bool AccountPodcastExists(int id)
         {
-            return _context.Accounts.Any(e => e.UserId == id);
+            return _context.AccountPodcasts.Any(e => e.PodcastId == id);
         }
     }
 }

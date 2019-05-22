@@ -33,7 +33,7 @@ namespace Podbase.APP.DataAccess
             {
                 json = await result.Content.ReadAsStringAsync();
                 var returnedAccount = JsonConvert.DeserializeObject<Account>(json);
-                account.LoginId = returnedAccount.LoginId;
+                account.UserId = returnedAccount.UserId;
 
                 return true;
             }
@@ -44,7 +44,7 @@ namespace Podbase.APP.DataAccess
         internal async Task<bool> DeleteActorAsync(Account account)
         {
             HttpResponseMessage result =
-                await _httpClient.DeleteAsync(new Uri(accountsBaseUri, "accounts/" + account.LoginId.ToString()));
+                await _httpClient.DeleteAsync(new Uri(accountsBaseUri, "accounts/" + account.UserId.ToString()));
             return result.IsSuccessStatusCode;
         }
     }

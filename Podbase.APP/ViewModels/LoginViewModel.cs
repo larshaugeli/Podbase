@@ -45,8 +45,13 @@ namespace Podbase.APP.ViewModels
             if (accountInAccountsList)
             {
                 loggedInUsername = account.Username;
-                loggedInFirstName = account.FirstName;
-                loggedInLastName = account.LastName;
+                var query = from acc in Accounts where acc.Username == loggedInUsername select acc;
+
+                foreach (Account acc in query)
+                {
+                    loggedInFirstName = acc.FirstName;
+                    loggedInLastName = acc.LastName;
+                }   
                 Misc.CreateDialog("exists");
                 NavigationService.Navigate(typeof(MainPage));
 

@@ -17,6 +17,7 @@ namespace Podbase.APP.ViewModels
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public static ObservableCollection<Podcast> UsersPodcastsList { get; set; } = new ObservableCollection<Podcast>();
         public static ObservableCollection<Podcast> Podcasts { get; set; } = new ObservableCollection<Podcast>();
 
         // Constructor

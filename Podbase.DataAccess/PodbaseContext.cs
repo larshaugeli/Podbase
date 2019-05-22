@@ -14,6 +14,7 @@ namespace Podbase.DataAccess
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Podcast> Podcasts { get; set; }
+        public DbSet<AccountPodcast> AccountPodcasts { get; set; }
 
         public PodbaseContext(DbContextOptions<PodbaseContext> options) : base(options) { }
 
@@ -21,12 +22,13 @@ namespace Podbase.DataAccess
         {
             CreateDummyAccounts(modelBuilder);
             CreateDummyPodcasts(modelBuilder);
+            CreateDummyAccountPodcasts(modelBuilder);
         }
 
         private static void CreateDummyAccounts(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Account>().HasData(new Account() { LoginId = 1, FirstName = "Lars", LastName = "Haugeli", Username = "larshaugeli", Password = "Sofimjau123" });
-            modelBuilder.Entity<Account>().HasData(new Account() { LoginId = 2, FirstName = "Sofi", LastName = "Mjaupus", Username = "sofimjaupus", Password = "Sofimjau123" });
+            modelBuilder.Entity<Account>().HasData(new Account() { UserId = 1, FirstName = "Lars", LastName = "Haugeli", Username = "larshaugeli", Password = "Sofimjau123" });
+            modelBuilder.Entity<Account>().HasData(new Account() { UserId = 2, FirstName = "Sofi", LastName = "Mjaupus", Username = "sofimjaupus", Password = "Sofimjau123" });
             Debug.WriteLine("Dummy accounts made.");
         }
 
@@ -34,7 +36,14 @@ namespace Podbase.DataAccess
         {
             modelBuilder.Entity<Podcast>().HasData(new Podcast() { PodcastId = 1, Name = "Radioresepsjonen", Creator = "NRK", Genre = "Humor", Description = "Gøy" });
             modelBuilder.Entity<Podcast>().HasData(new Podcast() { PodcastId = 2, Name = "Misjonen", Creator = "P4", Genre = "Humor", Description = "Hehe" });
-            Debug.WriteLine("Dummy accounts made.");
+            Debug.WriteLine("Dummy podcasts made.");
+        }
+
+        private static void CreateDummyAccountPodcasts(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AccountPodcast>().HasData(new AccountPodcast() { PodcastId = 1, UserId = 1});
+            modelBuilder.Entity<AccountPodcast>().HasData(new AccountPodcast() { PodcastId = 2, UserId = 1});
+            Debug.WriteLine("Dummy podcastsPerAccount made.");
         }
     }
 
@@ -53,7 +62,7 @@ namespace Podbase.DataAccess
             var connection = builder.ConnectionString.ToString();
 
             var optionsBuilder = new DbContextOptionsBuilder<PodbaseContext>();
-            optionsBuilder.UseSqlServer(connection, x => x.MigrationsAssembly("Podbase.MaintainDatabase.ConsoleApp"));
+            optionsBuilder.UseSqlServer(connection, x => x.MigrationsAssembly("Podbase.DataAccess"));
 
             return new PodbaseContext(optionsBuilder.Options);
         }
