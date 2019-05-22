@@ -16,15 +16,18 @@ namespace Podbase.APP.ViewModels
 {
     public class AddPodcastViewModel : ViewModelBase
     {
+        // Variables
         public static ObservableCollection<Podcast> AddedPodcasts = new ObservableCollection<Podcast>();
         public static Podcasts podcastsDataAccess = new Podcasts();
         public RelayCommand CreatePodcastCommand { get; set; }
 
+        // Constructor
         public AddPodcastViewModel()
         {
             CreatePodcastCommand = new RelayCommand(AddNewPodcast);
         }
 
+        // Add new podcast, executes when pressed "Add podcast"-button
         public async void AddNewPodcast()
         {
             Podcast podcast = new Podcast()
@@ -43,14 +46,8 @@ namespace Podbase.APP.ViewModels
             NavigationService.Navigate(typeof(PodcastPage));
         }
 
-        private void WritePodcastList()
-        {
-            foreach (var pod in AddedPodcasts)
-            {
-                Debug.WriteLine(pod.Name + " - " + pod.Creator + " - " + pod.Description + " - " + pod.Genre);
-            }
-        }
-
+       
+        // Input strings
         private String _name, _creator, _genre, _description;
 
         public string Name
@@ -96,6 +93,15 @@ namespace Podbase.APP.ViewModels
                     this._description = value;
                     OnPropertyChanged("_description");
                 }
+            }
+        }
+
+        // Debug
+        private void WritePodcastList()
+        {
+            foreach (var pod in AddedPodcasts)
+            {
+                Debug.WriteLine(pod.Name + " - " + pod.Creator + " - " + pod.Description + " - " + pod.Genre);
             }
         }
     }

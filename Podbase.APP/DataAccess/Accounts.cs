@@ -12,7 +12,7 @@ namespace Podbase.APP.DataAccess
     public class Accounts
     {
         readonly HttpClient _httpClient = new HttpClient();
-        static readonly Uri accountsBaseUri = new Uri("http://localhost:6289/api/accounts");
+        static readonly Uri accountsBaseUri = new Uri("http://localhost:62289/api/accounts");
 
         public async Task<Account[]> GetAccountsAsync()
         {

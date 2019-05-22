@@ -29,19 +29,6 @@ namespace Podbase.MaintainDatabase.ConsoleApp
             {
                 using (var db = new PodbaseContext(optionsBuilder.Options))
                 {
-                   
-                    // clear tables
-                    try
-                    {
-                        db.Database.ExecuteSqlCommand("TRUNCATE TABLE [Accounts]");
-                        db.Database.ExecuteSqlCommand("TRUNCATE TABLE [Podcasts]");
-                    }
-                    catch (DataException e)
-                    {
-                        Console.WriteLine("Exception of type {0} occurred.",
-                            e.GetType());
-                    }
-
                     db.Accounts.Add(new Account() { FirstName = "Test", LastName = "lol", Username = "testusername", Password = "testpassword" });
                     db.SaveChanges();
                     var count = db.SaveChanges();

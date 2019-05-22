@@ -3,6 +3,7 @@ using Windows.UI.Xaml;
 using Podbase.APP.ViewModels;
 
 using Windows.UI.Xaml.Controls;
+using Podbase.APP.Helpers;
 
 namespace Podbase.APP.Views
 {

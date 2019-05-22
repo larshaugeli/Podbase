@@ -114,6 +114,7 @@
     <Compile Include="Behaviors\NavigationViewHeaderMode.cs" />
     <Compile Include="DataAccess\Accounts.cs" />
     <Compile Include="DataAccess\Podcasts.cs" />
+    <Compile Include="Helpers\Misc.cs" />
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
     <Compile Include="Helpers\Observable.cs" />
@@ -275,6 +276,10 @@
     <ProjectReference Include="..\Podbase.APP.Core\Podbase.APP.Core.csproj">
       <Project>{0994A928-5B0A-4B6C-A235-FC815AF889BA}</Project>
       <Name>Podbase.APP.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Podbase.DataAccess\Podbase.DataAccess.csproj">
+      <Project>{628B9ADA-13EB-4350-830E-AC1011A0AFBA}</Project>
+      <Name>Podbase.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\Podbase.Model\Podbase.Model.csproj">
       <Project>{94442a40-aca7-4e9f-9942-e6fad3a25b34}</Project>

@@ -21,9 +21,11 @@ namespace Podbase.APP.ViewModels
             EditPodcastCommand = new RelayCommand(EditPodcast);
         }
 
-        public void EditPodcast()
+        // Edit podcasts. Deletes podcast and adds a new one. //TODO change this method so it updates the element, so PodcastId stays the same
+        public async void EditPodcast()
         {
-            AddPodcastViewModel.AddedPodcasts.Remove(SelectedPodcast);
+            await AddPodcastViewModel.podcastsDataAccess.DeletePodcastAsync(SelectedPodcast);
+            //AddPodcastViewModel.AddedPodcasts.Remove(SelectedPodcast);
             SelectedPodcast = new Podcast()
             {
                 Name = Name,
@@ -31,10 +33,15 @@ namespace Podbase.APP.ViewModels
                 Genre = Genre,
                 Description = Description
             };
-            AddPodcastViewModel.AddedPodcasts.Add(SelectedPodcast);
+            if (await AddPodcastViewModel.podcastsDataAccess.AddPodcastAsync(SelectedPodcast))
+            {
+                AddPodcastViewModel.AddedPodcasts.Add(SelectedPodcast);
+            }
+            //AddPodcastViewModel.AddedPodcasts.Add(SelectedPodcast);
             NavigationService.Navigate(typeof(PodcastPage));
         }
 
+        // Input strings
         private String _name, _creator, _genre, _description;
 
         public string Name
