@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Notifications;
+using Windows.UI.Xaml.Controls;
 using Microsoft.EntityFrameworkCore;
+using Podbase.APP.ViewModels;
 using Podbase.DataAccess;
 
 namespace Podbase.APP.Helpers
@@ -56,6 +58,34 @@ namespace Podbase.APP.Helpers
 
             ToastNotification toast = new ToastNotification(toastXml) { ExpirationTime = DateTime.Now.AddSeconds(showLength) };
             ToastNotifier.Show(toast);
+        }
+
+        public static void CreateDialog(string situation)
+        {
+            ContentDialog dialog = new ContentDialog();
+            {
+                switch (situation)
+                {
+                    case "notExists":
+                        dialog.Title = "Error";
+                        dialog.Content = "Username and password combination does not exists";
+                        break;
+                    case "exists":
+                        dialog.Title = "Welcome";
+                        dialog.Content = "Welcome " + LoginViewModel.loggedInUsername;
+                        break;
+                    case "invalidPassword":
+                        dialog.Title = "Error";
+                        dialog.Content = "Invalid password. Password must include one number, one upper case letter and must be 4 or more characters.";
+                        break;
+                    case "taken":
+                        dialog.Title = "Error";
+                        dialog.Content = "Username already taken.";
+                        break;
+                }
+            }
+            dialog.CloseButtonText = "OK";
+            dialog.ShowAsync();
         }
     }
 }

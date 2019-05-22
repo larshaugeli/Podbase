@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using Windows.ApplicationModel.Core;
 using Podbase.APP.ViewModels;
 
 using Windows.UI.Xaml.Controls;
+using Podbase.APP.DataAccess;
 
 namespace Podbase.APP.Views
 {
@@ -13,11 +15,12 @@ namespace Podbase.APP.Views
         public LoginPage()
         {
             InitializeComponent();
+            Loaded += LoginPage_LoadedAsync;
         }
 
-        private void CreateAccount_OnClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void LoginPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(CreateAccount));
+            await ViewModel.LoadAccountsAsync();
         }
     }
 }

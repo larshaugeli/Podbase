@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Text.RegularExpressions;
 using Windows.UI.Xaml.Controls;
@@ -15,15 +16,15 @@ namespace Podbase.APP.ViewModels
     {
 
         public RelayCommand CreateAccountCommand { get; set; }
-        public List<Account> Accounts = Account.Accounts;
-        //private Accounts accountsDataAccess = new Accounts();
+        public static ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
+        public static Accounts accountDataAccess = new Accounts();
 
         public CreateAccountViewModel()
         {
             CreateAccountCommand = new RelayCommand(AddNewAccount);
         }
 
-        private void AddNewAccount()
+        public async void AddNewAccount()
         {
             Account account = new Account()
             {
@@ -32,19 +33,24 @@ namespace Podbase.APP.ViewModels
                 Username = Username,
                 Password = Password
             };
+
+            
             if (Account.ValidPassword.IsMatch(account.Password))
             {
                 //if (Account.UsernameNotTaken(account.Username))
                 //{
+                if (await accountDataAccess.AddAccountAsync(account))
+                {
                     Accounts.Add(account);
-                    NavigationService.Navigate(typeof(LoginPage));
+                }
+                NavigationService.Navigate(typeof(LoginPage));
                 //}
                 //else
                 //    LoginViewModel.CreateDialog("taken");
 
             }
             else
-                LoginViewModel.CreateDialog("invalidPassword");
+                Misc.CreateDialog("invalidPassword");
         }
 
         private string _firstName, _lastName, _username, _password;

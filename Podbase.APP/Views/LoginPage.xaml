@@ -24,7 +24,7 @@
             <TextBlock HorizontalAlignment="Left" Margin="10,126,0,0" Text="Username:" FontSize="24" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="140"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,260,0,0" Text="Password:" FontSize="24" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="140" />
             <Button Content="Log in" Command="{Binding LoginCommand}" FontSize="24"  HorizontalAlignment="Left" Margin="198,424,0,0" VerticalAlignment="Top" Height="60" Width="158"/>
-            <Button Content="Create Account" FontSize="24" HorizontalAlignment="Left" Margin="488,424,0,0" VerticalAlignment="Top" Height="60" Width="202" Click="CreateAccount_OnClick"/>
+            <Button Content="Create Account" Command="{Binding CreateAccount}" FontSize="24" HorizontalAlignment="Left" Margin="488,424,0,0" VerticalAlignment="Top" Height="60" Width="202"/>
         </Grid>
     </Grid>
 </Page>

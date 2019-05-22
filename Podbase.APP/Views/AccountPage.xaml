@@ -22,8 +22,8 @@
             <TextBlock HorizontalAlignment="Left" Margin="37,176,0,0" Text="Last name:" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="37,238,0,0" Text="Username:" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="37,305,0,0" Text="About me:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-            <TextBlock HorizontalAlignment="Left" Margin="168,116,0,0" Text="Binding will be implemented later" TextWrapping="Wrap" VerticalAlignment="Top"/>
-            <TextBlock HorizontalAlignment="Left" Margin="168,176,0,0" Text="Binding will be implemented later" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="168,116,0,0" Text="{Binding FirstName, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="168,176,0,0" Text="{Binding LastName, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="168,238,0,0" Text="{Binding Username, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="168,305,0,0" Text="Binding will be implemented later" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <Image Source="../Assets/logo1.PNG" HorizontalAlignment="Left" Height="234" Margin="617,116,0,0" VerticalAlignment="Top" Width="238"/>
