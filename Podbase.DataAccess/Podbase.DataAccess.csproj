@@ -5,15 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190522163208_InitialCreate.cs" />
-    <Compile Remove="Migrations\20190522163958_InitialCreate.cs" />
-    <Compile Remove="Migrations\20190522165020_InitialCreate.cs" />
-    <Compile Remove="Migrations\20190522170540_InitialCreate.cs" />
-    <Compile Remove="Migrations\20190522173233_InitialCreate.cs" />
-    <Compile Remove="Migrations\20190522174330_InitialCreate.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.0" />
   </ItemGroup>
 

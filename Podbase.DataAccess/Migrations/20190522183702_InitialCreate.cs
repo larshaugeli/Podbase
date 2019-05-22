@@ -8,19 +8,6 @@ namespace Podbase.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AccountPodcasts",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(nullable: false),
-                    PodcastId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AccountPodcasts", x => x.PodcastId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Accounts",
                 columns: table => new
                 {
@@ -42,31 +29,16 @@ namespace Podbase.DataAccess.Migrations
                 {
                     PodcastId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Creator = table.Column<string>(nullable: true),
                     Genre = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    Rating = table.Column<int>(nullable: false),
-                    AccountPodcastPodcastId = table.Column<int>(nullable: true)
+                    Rating = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Podcasts", x => x.PodcastId);
-                    table.ForeignKey(
-                        name: "FK_Podcasts_AccountPodcasts_AccountPodcastPodcastId",
-                        column: x => x.AccountPodcastPodcastId,
-                        principalTable: "AccountPodcasts",
-                        principalColumn: "PodcastId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.InsertData(
-                table: "AccountPodcasts",
-                columns: new[] { "PodcastId", "UserId" },
-                values: new object[,]
-                {
-                    { 1, 1 },
-                    { 2, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -80,17 +52,12 @@ namespace Podbase.DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Podcasts",
-                columns: new[] { "PodcastId", "AccountPodcastPodcastId", "Creator", "Description", "Genre", "Name", "Rating" },
+                columns: new[] { "PodcastId", "Creator", "Description", "Genre", "Name", "Rating", "UserId" },
                 values: new object[,]
                 {
-                    { 1, null, "NRK", "Gøy", "Humor", "Radioresepsjonen", 0 },
-                    { 2, null, "P4", "Hehe", "Humor", "Misjonen", 0 }
+                    { 1, "NRK", "Gøy", "Humor", "Radioresepsjonen", 0, 1 },
+                    { 2, "P4", "Hehe", "Humor", "Misjonen", 0, 1 }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Podcasts_AccountPodcastPodcastId",
-                table: "Podcasts",
-                column: "AccountPodcastPodcastId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -100,9 +67,6 @@ namespace Podbase.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Podcasts");
-
-            migrationBuilder.DropTable(
-                name: "AccountPodcasts");
         }
     }
 }

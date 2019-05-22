@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
 using Podbase.APP.Services;
 using Podbase.APP.Views;
@@ -34,7 +35,8 @@ namespace Podbase.APP.ViewModels
         internal async Task LoadPodcastsAsync()
         {
             var podcasts = await AddPodcastViewModel.podcastsDataAccess.GetPodcastsAsync();
-            foreach (Podcast podcast in podcasts)
+            var query = from pod in podcasts where pod.UserId == LoginViewModel.loggedInUserId select pod;
+            foreach (Podcast podcast in query)
                 Podcasts.Add(podcast);
         }
 

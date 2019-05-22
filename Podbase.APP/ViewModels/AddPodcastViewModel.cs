@@ -30,7 +30,8 @@ namespace Podbase.APP.ViewModels
                 Name = Name,
                 Creator = Creator,
                 Genre = Genre,
-                Description = Description
+                Description = Description,
+                UserId = LoginViewModel.loggedInUserId
             };
             if (await podcastsDataAccess.AddPodcastAsync(podcast))
             {

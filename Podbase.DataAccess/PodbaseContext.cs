@@ -14,7 +14,7 @@ namespace Podbase.DataAccess
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Podcast> Podcasts { get; set; }
-        public DbSet<AccountPodcast> AccountPodcasts { get; set; }
+        //public DbSet<AccountPodcast> AccountPodcasts { get; set; }
 
         public PodbaseContext(DbContextOptions<PodbaseContext> options) : base(options) { }
 
@@ -22,7 +22,7 @@ namespace Podbase.DataAccess
         {
             CreateDummyAccounts(modelBuilder);
             CreateDummyPodcasts(modelBuilder);
-            CreateDummyAccountPodcasts(modelBuilder);
+            //CreateDummyAccountPodcasts(modelBuilder);
         }
 
         private static void CreateDummyAccounts(ModelBuilder modelBuilder)
@@ -34,8 +34,8 @@ namespace Podbase.DataAccess
 
         private static void CreateDummyPodcasts(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Podcast>().HasData(new Podcast() { PodcastId = 1, Name = "Radioresepsjonen", Creator = "NRK", Genre = "Humor", Description = "Gøy" });
-            modelBuilder.Entity<Podcast>().HasData(new Podcast() { PodcastId = 2, Name = "Misjonen", Creator = "P4", Genre = "Humor", Description = "Hehe" });
+            modelBuilder.Entity<Podcast>().HasData(new Podcast() { PodcastId = 1, Name = "Radioresepsjonen", Creator = "NRK", Genre = "Humor", Description = "Gøy", UserId = 1});
+            modelBuilder.Entity<Podcast>().HasData(new Podcast() { PodcastId = 2, Name = "Misjonen", Creator = "P4", Genre = "Humor", Description = "Hehe", UserId = 1});
             Debug.WriteLine("Dummy podcasts made.");
         }
 

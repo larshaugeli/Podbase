@@ -16,6 +16,7 @@ namespace Podbase.APP.ViewModels
     {
         // Variables
         public static string loggedInUsername, loggedInFirstName, loggedInLastName;
+        public static int loggedInUserId;
         public RelayCommand LoginCommand { get; set; }
         public RelayCommand CreateAccount { get; set; }
         public static ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
@@ -51,6 +52,7 @@ namespace Podbase.APP.ViewModels
                 {
                     loggedInFirstName = acc.FirstName;
                     loggedInLastName = acc.LastName;
+                    loggedInUserId = acc.UserId;
                 }   
                 Misc.CreateDialog("exists");
                 NavigationService.Navigate(typeof(MainPage));

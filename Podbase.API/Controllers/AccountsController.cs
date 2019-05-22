@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,6 +27,7 @@ namespace Podbase.API.Controllers
         {
             return await _context.Accounts.ToListAsync();
         }
+
 
         // GET: api/Accounts/5
         [HttpGet("{id}")]
