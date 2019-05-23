@@ -26,7 +26,7 @@ namespace Podbase.APP.ViewModels
         {
             Podcasts.Clear();
             SortCommand = new RelayCommand(Sort);
-            DeleteCommand = new RelayCommand<Podcast>(async podcast => DeletePodcast(podcast));
+            DeleteCommand = new RelayCommand<Podcast>(async podcast => await DeletePodcast(podcast));
             AddCommand = new RelayCommand(GoToAddPodcastPage);
             EditCommand = new RelayCommand<Podcast>(podcast => GoToEditPodcastPage(podcast));
         }

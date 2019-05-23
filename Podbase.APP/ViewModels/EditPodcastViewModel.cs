@@ -15,6 +15,7 @@ namespace Podbase.APP.ViewModels
     {
         public RelayCommand EditPodcastCommand { get; set; }
         public static Podcast SelectedPodcast;
+        public int SelectedPodcastId = SelectedPodcast.PodcastId;
 
         public EditPodcastViewModel()
         {
@@ -25,19 +26,19 @@ namespace Podbase.APP.ViewModels
         public async void EditPodcast()
         {
             await AddPodcastViewModel.podcastsDataAccess.DeletePodcastAsync(SelectedPodcast);
-            //AddPodcastViewModel.AddedPodcasts.Remove(SelectedPodcast);
             SelectedPodcast = new Podcast()
             {
                 Name = Name,
                 Creator = Creator,
                 Genre = Genre,
-                Description = Description
+                Description = Description,
+                UserId = LoginViewModel.loggedInUserId,
+                PodcastId = SelectedPodcastId
             };
             if (await AddPodcastViewModel.podcastsDataAccess.AddPodcastAsync(SelectedPodcast))
             {
                 AddPodcastViewModel.AddedPodcasts.Add(SelectedPodcast);
             }
-            //AddPodcastViewModel.AddedPodcasts.Add(SelectedPodcast);
             NavigationService.Navigate(typeof(PodcastPage));
         }
 

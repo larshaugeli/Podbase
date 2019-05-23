@@ -16,7 +16,8 @@ namespace Podbase.DataAccess.Migrations
                     Username = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true)
+                    LastName = table.Column<string>(nullable: true),
+                    AboutMe = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -43,11 +44,11 @@ namespace Podbase.DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Accounts",
-                columns: new[] { "UserId", "FirstName", "LastName", "Password", "Username" },
+                columns: new[] { "UserId", "AboutMe", "FirstName", "LastName", "Password", "Username" },
                 values: new object[,]
                 {
-                    { 1, "Lars", "Haugeli", "Sofimjau123", "larshaugeli" },
-                    { 2, "Sofi", "Mjaupus", "Sofimjau123", "sofimjaupus" }
+                    { 1, null, "Lars", "Haugeli", "Sofimjau123", "larshaugeli" },
+                    { 2, null, "Sofi", "Mjaupus", "Sofimjau123", "sofimjaupus" }
                 });
 
             migrationBuilder.InsertData(

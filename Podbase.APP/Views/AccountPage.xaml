@@ -25,8 +25,10 @@
             <TextBlock HorizontalAlignment="Left" Margin="168,116,0,0" Text="{Binding FirstName, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="168,176,0,0" Text="{Binding LastName, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="168,238,0,0" Text="{Binding Username, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top"/>
-            <TextBlock HorizontalAlignment="Left" Margin="168,305,0,0" Text="Binding will be implemented later" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="168,305,0,0" Text="{Binding AboutMe, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Margin="168,306,0,0" Text="{Binding AboutMe, Mode=TwoWay}" VerticalAlignment="Top" Height="189" Width="295"/>
             <Image Source="../Assets/logo1.PNG" HorizontalAlignment="Left" Height="234" Margin="617,116,0,0" VerticalAlignment="Top" Width="238"/>
+            <Button Content="Save" Command="{Binding SaveTextCommand}" HorizontalAlignment="Left" Margin="168,531,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 </Page>

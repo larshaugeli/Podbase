@@ -24,6 +24,8 @@ namespace Podbase.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AboutMe");
+
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");

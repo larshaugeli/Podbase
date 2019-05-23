@@ -9,7 +9,7 @@ using Podbase.DataAccess;
 namespace Podbase.DataAccess.Migrations
 {
     [DbContext(typeof(PodbaseContext))]
-    [Migration("20190522183702_InitialCreate")]
+    [Migration("20190523190338_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,8 @@ namespace Podbase.DataAccess.Migrations
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AboutMe");
 
                     b.Property<string>("FirstName");
 
