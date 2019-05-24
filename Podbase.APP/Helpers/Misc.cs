@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml.Controls;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +11,7 @@ namespace Podbase.APP.Helpers
 {
     public class Misc
     {
-        public static void TruncateTables()
+        public static String StringBuilder()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
             {
@@ -26,8 +22,14 @@ namespace Podbase.APP.Helpers
             };
 
             var connection = builder.ConnectionString.ToString();
+
+            return connection;
+        }
+
+        public static void TruncateTables()
+        {
             var optionsBuilder = new DbContextOptionsBuilder<PodbaseContext>();
-            optionsBuilder.UseSqlServer(connection);
+            optionsBuilder.UseSqlServer(StringBuilder());
 
             using (var db = new PodbaseContext(optionsBuilder.Options))
             {

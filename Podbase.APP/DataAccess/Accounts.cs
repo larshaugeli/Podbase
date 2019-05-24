@@ -49,24 +49,6 @@ namespace Podbase.APP.DataAccess
                 return false;
         }
 
-        internal async Task<bool>UpdateAccountAsync(Account account, string update)
-        {
-            string json = JsonConvert.SerializeObject(account);
-            HttpResponseMessage result = await _httpClient.PostAsync(accountsBaseUri,
-                new StringContent(json, Encoding.UTF8, "application/json"));
-
-            if (result.IsSuccessStatusCode)
-            {
-                json = await result.Content.ReadAsStringAsync();
-                var returnedAccount = JsonConvert.DeserializeObject<Account>(json);
-                returnedAccount.AboutMe = update;
-
-                return true;
-            }
-            else
-                return false;
-        }
-
         internal async Task<bool> DeleteAccountAsync(Account account)
         {
             HttpResponseMessage result =

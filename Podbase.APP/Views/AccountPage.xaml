@@ -25,10 +25,11 @@
             <TextBlock HorizontalAlignment="Left" Margin="168,116,0,0" Text="{Binding FirstName, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="168,176,0,0" Text="{Binding LastName, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="168,238,0,0" Text="{Binding Username, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top"/>
-            <TextBlock HorizontalAlignment="Left" Margin="168,305,0,0" Text="{Binding AboutMe, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Margin="168,306,0,0" Text="{Binding AboutMe, Mode=TwoWay}" VerticalAlignment="Top" Height="189" Width="295"/>
+            <TextBlock Name="AboutMeTextBlock" HorizontalAlignment="Left" Margin="168,305,0,0" Text="{Binding AboutMe, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBox Name="AboutMeTextBox" HorizontalAlignment="Left" Margin="168,306,0,0" Text="{Binding AboutMe, Mode=TwoWay}" VerticalAlignment="Top" Height="200" Width="320"/>
             <Image Source="../Assets/logo1.PNG" HorizontalAlignment="Left" Height="234" Margin="617,116,0,0" VerticalAlignment="Top" Width="238"/>
-            <Button Content="Save" Command="{Binding SaveTextCommand}" HorizontalAlignment="Left" Margin="168,531,0,0" VerticalAlignment="Top"/>
+            <Button Name="SaveButton" Content="Save" Command="{Binding SaveTextCommand}" HorizontalAlignment="Left" Margin="168,531,0,0" VerticalAlignment="Top" Click="SaveButton_Click"/>
+            <ToggleSwitch Name="ToggleSwitch" Header="Edit mode" HorizontalAlignment="Left" Margin="789,16,0,0" VerticalAlignment="Top" Toggled="ToggleSwitch_Toggled_1" />
         </Grid>
     </Grid>
 </Page>

@@ -2,11 +2,11 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Podbase.APP.DataAccess;
+using Windows.UI.Xaml.Controls;
+using Microsoft.EntityFrameworkCore;
 using Podbase.APP.Helpers;
+using Podbase.DataAccess;
 using Podbase.Model;
-using Remotion.Linq.Clauses;
 
 namespace Podbase.APP.ViewModels
 {
@@ -14,35 +14,36 @@ namespace Podbase.APP.ViewModels
     {
         public RelayCommand SaveTextCommand { get; set; }
         public Account LoggedInAccount;
+        public static string LoggedInAboutMe;
 
         public AccountViewModel()
         {
+            CreateAccountViewModel.Accounts.Clear();
             SaveTextCommand = new RelayCommand(SaveText);
         }
 
-        private async void SaveText()
+        internal async Task LoadAccountsAsync()
+        {
+            var accounts = await CreateAccountViewModel.accountDataAccess.GetAccountsAsync();
+            var query = from acc in accounts where acc.UserId == LoginViewModel.loggedInUserId select acc;
+            foreach (Account account in query)
+            {
+                LoggedInAboutMe = account.AboutMe;
+                Debug.WriteLine("AboutMe: " + AboutMe + " og " + "account.AboutMe " + account.AboutMe);
+            }
+        }
+
+        public async void SaveText()
         {
             Account[] accounts = await CreateAccountViewModel.accountDataAccess.GetAccountsAsync();
-            var query = from acc in LoginViewModel.Accounts where acc.Username == LoginViewModel.loggedInUsername select acc;
             foreach (Account acc in accounts)
             {
-                foreach (Account account in query)
+                if (acc.UserId == LoginViewModel.loggedInUserId)
                 {
-                    LoggedInAccount = account;
+                    LoggedInAccount = acc;
+                    Debug.WriteLine("LoggedInAccount is set.");
                 }
             }
-            LoggedInAccount.AboutMe = AboutMe;
-            Debug.WriteLine("Account: " + LoggedInAccount.Username + " " + LoggedInAccount.UserId + " " + LoggedInAccount.AboutMe);
-            string json = LoggedInAccount.ConvertFromObjectToJson();
-            
-            Account accountJson = new Account(json);
-            Debug.WriteLine("jsondrit: " + accountJson.Username + " " + accountJson.UserId + " " + accountJson.AboutMe);
-
-            if (await CreateAccountViewModel.accountDataAccess.DeleteAccountAsync(LoggedInAccount))
-            {
-                Debug.WriteLine("Deleted " + LoggedInAccount.Username + " " + LoggedInAccount.AboutMe);
-            }
-            
 
             LoggedInAccount = new Account()
             {
@@ -53,20 +54,35 @@ namespace Podbase.APP.ViewModels
                 LastName = LoggedInAccount.LastName,
                 AboutMe = LoggedInAccount.AboutMe
             };
-            Debug.WriteLine(LoggedInAccount.Username + " " + LoggedInAccount.UserId + " " + LoggedInAccount.AboutMe);
-
-            if (await CreateAccountViewModel.accountDataAccess.AddAccountAsync(LoggedInAccount))
-            {
-                Debug.WriteLine("yes");
-                CreateAccountViewModel.Accounts.Add(LoggedInAccount);
-            }
             
+            var optionsBuilder = new DbContextOptionsBuilder<PodbaseContext>();
+            optionsBuilder.UseSqlServer(Misc.StringBuilder());
+
+            // modifies table row
+            using (var db = new PodbaseContext(optionsBuilder.Options))
+            {
+                var result = db.Accounts.SingleOrDefault(b => b.UserId == LoginViewModel.loggedInUserId);
+                Debug.WriteLine("LoggedIAccount UserId: " + LoggedInAccount.UserId + " " + "loggedINUSerID: " + " " + LoginViewModel.loggedInUserId);
+                if (result != null)
+                {
+                    CreateAccountViewModel.Accounts.Add(LoggedInAccount);
+                    result.AboutMe = AboutMe;
+                    db.SaveChanges();
+                }
+            }
+
+            var query = from acc in accounts where acc.UserId == LoginViewModel.loggedInUserId select acc;
+            foreach (Account account in query)
+            {
+                LoggedInAboutMe = account.AboutMe;
+                Debug.WriteLine("AboutMe: " + AboutMe + " og " + "account.AboutMe " + account.AboutMe);
+            }
         }
 
         private string _username = LoginViewModel.loggedInUsername;
         private string _firstName = LoginViewModel.loggedInFirstName;
         private string _lastName = LoginViewModel.loggedInLastName;
-        private string _aboutMe;
+        private string _aboutMe = LoggedInAboutMe;
 
         public string Username
         {

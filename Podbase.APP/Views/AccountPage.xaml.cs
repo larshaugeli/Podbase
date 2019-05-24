@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Diagnostics;
+using Windows.UI.Xaml;
 using Podbase.APP.ViewModels;
 
 using Windows.UI.Xaml.Controls;
@@ -13,6 +14,40 @@ namespace Podbase.APP.Views
         public AccountPage()
         {
             InitializeComponent();
+            AboutMeTextBox.Visibility = Visibility.Collapsed;
+            SaveButton.Visibility = Visibility.Collapsed;
+            Loaded += AccountPage_LoadedAsync;
+        }
+
+        private async void AccountPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            await ViewModel.LoadAccountsAsync();
+            Debug.WriteLine("async method happened");
+        }
+
+        private void ToggleSwitch_Toggled_1(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
+            if (toggleSwitch != null)
+            {
+                if (toggleSwitch.IsOn)
+                {
+                    AboutMeTextBox.Visibility = Visibility.Visible;
+                    AboutMeTextBlock.Visibility = Visibility.Collapsed;
+                    SaveButton.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    AboutMeTextBox.Visibility = Visibility.Collapsed;
+                    AboutMeTextBlock.Visibility = Visibility.Visible;
+                    SaveButton.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch.IsOn = false;
         }
     }
 }

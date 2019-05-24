@@ -4,9 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Podbase.APP.Helpers;
 using Podbase.APP.Services;
 using Podbase.APP.Views;
+using Podbase.DataAccess;
 using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
@@ -22,10 +24,9 @@ namespace Podbase.APP.ViewModels
             EditPodcastCommand = new RelayCommand(EditPodcast);
         }
 
-        // Edit podcasts. Deletes podcast and adds a new one. //TODO change this method so it updates the element, so PodcastId stays the same
-        public async void EditPodcast()
+        // Edit podcasts. modifies table row
+        public void EditPodcast()
         {
-            await AddPodcastViewModel.podcastsDataAccess.DeletePodcastAsync(SelectedPodcast);
             SelectedPodcast = new Podcast()
             {
                 Name = Name,
@@ -35,10 +36,25 @@ namespace Podbase.APP.ViewModels
                 UserId = LoginViewModel.loggedInUserId,
                 PodcastId = SelectedPodcastId
             };
-            if (await AddPodcastViewModel.podcastsDataAccess.AddPodcastAsync(SelectedPodcast))
+
+            var optionsBuilder = new DbContextOptionsBuilder<PodbaseContext>();
+            optionsBuilder.UseSqlServer(Misc.StringBuilder());
+
+            // modifies table row
+            using (var db = new PodbaseContext(optionsBuilder.Options))
             {
-                AddPodcastViewModel.AddedPodcasts.Add(SelectedPodcast);
-            }
+                var result = db.Podcasts.SingleOrDefault(b => b.PodcastId == SelectedPodcastId);
+                Debug.WriteLine("PodcastId: " + SelectedPodcast.PodcastId + " " + "selectedPodcastId: " + " " + SelectedPodcastId);
+                if (result != null)
+                {
+                    result.Name = Name;
+                    result.Creator = Creator;
+                    result.Genre = Genre;
+                    result.Description = Description;
+                    db.SaveChanges();
+                }
+            };
+
             NavigationService.Navigate(typeof(PodcastPage));
         }
 
