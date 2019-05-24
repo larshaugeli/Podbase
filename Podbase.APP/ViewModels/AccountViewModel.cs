@@ -29,7 +29,7 @@ namespace Podbase.APP.ViewModels
             foreach (Account account in query)
             {
                 LoggedInAboutMe = account.AboutMe;
-                Debug.WriteLine("AboutMe: " + AboutMe + " og " + "account.AboutMe " + account.AboutMe);
+                Debug.WriteLine("AboutMe: " + LoggedInAboutMe + " og " + "account.AboutMe " + account.AboutMe);
             }
         }
 
@@ -67,6 +67,8 @@ namespace Podbase.APP.ViewModels
                 {
                     CreateAccountViewModel.Accounts.Add(LoggedInAccount);
                     result.AboutMe = AboutMe;
+                    LoggedInAboutMe = AboutMe;
+                    Debug.WriteLine("results: LoggedInAboutMe " + LoggedInAboutMe + " results.AboutMe " + result.AboutMe);
                     db.SaveChanges();
                 }
             }
@@ -74,7 +76,7 @@ namespace Podbase.APP.ViewModels
             var query = from acc in accounts where acc.UserId == LoginViewModel.loggedInUserId select acc;
             foreach (Account account in query)
             {
-                LoggedInAboutMe = account.AboutMe;
+                account.AboutMe = LoggedInAboutMe;
                 Debug.WriteLine("AboutMe: " + AboutMe + " og " + "account.AboutMe " + account.AboutMe);
             }
         }
