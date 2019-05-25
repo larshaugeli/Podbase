@@ -3,15 +3,16 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
 using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
 {
-    public class FriendsViewModel : Observable
+    public class FriendsViewModel : ViewModelBase
     {
-        public ObservableCollection<Account> Accounts { get; set; }= new ObservableCollection<Account>();
+        public ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
         public Account SelectedAccount;
 
         public FriendsViewModel()
@@ -22,11 +23,11 @@ namespace Podbase.APP.ViewModels
         internal async Task LoadAccountsAsync()
         {
             var accounts = await CreateAccountViewModel.accountDataAccess.GetAccountsAsync();
-            var query = from acc in accounts where acc.UserId == LoginViewModel.loggedInUserId select acc;
-            foreach (Account account in query)
+            foreach (Account account in accounts)
             {
                 Accounts.Add(account);
                 Debug.WriteLine("accounts is set");
+                Debug.WriteLine("Accounts freinds count: " +  Accounts.Count);
             }
         }
     }

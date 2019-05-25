@@ -3,6 +3,7 @@
 using Podbase.APP.ViewModels;
 
 using Windows.UI.Xaml.Controls;
+using Podbase.APP.Services;
 
 namespace Podbase.APP.Views
 {
@@ -13,12 +14,17 @@ namespace Podbase.APP.Views
         public FriendsPage()
         {
             InitializeComponent();
-            Loaded += PodcastPage_LoadedAsync;
+            Loaded += FriendsPage_LoadedAsync;
         }
 
-        private async void PodcastPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void FriendsPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             await ViewModel.LoadAccountsAsync();
+        }
+
+        private void AccountsListView_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            NavigationService.Navigate(typeof(AccountPage));
         }
     }
 }
