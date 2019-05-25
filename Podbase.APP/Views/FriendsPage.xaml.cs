@@ -13,6 +13,12 @@ namespace Podbase.APP.Views
         public FriendsPage()
         {
             InitializeComponent();
+            Loaded += PodcastPage_LoadedAsync;
+        }
+
+        private async void PodcastPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            await ViewModel.LoadAccountsAsync();
         }
     }
 }
