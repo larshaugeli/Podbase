@@ -25,6 +25,19 @@ namespace Podbase.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Friends",
+                columns: table => new
+                {
+                    FriendId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Friends", x => x.FriendId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Podcasts",
                 columns: table => new
                 {
@@ -52,6 +65,11 @@ namespace Podbase.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Friends",
+                columns: new[] { "FriendId", "UserId" },
+                values: new object[] { 2, 1 });
+
+            migrationBuilder.InsertData(
                 table: "Podcasts",
                 columns: new[] { "PodcastId", "Creator", "Description", "Genre", "Name", "Rating", "UserId" },
                 values: new object[,]
@@ -65,6 +83,9 @@ namespace Podbase.DataAccess.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Accounts");
+
+            migrationBuilder.DropTable(
+                name: "Friends");
 
             migrationBuilder.DropTable(
                 name: "Podcasts");

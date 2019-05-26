@@ -57,6 +57,26 @@ namespace Podbase.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Podbase.Model.Friend", b =>
+                {
+                    b.Property<int>("FriendId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("FriendId");
+
+                    b.ToTable("Friends");
+
+                    b.HasData(
+                        new
+                        {
+                            FriendId = 2,
+                            UserId = 1
+                        });
+                });
+
             modelBuilder.Entity("Podbase.Model.Podcast", b =>
                 {
                     b.Property<int>("PodcastId")

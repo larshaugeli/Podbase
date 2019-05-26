@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.UI.Xaml.Controls;
 using Microsoft.EntityFrameworkCore;
 using Podbase.APP.Helpers;
@@ -13,8 +14,10 @@ namespace Podbase.APP.ViewModels
     public class AccountViewModel : ViewModelBase
     {
         public RelayCommand SaveTextCommand { get; set; }
+        public ICommand AddFriendCommand { get; set; }
         public Account LoggedInAccount;
-        public static string LoggedInAboutMe, FriendUsername, FriendFirstName, FriendLastName, FriendAboutMe;
+        public Friend SelectedFriend = new Friend() { UserId = LoginViewModel.loggedInUserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
+        public static string LoggedInAboutMe;
         public static int FriendUserID;
         public static bool FromFriendsPage { get; set; } = false;
         private string _username, _firstName, _lastName, _aboutMe;
@@ -33,6 +36,7 @@ namespace Podbase.APP.ViewModels
             }
             else
             {
+                AddFriendCommand = new RelayCommand<Friend>(AddFriend);
                 _username = FriendsViewModel.SelectedAccount.Username;
                 _firstName = FriendsViewModel.SelectedAccount.FirstName;
                 _lastName = FriendsViewModel.SelectedAccount.LastName;
@@ -48,6 +52,21 @@ namespace Podbase.APP.ViewModels
             {
                 LoggedInAboutMe = account.AboutMe;
                 Debug.WriteLine("AboutMe: " + LoggedInAboutMe + " og " + "account.AboutMe " + account.AboutMe);
+            }
+        }
+
+        private void AddFriend(Friend friend)
+        {
+            friend = SelectedFriend;
+            if (FriendsViewModel.Friends.Contains(friend))
+            {
+                Misc.ShowToastNotification("Notification", "You are already friend with this account.", 1);
+            }
+            else
+            {
+                FriendsViewModel.Friends.Add(friend);
+                Debug.WriteLine(FriendsViewModel.Friends.Count);
+                Misc.ShowToastNotification("Notification", "Added " + FriendsViewModel.SelectedAccount.Username + " as friend", 1);
             }
         }
 

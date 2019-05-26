@@ -30,7 +30,7 @@
             <Image Source="../Assets/logo1.PNG" HorizontalAlignment="Left" Height="234" Margin="617,116,0,0" VerticalAlignment="Top" Width="238"/>
             <Button Name="SaveButton" Content="Save" Command="{Binding SaveTextCommand}" HorizontalAlignment="Left" Margin="168,531,0,0" VerticalAlignment="Top" Click="SaveButton_Click"/>
             <ToggleSwitch Name="ToggleSwitch" Header="Edit mode" HorizontalAlignment="Left" Margin="789,16,0,0" VerticalAlignment="Top" Toggled="ToggleSwitch_Toggled" />
-            <Button Name="AddFriendButton" Content="Add as friend" HorizontalAlignment="Left" Margin="617,403,0,0" VerticalAlignment="Top" Height="43" Width="115" Click="AddFriendButton_Click"/>
+            <Button Name="AddFriendButton" Content="Add as friend" HorizontalAlignment="Left" Margin="617,403,0,0" VerticalAlignment="Top" Height="43" Width="115" Command="{Binding AddFriendCommand}"/>
         </Grid>
     </Grid>
 </Page>

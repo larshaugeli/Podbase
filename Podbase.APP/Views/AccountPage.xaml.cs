@@ -4,6 +4,8 @@ using Windows.UI.Xaml;
 using Podbase.APP.ViewModels;
 
 using Windows.UI.Xaml.Controls;
+using Podbase.APP.Helpers;
+using Podbase.Model;
 
 namespace Podbase.APP.Views
 {
@@ -13,7 +15,9 @@ namespace Podbase.APP.Views
 
         public AccountPage()
         {
+            Friend friend = new Friend() { UserId = LoginViewModel.loggedInUserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
             InitializeComponent();
+
             if (AccountViewModel.FromFriendsPage == false)
             {
                 AboutMeTextBox.Visibility = Visibility.Collapsed;
@@ -60,12 +64,6 @@ namespace Podbase.APP.Views
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             ToggleSwitch.IsOn = false;
-        }
-
-        private void AddFriendButton_Click(object sender, RoutedEventArgs e)
-        {
-            FriendsViewModel.Friends.Add(FriendsViewModel.SelectedAccount);
-            Debug.WriteLine(FriendsViewModel.Friends.Count);
         }
     }
 }

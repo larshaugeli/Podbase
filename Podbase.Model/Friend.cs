@@ -8,13 +8,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Podbase.Model
 {
-    public class AccountPodcast
+    [Table("Friends")]
+    public class Friend
     {
-
         public int UserId { get; set; }
-        [Key]
-        public int PodcastId { get; set; }
-
-        public ObservableCollection<Podcast> PodcastsPerAccount { get; set; } = new ObservableCollection<Podcast>();
+        public int FriendId { get; set; }
     }
 }

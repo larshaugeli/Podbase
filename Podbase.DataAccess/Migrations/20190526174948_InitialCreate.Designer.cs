@@ -9,7 +9,7 @@ using Podbase.DataAccess;
 namespace Podbase.DataAccess.Migrations
 {
     [DbContext(typeof(PodbaseContext))]
-    [Migration("20190523190338_InitialCreate")]
+    [Migration("20190526174948_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,26 @@ namespace Podbase.DataAccess.Migrations
                             LastName = "Mjaupus",
                             Password = "Sofimjau123",
                             Username = "sofimjaupus"
+                        });
+                });
+
+            modelBuilder.Entity("Podbase.Model.Friend", b =>
+                {
+                    b.Property<int>("FriendId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("FriendId");
+
+                    b.ToTable("Friends");
+
+                    b.HasData(
+                        new
+                        {
+                            FriendId = 2,
+                            UserId = 1
                         });
                 });
 
