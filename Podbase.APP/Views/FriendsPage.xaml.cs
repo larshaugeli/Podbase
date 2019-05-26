@@ -20,6 +20,7 @@ namespace Podbase.APP.Views
             InitializeComponent();
             Loaded += FriendsPage_LoadedAsync;
             AccountsListView.ItemsSource = ViewModel.Accounts;
+            YourFriends.ItemsSource = FriendsViewModel.FriendsAccounts;
         }
 
         private async void FriendsPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -29,9 +30,9 @@ namespace Podbase.APP.Views
 
         private void UIElement_OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            Account SelectedAccount = ((Grid) sender).DataContext as Account;
-            if (SelectedAccount == null) Debug.WriteLine("no item selected");
-            ViewModel.GoToSelectedAccount(SelectedAccount);
+            Account selectedAccount = ((Grid) sender).DataContext as Account;
+            if (selectedAccount == null) Debug.WriteLine("no item selected");
+            ViewModel.GoToSelectedAccount(selectedAccount);
         }
     }
 }

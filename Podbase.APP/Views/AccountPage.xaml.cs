@@ -15,7 +15,6 @@ namespace Podbase.APP.Views
 
         public AccountPage()
         {
-            Friend friend = new Friend() { UserId = LoginViewModel.loggedInUserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
             InitializeComponent();
 
             if (AccountViewModel.FromFriendsPage == false)

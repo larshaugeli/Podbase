@@ -16,7 +16,6 @@ namespace Podbase.APP.ViewModels
         public RelayCommand SaveTextCommand { get; set; }
         public ICommand AddFriendCommand { get; set; }
         public Account LoggedInAccount;
-        public Friend SelectedFriend = new Friend() { UserId = LoginViewModel.loggedInUserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
         public static string LoggedInAboutMe;
         public static int FriendUserID;
         public static bool FromFriendsPage { get; set; } = false;
@@ -55,9 +54,10 @@ namespace Podbase.APP.ViewModels
             }
         }
 
-        private void AddFriend(Friend friend)
+        private async void AddFriend(Friend friend)
         {
-            friend = SelectedFriend;
+            Friend selectedFriend = new Friend() { UserId = LoginViewModel.loggedInUserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
+            friend = selectedFriend;
             if (FriendsViewModel.Friends.Contains(friend))
             {
                 Misc.ShowToastNotification("Notification", "You are already friend with this account.", 1);
@@ -65,6 +65,15 @@ namespace Podbase.APP.ViewModels
             else
             {
                 FriendsViewModel.Friends.Add(friend);
+
+                var optionsBuilder = new DbContextOptionsBuilder<PodbaseContext>();
+                optionsBuilder.UseSqlServer(Misc.StringBuilder());
+
+                using (var db = new PodbaseContext(optionsBuilder.Options))
+                {
+                    db.Friends.Add(friend);
+                    db.SaveChanges();
+                };
                 Debug.WriteLine(FriendsViewModel.Friends.Count);
                 Misc.ShowToastNotification("Notification", "Added " + FriendsViewModel.SelectedAccount.Username + " as friend", 1);
             }

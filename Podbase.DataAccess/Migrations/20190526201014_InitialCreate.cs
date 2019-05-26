@@ -28,13 +28,14 @@ namespace Podbase.DataAccess.Migrations
                 name: "Friends",
                 columns: table => new
                 {
-                    FriendId = table.Column<int>(nullable: false)
+                    ConnectionId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: false),
+                    FriendId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Friends", x => x.FriendId);
+                    table.PrimaryKey("PK_Friends", x => x.ConnectionId);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,22 +61,35 @@ namespace Podbase.DataAccess.Migrations
                 columns: new[] { "UserId", "AboutMe", "FirstName", "LastName", "Password", "Username" },
                 values: new object[,]
                 {
-                    { 1, null, "Lars", "Haugeli", "Sofimjau123", "larshaugeli" },
-                    { 2, null, "Sofi", "Mjaupus", "Sofimjau123", "sofimjaupus" }
+                    { 1, null, "Lars", "Haugeli", "Test123", "larshaugeli" },
+                    { 2, null, "Sansa", "Stark", "Test123", "sansastark" },
+                    { 3, null, "Arya", "Stark", "Test123", "aryastark" },
+                    { 4, null, "Ned", "Stark", "Test123", "nedstark" },
+                    { 5, null, "Bran", "Stark", "Test123", "branstark" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Friends",
-                columns: new[] { "FriendId", "UserId" },
-                values: new object[] { 2, 1 });
+                columns: new[] { "ConnectionId", "FriendId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 2, 1 },
+                    { 2, 3, 1 },
+                    { 3, 4, 1 },
+                    { 4, 3, 2 },
+                    { 5, 5, 2 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Podcasts",
                 columns: new[] { "PodcastId", "Creator", "Description", "Genre", "Name", "Rating", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "NRK", "Gøy", "Humor", "Radioresepsjonen", 0, 1 },
-                    { 2, "P4", "Hehe", "Humor", "Misjonen", 0, 1 }
+                    { 1, "NRK", "Funny podcast", "Comedy", "Radioresepsjonen", 0, 1 },
+                    { 2, "P4", "Funny podcast", "Comedy", "Misjonen", 0, 1 },
+                    { 3, "P4", "Funny podcast", "Comedy", "Misjonen", 0, 1 },
+                    { 4, "This American Life", "Podcast about a murder", "True Crime", "Serial", 0, 2 },
+                    { 5, "This American Life", "Podcast about a murder", "True Crime", "Serial", 0, 2 }
                 });
         }
 

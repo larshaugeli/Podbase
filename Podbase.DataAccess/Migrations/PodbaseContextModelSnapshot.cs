@@ -44,36 +44,87 @@ namespace Podbase.DataAccess.Migrations
                             UserId = 1,
                             FirstName = "Lars",
                             LastName = "Haugeli",
-                            Password = "Sofimjau123",
+                            Password = "Test123",
                             Username = "larshaugeli"
                         },
                         new
                         {
                             UserId = 2,
-                            FirstName = "Sofi",
-                            LastName = "Mjaupus",
-                            Password = "Sofimjau123",
-                            Username = "sofimjaupus"
+                            FirstName = "Sansa",
+                            LastName = "Stark",
+                            Password = "Test123",
+                            Username = "sansastark"
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            FirstName = "Arya",
+                            LastName = "Stark",
+                            Password = "Test123",
+                            Username = "aryastark"
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            FirstName = "Ned",
+                            LastName = "Stark",
+                            Password = "Test123",
+                            Username = "nedstark"
+                        },
+                        new
+                        {
+                            UserId = 5,
+                            FirstName = "Bran",
+                            LastName = "Stark",
+                            Password = "Test123",
+                            Username = "branstark"
                         });
                 });
 
             modelBuilder.Entity("Podbase.Model.Friend", b =>
                 {
-                    b.Property<int>("FriendId")
+                    b.Property<int>("ConnectionId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("FriendId");
+
                     b.Property<int>("UserId");
 
-                    b.HasKey("FriendId");
+                    b.HasKey("ConnectionId");
 
                     b.ToTable("Friends");
 
                     b.HasData(
                         new
                         {
+                            ConnectionId = 1,
                             FriendId = 2,
                             UserId = 1
+                        },
+                        new
+                        {
+                            ConnectionId = 2,
+                            FriendId = 3,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            ConnectionId = 3,
+                            FriendId = 4,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            ConnectionId = 4,
+                            FriendId = 3,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            ConnectionId = 5,
+                            FriendId = 5,
+                            UserId = 2
                         });
                 });
 
@@ -104,8 +155,8 @@ namespace Podbase.DataAccess.Migrations
                         {
                             PodcastId = 1,
                             Creator = "NRK",
-                            Description = "Gøy",
-                            Genre = "Humor",
+                            Description = "Funny podcast",
+                            Genre = "Comedy",
                             Name = "Radioresepsjonen",
                             Rating = 0,
                             UserId = 1
@@ -114,11 +165,41 @@ namespace Podbase.DataAccess.Migrations
                         {
                             PodcastId = 2,
                             Creator = "P4",
-                            Description = "Hehe",
-                            Genre = "Humor",
+                            Description = "Funny podcast",
+                            Genre = "Comedy",
                             Name = "Misjonen",
                             Rating = 0,
                             UserId = 1
+                        },
+                        new
+                        {
+                            PodcastId = 3,
+                            Creator = "P4",
+                            Description = "Funny podcast",
+                            Genre = "Comedy",
+                            Name = "Misjonen",
+                            Rating = 0,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            PodcastId = 4,
+                            Creator = "This American Life",
+                            Description = "Podcast about a murder",
+                            Genre = "True Crime",
+                            Name = "Serial",
+                            Rating = 0,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            PodcastId = 5,
+                            Creator = "This American Life",
+                            Description = "Podcast about a murder",
+                            Genre = "True Crime",
+                            Name = "Serial",
+                            Rating = 0,
+                            UserId = 2
                         });
                 });
 #pragma warning restore 612, 618

@@ -24,7 +24,6 @@ namespace Podbase.APP.ViewModels
         // Constructor
         public LoginViewModel()
         {
-            Accounts.Clear();
             LoginCommand = new RelayCommand(LoginUser);
             CreateAccount = new RelayCommand(GoToCreateAccount);
         }

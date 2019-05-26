@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -26,7 +27,7 @@ namespace Podbase.Model
         public string LastName { get; set; }
         public string AboutMe { get; set; }
 
-        public static List<Account> Accounts { get; set; } = new List<Account>();
+        public static ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
 
         // password must be minimum 4 characters, minimum 1 upper case letter and minimum 1 number
         public static Regex ValidPassword = new Regex("(?=.*[A-Z])(?=.*[0-9])(?=.{4,})");
