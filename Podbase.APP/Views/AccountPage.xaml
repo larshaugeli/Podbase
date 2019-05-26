@@ -29,7 +29,8 @@
             <TextBox Name="AboutMeTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsSpellCheckEnabled="True" HorizontalAlignment="Left" Margin="168,306,0,0" Text="{Binding AboutMe, Mode=TwoWay}" VerticalAlignment="Top" Height="195" Width="339"/>
             <Image Source="../Assets/logo1.PNG" HorizontalAlignment="Left" Height="234" Margin="617,116,0,0" VerticalAlignment="Top" Width="238"/>
             <Button Name="SaveButton" Content="Save" Command="{Binding SaveTextCommand}" HorizontalAlignment="Left" Margin="168,531,0,0" VerticalAlignment="Top" Click="SaveButton_Click"/>
-            <ToggleSwitch Name="ToggleSwitch" Header="Edit mode" HorizontalAlignment="Left" Margin="789,16,0,0" VerticalAlignment="Top" Toggled="ToggleSwitch_Toggled_1" />
+            <ToggleSwitch Name="ToggleSwitch" Header="Edit mode" HorizontalAlignment="Left" Margin="789,16,0,0" VerticalAlignment="Top" Toggled="ToggleSwitch_Toggled" />
+            <Button Name="AddFriendButton" Content="Add as friend" HorizontalAlignment="Left" Margin="617,403,0,0" VerticalAlignment="Top" Height="43" Width="115" Click="AddFriendButton_Click"/>
         </Grid>
     </Grid>
 </Page>

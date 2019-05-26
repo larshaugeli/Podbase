@@ -24,8 +24,8 @@ namespace Podbase.APP.Views
 
         public CreateAccount()
         {
-            this.InitializeComponent();
-            this.DataContext = ViewModel;
+            InitializeComponent();
+            DataContext = ViewModel;
         }
     }
 }

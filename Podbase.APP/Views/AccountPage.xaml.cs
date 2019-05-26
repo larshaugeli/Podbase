@@ -14,9 +14,21 @@ namespace Podbase.APP.Views
         public AccountPage()
         {
             InitializeComponent();
-            AboutMeTextBox.Visibility = Visibility.Collapsed;
-            SaveButton.Visibility = Visibility.Collapsed;
-            Loaded += AccountPage_LoadedAsync;
+            if (AccountViewModel.FromFriendsPage == false)
+            {
+                AboutMeTextBox.Visibility = Visibility.Collapsed;
+                SaveButton.Visibility = Visibility.Collapsed;
+                AddFriendButton.Visibility = Visibility.Collapsed;
+                Debug.WriteLine("Loaded: account");
+                Loaded += AccountPage_LoadedAsync;
+            }
+            else
+            {
+                AboutMeTextBox.Visibility = Visibility.Collapsed;
+                SaveButton.Visibility = Visibility.Collapsed;
+                ToggleSwitch.Visibility = Visibility.Collapsed;
+                Debug.WriteLine("Loaded: From friends");
+            }
         }
 
         private async void AccountPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -25,7 +37,7 @@ namespace Podbase.APP.Views
             Debug.WriteLine("async method happened");
         }
 
-        private void ToggleSwitch_Toggled_1(object sender, RoutedEventArgs e)
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = sender as ToggleSwitch;
             if (toggleSwitch != null)
@@ -48,6 +60,12 @@ namespace Podbase.APP.Views
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             ToggleSwitch.IsOn = false;
+        }
+
+        private void AddFriendButton_Click(object sender, RoutedEventArgs e)
+        {
+            FriendsViewModel.Friends.Add(FriendsViewModel.SelectedAccount);
+            Debug.WriteLine(FriendsViewModel.Friends.Count);
         }
     }
 }

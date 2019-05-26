@@ -14,12 +14,30 @@ namespace Podbase.APP.ViewModels
     {
         public RelayCommand SaveTextCommand { get; set; }
         public Account LoggedInAccount;
-        public static string LoggedInAboutMe;
+        public static string LoggedInAboutMe, FriendUsername, FriendFirstName, FriendLastName, FriendAboutMe;
+        public static int FriendUserID;
+        public static bool FromFriendsPage { get; set; } = false;
+        private string _username, _firstName, _lastName, _aboutMe;
 
         public AccountViewModel()
         {
-            CreateAccountViewModel.Accounts.Clear();
-            SaveTextCommand = new RelayCommand(SaveText);
+            if (FromFriendsPage == false)
+            {
+                _username = LoginViewModel.loggedInUsername;
+                _firstName = LoginViewModel.loggedInFirstName;
+                _lastName = LoginViewModel.loggedInLastName;
+                _aboutMe = LoggedInAboutMe;
+
+                CreateAccountViewModel.Accounts.Clear();
+                SaveTextCommand = new RelayCommand(SaveText);
+            }
+            else
+            {
+                _username = FriendsViewModel.SelectedAccount.Username;
+                _firstName = FriendsViewModel.SelectedAccount.FirstName;
+                _lastName = FriendsViewModel.SelectedAccount.LastName;
+                _aboutMe = FriendsViewModel.SelectedAccount.AboutMe;
+            }
         }
 
         internal async Task LoadAccountsAsync()
@@ -80,11 +98,6 @@ namespace Podbase.APP.ViewModels
                 Debug.WriteLine("AboutMe: " + AboutMe + " og " + "account.AboutMe " + account.AboutMe);
             }
         }
-
-        private string _username = LoginViewModel.loggedInUsername;
-        private string _firstName = LoginViewModel.loggedInFirstName;
-        private string _lastName = LoginViewModel.loggedInLastName;
-        private string _aboutMe = LoggedInAboutMe;
 
         public string Username
         {
