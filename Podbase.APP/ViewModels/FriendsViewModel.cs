@@ -15,6 +15,7 @@ namespace Podbase.APP.ViewModels
         public ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
         public Account SelectedAccount;
 
+
         public FriendsViewModel()
         {
 
@@ -28,6 +29,15 @@ namespace Podbase.APP.ViewModels
                 Accounts.Add(account);
                 Debug.WriteLine("accounts is set");
                 Debug.WriteLine("Accounts freinds count: " +  Accounts.Count);
+                WriteAccountsInDebug();
+            }
+        }
+
+        public void WriteAccountsInDebug()
+        {
+            foreach (var account in Accounts)
+            {
+                Debug.WriteLine(account.Username + " " + account.UserId);
             }
         }
     }

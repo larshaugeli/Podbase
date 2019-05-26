@@ -22,9 +22,9 @@ namespace Podbase.APP.Views
             await ViewModel.LoadAccountsAsync();
         }
 
-        private void AccountsListView_OnItemClick(object sender, ItemClickEventArgs e)
-        {
-            NavigationService.Navigate(typeof(AccountPage));
-        }
+        //private void AccountsListView_OnItemClick(object sender, ItemClickEventArgs e)
+        //{
+        //    NavigationService.Navigate(typeof(AccountPage));
+        //}
     }
 }
