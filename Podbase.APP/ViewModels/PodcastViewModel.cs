@@ -33,7 +33,7 @@ namespace Podbase.APP.ViewModels
         // Methods
         internal async Task LoadPodcastsAsync()
         {
-            var podcasts = await AddPodcastViewModel.podcastsDataAccess.GetPodcastsAsync();
+            var podcasts = await AddPodcastViewModel.PodcastsDataAccess.GetPodcastsAsync();
             var query = from pod in podcasts where pod.UserId == LoginViewModel.loggedInUserId select pod;
             foreach (Podcast podcast in query)
                 Podcasts.Add(podcast);
@@ -49,7 +49,7 @@ namespace Podbase.APP.ViewModels
             }
             else
             {
-                if (await AddPodcastViewModel.podcastsDataAccess.DeletePodcastAsync(pod))
+                if (await AddPodcastViewModel.PodcastsDataAccess.DeletePodcastAsync(pod))
                 {
                     Podcasts.Remove(pod);
                 }

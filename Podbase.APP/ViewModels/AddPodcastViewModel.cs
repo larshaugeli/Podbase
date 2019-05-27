@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
 using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
 using Podbase.APP.Services;
@@ -11,12 +9,10 @@ namespace Podbase.APP.ViewModels
 {
     public class AddPodcastViewModel : ViewModelBase
     {
-        // Variables
         public static ObservableCollection<Podcast> AddedPodcasts = new ObservableCollection<Podcast>();
-        public static Podcasts podcastsDataAccess = new Podcasts();
+        public static Podcasts PodcastsDataAccess = new Podcasts();
         public RelayCommand CreatePodcastCommand { get; set; }
 
-        // Constructor
         public AddPodcastViewModel()
         {
             CreatePodcastCommand = new RelayCommand(AddNewPodcast);
@@ -33,71 +29,53 @@ namespace Podbase.APP.ViewModels
                 Description = Description,
                 UserId = LoginViewModel.loggedInUserId
             };
-            if (await podcastsDataAccess.AddPodcastAsync(podcast))
+            if (await PodcastsDataAccess.AddPodcastAsync(podcast))
             {
                 AddedPodcasts.Add(podcast);
             }
-
-            WritePodcastList();
             NavigationService.Navigate(typeof(PodcastPage));
         }
-
        
         // Input strings
-        private String _name, _creator, _genre, _description;
+        private string _name, _creator, _genre, _description;
 
         public string Name
         {
-            get { return _name; }
+            get => _name;
             set
             {
-                this._name = value;
+                _name = value;
                 OnPropertyChanged("_name");
             }
         }
 
         public string Creator
         {
-            get { return _creator; }
+            get => _creator;
             set
             {
-                {
-                    this._creator = value;
-                    OnPropertyChanged("_creator");
-                }
+                _creator = value;
+                OnPropertyChanged("_creator");  
             }
         }
 
         public string Genre
         {
-            get { return _genre; }
+            get => _genre;
             set
             {
-                {
-                    this._genre = value;
-                    OnPropertyChanged("_genre");
-                }
+                _genre = value;
+                OnPropertyChanged("_genre");
             }
         }
 
         public string Description
         {
-            get { return _description; }
+            get => _description;
             set
             {
-                {
-                    this._description = value;
-                    OnPropertyChanged("_description");
-                }
-            }
-        }
-
-        // Debug
-        private void WritePodcastList()
-        {
-            foreach (var pod in AddedPodcasts)
-            {
-                Debug.WriteLine(pod.Name + " - " + pod.Creator + " - " + pod.Description + " - " + pod.Genre);
+                _description = value;
+                OnPropertyChanged("_description");
             }
         }
     }

@@ -65,7 +65,7 @@ namespace Podbase.APP.ViewModels
         // 
         internal async Task LoadAccountsAsync()
         {
-            var accounts = await CreateAccountViewModel.accountDataAccess.GetAccountsAsync();
+            var accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
             foreach (Account account in accounts)
                 Accounts.Add(account);
         }

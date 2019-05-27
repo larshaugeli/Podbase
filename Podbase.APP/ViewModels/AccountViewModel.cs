@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -13,21 +12,16 @@ namespace Podbase.APP.ViewModels
 {
     public class AccountViewModel : ViewModelBase
     {
-        // Variables
-        // Commands
         public RelayCommand SaveTextCommand { get; set; }
         public ICommand AddFriendCommand { get; set; }
 
-        //
         public static ObservableCollection<Friend> Friends { get; set; } = new ObservableCollection<Friend>();
-        public Account LoggedInAccount;
-        public static bool FromFriendsPage { get; set; }
-
-        // Strings
-        private string _username, _firstName, _lastName, _aboutMe;
         public static string LoggedInAboutMe;
-        
+        public static bool FromFriendsPage { get; set; }
+        public Account LoggedInAccount;
 
+        private string _username, _firstName, _lastName, _aboutMe;
+        
         public AccountViewModel()
         {
             // If AccountPage is opened from anywhere but when double click on a user in FriendPage
@@ -57,7 +51,7 @@ namespace Podbase.APP.ViewModels
         // Sets edited AboutMe TextBlock
         internal async Task LoadAccountsAsync()
         {
-            var accounts = await CreateAccountViewModel.accountDataAccess.GetAccountsAsync();
+            var accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
             var query = from acc in accounts where acc.UserId == LoginViewModel.loggedInUserId select acc;
             foreach (Account account in query)
                 LoggedInAboutMe = account.AboutMe;
@@ -91,7 +85,7 @@ namespace Podbase.APP.ViewModels
         // Saves text from AboutMe TextBox to database and displays it in AboutMe TextBlock
         public async void SaveText()
         {
-            Account[] accounts = await CreateAccountViewModel.accountDataAccess.GetAccountsAsync();
+            Account[] accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
             foreach (Account acc in accounts)
             {
                 if (acc.UserId == LoginViewModel.loggedInUserId)
@@ -128,10 +122,10 @@ namespace Podbase.APP.ViewModels
             }
         }
 
-        // Strings
+        // Input strings
         public string Username
         {
-            get { return _username; }
+            get => _username;
             set
             {
                 _username = value;
@@ -141,7 +135,7 @@ namespace Podbase.APP.ViewModels
 
         public string FirstName
         {
-            get { return _firstName; }
+            get => _firstName;
             set
             {
                 _firstName = value;
@@ -151,7 +145,7 @@ namespace Podbase.APP.ViewModels
 
         public string LastName
         {
-            get { return _lastName; }
+            get => _lastName;
             set
             {
                 _lastName = value;
@@ -161,7 +155,7 @@ namespace Podbase.APP.ViewModels
 
         public string AboutMe
         {
-            get { return _aboutMe; }
+            get => _aboutMe;
             set
             {
                 _aboutMe = value;

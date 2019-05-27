@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Data.SqlClient;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Windows.UI.Xaml.Input;
 using Podbase.APP.DataAccess;
-using Podbase.APP.Helpers;
 using Podbase.APP.Services;
 using Podbase.APP.Views;
 using Podbase.Model;
@@ -19,7 +14,7 @@ namespace Podbase.APP.ViewModels
         public ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
         public static ObservableCollection<Account> FriendsAccounts { get; set; } = new ObservableCollection<Account>();
         public static Account SelectedAccount;
-        public static Friends friendsDataAccess = new Friends();
+        public static Friends FriendsDataAccess = new Friends();
 
         public FriendsViewModel()
         {
@@ -28,8 +23,8 @@ namespace Podbase.APP.ViewModels
 
         internal async Task LoadAccountsAsync()
         {
-            var accounts = await CreateAccountViewModel.accountDataAccess.GetAccountsAsync();
-            foreach (Account account in accounts)
+            var accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
+            foreach (var account in accounts)
             {
                 if (account.UserId != LoginViewModel.loggedInUserId)
                 Accounts.Add(account);
@@ -38,7 +33,7 @@ namespace Podbase.APP.ViewModels
                 WriteAccountsInDebug();
             } 
 
-            var friends = await friendsDataAccess.GetFriendsAsync();
+            var friends = await FriendsDataAccess.GetFriendsAsync();
             var friendsAccountsQuery = from friend in friends where friend.UserId == LoginViewModel.loggedInUserId select friend.FriendId;
             var friendsQuery = from queryFriend in friends where queryFriend.UserId == LoginViewModel.loggedInUserId select queryFriend;
 
