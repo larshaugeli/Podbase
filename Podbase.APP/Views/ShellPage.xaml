@@ -35,9 +35,9 @@
             <winui:NavigationViewItem x:Uid="Shell_Main" Icon="Document" helpers:NavHelper.NavigateTo="views:MainPage" />
             <winui:NavigationViewItem x:Uid="Shell_Podcast" Icon="Document" helpers:NavHelper.NavigateTo="views:PodcastPage" />
             <winui:NavigationViewItem x:Uid="Shell_Search" Icon="Document" helpers:NavHelper.NavigateTo="views:SearchPage" />
-            <winui:NavigationViewItem x:Uid="Shell_Account" Icon="Document" helpers:NavHelper.NavigateTo="views:AccountPage" />
+            <winui:NavigationViewItem x:Name="Accounts" x:Uid="Shell_Account" Icon="Document" helpers:NavHelper.NavigateTo="views:AccountPage" />
             <winui:NavigationViewItem x:Uid="Shell_Friends" Icon="Document" helpers:NavHelper.NavigateTo="views:FriendsPage" />
-            <winui:NavigationViewItem x:Uid="Shell_Login" Icon="Document" helpers:NavHelper.NavigateTo="views:LoginPage" />
+            <winui:NavigationViewItem x:Uid="Shell_Logout" Icon="Document" helpers:NavHelper.NavigateTo="views:LogOutPage" />
         </winui:NavigationView.MenuItems>
         <i:Interaction.Behaviors>
             <behaviors:NavigationViewHeaderBehavior

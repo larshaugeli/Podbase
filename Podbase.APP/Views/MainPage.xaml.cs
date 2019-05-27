@@ -14,6 +14,7 @@ namespace Podbase.APP.Views
         public MainPage()
         {
             InitializeComponent();
+
             Loaded += AccountPage_LoadedAsync;
         }
 

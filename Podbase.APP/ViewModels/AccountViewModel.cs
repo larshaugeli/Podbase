@@ -6,6 +6,8 @@ using System.Windows.Input;
 using Windows.UI.Xaml.Controls;
 using Microsoft.EntityFrameworkCore;
 using Podbase.APP.Helpers;
+using Podbase.APP.Services;
+using Podbase.APP.Views;
 using Podbase.DataAccess;
 using Podbase.Model;
 
@@ -18,7 +20,7 @@ namespace Podbase.APP.ViewModels
         public Account LoggedInAccount;
         public static string LoggedInAboutMe;
         public static int FriendUserID;
-        public static bool FromFriendsPage { get; set; } = false;
+        public static bool FromFriendsPage { get; set; }
         private string _username, _firstName, _lastName, _aboutMe;
 
         public AccountViewModel()
@@ -76,6 +78,8 @@ namespace Podbase.APP.ViewModels
                 };
                 Debug.WriteLine(FriendsViewModel.Friends.Count);
                 Misc.ShowToastNotification("Notification", "Added " + FriendsViewModel.SelectedAccount.Username + " as friend", 1);
+                NavigationService.Navigate(typeof(FriendsPage));
+                FromFriendsPage = false;
             }
         }
 

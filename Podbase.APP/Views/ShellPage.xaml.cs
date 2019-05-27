@@ -1,8 +1,9 @@
 ﻿using System;
-
+using System.Diagnostics;
 using Podbase.APP.ViewModels;
 
 using Windows.UI.Xaml.Controls;
+using Podbase.APP.Helpers;
 
 namespace Podbase.APP.Views
 {

@@ -3,12 +3,13 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
 using Podbase.APP.Services;
 using Podbase.APP.Views;
 using Podbase.Model;
+using NavigationViewPaneDisplayMode = Microsoft.UI.Xaml.Controls.NavigationViewPaneDisplayMode;
 
 namespace Podbase.APP.ViewModels
 {
@@ -54,6 +55,7 @@ namespace Podbase.APP.ViewModels
                     loggedInUserId = acc.UserId;
                 }   
                 Misc.CreateDialog("exists");
+                NavigationService.Navigate<ShellPage>();
                 NavigationService.Navigate(typeof(MainPage));
 
             } else {

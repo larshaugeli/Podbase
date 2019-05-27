@@ -17,7 +17,7 @@
         Margin="{StaticResource MediumLeftRightMargin}">
         <Grid
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <TextBlock Text="Your account" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" FontWeight="ExtraBold" Margin="0,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock Text="Your account" HorizontalAlignment="Left" TextAlignment="Center" FontSize="20" FontWeight="ExtraBold" Margin="273,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="37,116,0,0" Text="First name:" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="37,176,0,0" Text="Last name:" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="37,238,0,0" Text="Username:" TextWrapping="Wrap" VerticalAlignment="Top"/>
@@ -27,10 +27,9 @@
             <TextBlock HorizontalAlignment="Left" Margin="168,238,0,0" Text="{Binding Username, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock Name="AboutMeTextBlock" HorizontalAlignment="Left" Margin="168,305,0,0" Text="{Binding AboutMe, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBox Name="AboutMeTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsSpellCheckEnabled="True" HorizontalAlignment="Left" Margin="168,306,0,0" Text="{Binding AboutMe, Mode=TwoWay}" VerticalAlignment="Top" Height="195" Width="339"/>
-            <Image Source="../Assets/logo1.PNG" HorizontalAlignment="Left" Height="234" Margin="617,116,0,0" VerticalAlignment="Top" Width="238"/>
             <Button Name="SaveButton" Content="Save" Command="{Binding SaveTextCommand}" HorizontalAlignment="Left" Margin="168,531,0,0" VerticalAlignment="Top" Click="SaveButton_Click"/>
-            <ToggleSwitch Name="ToggleSwitch" Header="Edit mode" HorizontalAlignment="Left" Margin="789,16,0,0" VerticalAlignment="Top" Toggled="ToggleSwitch_Toggled" />
-            <Button Name="AddFriendButton" Content="Add as friend" HorizontalAlignment="Left" Margin="617,403,0,0" VerticalAlignment="Top" Height="43" Width="115" Command="{Binding AddFriendCommand}"/>
+            <ToggleSwitch Name="ToggleSwitch" Header="Edit mode" HorizontalAlignment="Left" Margin="578,18,0,0" VerticalAlignment="Top" Toggled="ToggleSwitch_Toggled" />
+            <Button Name="AddFriendButton" Content="Add as friend" HorizontalAlignment="Left" Margin="578,125,0,0" VerticalAlignment="Top" Height="60" Width="99" Command="{Binding AddFriendCommand}"/>
         </Grid>
     </Grid>
 </Page>
