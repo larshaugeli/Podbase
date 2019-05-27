@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.UI.Xaml.Controls;
-using Microsoft.EntityFrameworkCore;
 using Podbase.APP.Helpers;
 using Podbase.APP.Services;
 using Podbase.APP.Views;
@@ -17,31 +13,40 @@ namespace Podbase.APP.ViewModels
 {
     public class AccountViewModel : ViewModelBase
     {
+        // Variables
+        // Commands
         public RelayCommand SaveTextCommand { get; set; }
         public ICommand AddFriendCommand { get; set; }
-        public Account LoggedInAccount;
-        public static string LoggedInAboutMe;
-        public static Regex connId = new Regex("^[0-9]*$");
-        public static Friend FriendInFriends;
-        public static bool FromFriendsPage { get; set; }
-        private string _username, _firstName, _lastName, _aboutMe;
+
+        //
         public static ObservableCollection<Friend> Friends { get; set; } = new ObservableCollection<Friend>();
+        public Account LoggedInAccount;
+        public static bool FromFriendsPage { get; set; }
+
+        // Strings
+        private string _username, _firstName, _lastName, _aboutMe;
+        public static string LoggedInAboutMe;
+        
 
         public AccountViewModel()
         {
+            // If AccountPage is opened from anywhere but when double click on a user in FriendPage
             if (FromFriendsPage == false)
             {
+                SaveTextCommand = new RelayCommand(SaveText);
+                CreateAccountViewModel.Accounts.Clear();
+
+                // sets TextBlocks to be the logged in user
                 _username = LoginViewModel.loggedInUsername;
                 _firstName = LoginViewModel.loggedInFirstName;
                 _lastName = LoginViewModel.loggedInLastName;
                 _aboutMe = LoggedInAboutMe;
-
-                CreateAccountViewModel.Accounts.Clear();
-                SaveTextCommand = new RelayCommand(SaveText);
             }
+            // If AccountPage is opened by double clicking on a user in FriendPage
             else
             {
-                AddFriendCommand = new RelayCommand<Friend>(AddFriend);
+                AddFriendCommand = new RelayCommand(AddFriend);
+                // sets TextBlocks to be the selected user from FriendPage
                 _username = FriendsViewModel.SelectedAccount.Username;
                 _firstName = FriendsViewModel.SelectedAccount.FirstName;
                 _lastName = FriendsViewModel.SelectedAccount.LastName;
@@ -49,55 +54,48 @@ namespace Podbase.APP.ViewModels
             }
         }
 
+        // Sets edited AboutMe TextBlock
         internal async Task LoadAccountsAsync()
         {
             var accounts = await CreateAccountViewModel.accountDataAccess.GetAccountsAsync();
             var query = from acc in accounts where acc.UserId == LoginViewModel.loggedInUserId select acc;
             foreach (Account account in query)
-            {
                 LoggedInAboutMe = account.AboutMe;
-                Debug.WriteLine("AboutMe: " + LoggedInAboutMe + " og " + "account.AboutMe " + account.AboutMe);
-            }
         }
 
-        private void AddFriend(Friend friend)
+        // Adds a user as friend with another user. Adds the user to a ObservableCollection and to database
+        private void AddFriend()
         {
-            Friend selectedFriend = new Friend() { ConnectionId = FriendInFriends.ConnectionId, UserId = LoginViewModel.loggedInUserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
+            Friend selectedFriend = new Friend() { UserId = LoginViewModel.loggedInUserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
             bool alreadyInFriends = Friends.Any(x => x.UserId == selectedFriend.UserId && x.FriendId == selectedFriend.FriendId);
+
             if (alreadyInFriends)
-            {
-                Misc.ShowToastNotification("Notification", "You are already friend with this account.", 1);
-            }
+                Misc.ShowToastNotification("Notification", "You are already friend with " + FriendsViewModel.SelectedAccount.Username, 1);
             else
             {
-                friend = new Friend() { UserId = LoginViewModel.loggedInUserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
-                Friends.Add(friend);
-
-                var optionsBuilder = new DbContextOptionsBuilder<PodbaseContext>();
-                optionsBuilder.UseSqlServer(Misc.StringBuilder());
-
-                using (var db = new PodbaseContext(optionsBuilder.Options))
+                // Adds selected friend to ObservableCollection
+                Friends.Add(selectedFriend);
+                // Adds selected friend to database
+                using (var db = new PodbaseContext(Misc.OptionsBuilder().Options))
                 {
-                    db.Friends.Add(friend);
+                    db.Friends.Add(selectedFriend);
                     db.SaveChanges();
-                };
-                Debug.WriteLine(Friends.Count);
-                Misc.ShowToastNotification("Notification", "Added " + FriendsViewModel.SelectedAccount.Username + " as friend", 1);
+                }
+
+                Misc.ShowToastNotification("Notification","Added " + FriendsViewModel.SelectedAccount.Username + " as friend", 1);
                 NavigationService.Navigate(typeof(FriendsPage));
                 FromFriendsPage = false;
             }
         }
 
+        // Saves text from AboutMe TextBox to database and displays it in AboutMe TextBlock
         public async void SaveText()
         {
             Account[] accounts = await CreateAccountViewModel.accountDataAccess.GetAccountsAsync();
             foreach (Account acc in accounts)
             {
                 if (acc.UserId == LoginViewModel.loggedInUserId)
-                {
                     LoggedInAccount = acc;
-                    Debug.WriteLine("LoggedInAccount is set.");
-                }
             }
 
             LoggedInAccount = new Account()
@@ -109,21 +107,16 @@ namespace Podbase.APP.ViewModels
                 LastName = LoggedInAccount.LastName,
                 AboutMe = LoggedInAccount.AboutMe
             };
-            
-            var optionsBuilder = new DbContextOptionsBuilder<PodbaseContext>();
-            optionsBuilder.UseSqlServer(Misc.StringBuilder());
 
-            // modifies table row
-            using (var db = new PodbaseContext(optionsBuilder.Options))
+            // Modifies table row
+            using (var db = new PodbaseContext(Misc.OptionsBuilder().Options))
             {
                 var result = db.Accounts.SingleOrDefault(b => b.UserId == LoginViewModel.loggedInUserId);
-                Debug.WriteLine("LoggedIAccount UserId: " + LoggedInAccount.UserId + " " + "loggedINUSerID: " + " " + LoginViewModel.loggedInUserId);
                 if (result != null)
                 {
                     CreateAccountViewModel.Accounts.Add(LoggedInAccount);
                     result.AboutMe = AboutMe;
                     LoggedInAboutMe = AboutMe;
-                    Debug.WriteLine("results: LoggedInAboutMe " + LoggedInAboutMe + " results.AboutMe " + result.AboutMe);
                     db.SaveChanges();
                 }
             }
@@ -132,10 +125,10 @@ namespace Podbase.APP.ViewModels
             foreach (Account account in query)
             {
                 account.AboutMe = LoggedInAboutMe;
-                Debug.WriteLine("AboutMe: " + AboutMe + " og " + "account.AboutMe " + account.AboutMe);
             }
         }
 
+        // Strings
         public string Username
         {
             get { return _username; }
@@ -175,14 +168,14 @@ namespace Podbase.APP.ViewModels
                 OnPropertyChanged("AboutMe");
             }
         }
-
-        public static void WriteFriendsInDebug()
-        {
-            Debug.WriteLine("Friends Observable");
-            foreach (var friend in Friends)
-            {
-                Debug.WriteLine("ConnectionId: " + friend.ConnectionId + "UserId: " + friend.UserId + " FriendId: " + friend.FriendId);
-            }
-        }
+    
+        //public static void WriteFriendsInDebug()
+        //{
+        //    Debug.WriteLine("Friends Observable");
+        //    foreach (var friend in Friends)
+        //    {
+        //        Debug.WriteLine("ConnectionId: " + friend.ConnectionId + "UserId: " + friend.UserId + " FriendId: " + friend.FriendId);
+        //    }
+        //}
     }
 }

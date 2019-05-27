@@ -11,7 +11,7 @@ namespace Podbase.APP.Helpers
 {
     public class Misc
     {
-        public static String StringBuilder()
+        public static DbContextOptionsBuilder<PodbaseContext> OptionsBuilder()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
             {
@@ -23,15 +23,15 @@ namespace Podbase.APP.Helpers
 
             var connection = builder.ConnectionString.ToString();
 
-            return connection;
+            var optionsBuilder = new DbContextOptionsBuilder<PodbaseContext>();
+            optionsBuilder.UseSqlServer(connection);
+
+            return optionsBuilder;
         }
 
         public static void TruncateTables()
         {
-            var optionsBuilder = new DbContextOptionsBuilder<PodbaseContext>();
-            optionsBuilder.UseSqlServer(StringBuilder());
-
-            using (var db = new PodbaseContext(optionsBuilder.Options))
+            using (var db = new PodbaseContext(OptionsBuilder().Options))
             {
                 try
                 {

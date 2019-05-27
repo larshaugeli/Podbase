@@ -37,11 +37,11 @@ namespace Podbase.APP.ViewModels
                 PodcastId = SelectedPodcastId
             };
 
-            var optionsBuilder = new DbContextOptionsBuilder<PodbaseContext>();
-            optionsBuilder.UseSqlServer(Misc.StringBuilder());
+            //var optionsBuilder = new DbContextOptionsBuilder<PodbaseContext>();
+            //optionsBuilder.UseSqlServer(Misc.StringBuilder());
 
             // modifies table row
-            using (var db = new PodbaseContext(optionsBuilder.Options))
+            using (var db = new PodbaseContext(Misc.OptionsBuilder().Options))
             {
                 var result = db.Podcasts.SingleOrDefault(b => b.PodcastId == SelectedPodcastId);
                 Debug.WriteLine("PodcastId: " + SelectedPodcast.PodcastId + " " + "selectedPodcastId: " + " " + SelectedPodcastId);

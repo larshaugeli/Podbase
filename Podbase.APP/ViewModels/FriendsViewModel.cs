@@ -55,9 +55,8 @@ namespace Podbase.APP.ViewModels
 
             foreach (Friend dbFriend in friendsQuery)
             {
-                AccountViewModel.FriendInFriends = dbFriend;
                 AccountViewModel.Friends.Add(dbFriend);
-                AccountViewModel.WriteFriendsInDebug();
+                //AccountViewModel.WriteFriendsInDebug();
             }
         }
 
