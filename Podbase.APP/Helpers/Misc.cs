@@ -37,6 +37,7 @@ namespace Podbase.APP.Helpers
                 {
                     db.Database.ExecuteSqlCommand("TRUNCATE TABLE [Accounts]");
                     db.Database.ExecuteSqlCommand("TRUNCATE TABLE [Podcasts]");
+                    db.Database.ExecuteSqlCommand("TRUNCATE TABLE [Friends]");
                 }
                 catch (DataException e)
                 {

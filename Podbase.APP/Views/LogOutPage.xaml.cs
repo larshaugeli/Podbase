@@ -16,5 +16,10 @@ namespace Podbase.APP.Views
         {
             InitializeComponent();
         }
+
+        private void LogOutButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            NavigationService.Navigate<LoginPage>();
+        }
     }
 }

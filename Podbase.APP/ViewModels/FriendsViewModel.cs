@@ -17,7 +17,6 @@ namespace Podbase.APP.ViewModels
     public class FriendsViewModel : ViewModelBase
     {
         public ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
-        public static ObservableCollection<Friend> Friends { get; set; } = new ObservableCollection<Friend>();
         public static ObservableCollection<Account> FriendsAccounts { get; set; } = new ObservableCollection<Account>();
         public static Account SelectedAccount;
         public static Friends friendsDataAccess = new Friends();
@@ -37,10 +36,11 @@ namespace Podbase.APP.ViewModels
                 Debug.WriteLine("accounts is set");
                 Debug.WriteLine("Accounts freinds count: " +  Accounts.Count);
                 WriteAccountsInDebug();
-            }
+            } 
 
             var friends = await friendsDataAccess.GetFriendsAsync();
             var friendsAccountsQuery = from friend in friends where friend.UserId == LoginViewModel.loggedInUserId select friend.FriendId;
+            var friendsQuery = from queryFriend in friends where queryFriend.UserId == LoginViewModel.loggedInUserId select queryFriend;
 
             foreach (int friendId in friendsAccountsQuery)
             {
@@ -51,6 +51,13 @@ namespace Podbase.APP.ViewModels
                         FriendsAccounts.Add(account);
                     }
                 }
+            }
+
+            foreach (Friend dbFriend in friendsQuery)
+            {
+                AccountViewModel.FriendInFriends = dbFriend;
+                AccountViewModel.Friends.Add(dbFriend);
+                AccountViewModel.WriteFriendsInDebug();
             }
         }
 

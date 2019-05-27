@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Podbase.APP.Services;
 using Podbase.APP.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -26,6 +27,7 @@ namespace Podbase.APP.Views
         {
             this.InitializeComponent();
             Loaded += LoginPage_LoadedAsync;
+            
         }
 
         private async void LoginPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)

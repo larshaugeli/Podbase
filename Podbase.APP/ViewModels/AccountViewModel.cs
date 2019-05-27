@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Xaml.Controls;
@@ -19,9 +21,11 @@ namespace Podbase.APP.ViewModels
         public ICommand AddFriendCommand { get; set; }
         public Account LoggedInAccount;
         public static string LoggedInAboutMe;
-        public static int FriendUserID;
+        public static Regex connId = new Regex("^[0-9]*$");
+        public static Friend FriendInFriends;
         public static bool FromFriendsPage { get; set; }
         private string _username, _firstName, _lastName, _aboutMe;
+        public static ObservableCollection<Friend> Friends { get; set; } = new ObservableCollection<Friend>();
 
         public AccountViewModel()
         {
@@ -56,17 +60,18 @@ namespace Podbase.APP.ViewModels
             }
         }
 
-        private async void AddFriend(Friend friend)
+        private void AddFriend(Friend friend)
         {
-            Friend selectedFriend = new Friend() { UserId = LoginViewModel.loggedInUserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
-            friend = selectedFriend;
-            if (FriendsViewModel.Friends.Contains(friend))
+            Friend selectedFriend = new Friend() { ConnectionId = FriendInFriends.ConnectionId, UserId = LoginViewModel.loggedInUserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
+            bool alreadyInFriends = Friends.Any(x => x.UserId == selectedFriend.UserId && x.FriendId == selectedFriend.FriendId);
+            if (alreadyInFriends)
             {
                 Misc.ShowToastNotification("Notification", "You are already friend with this account.", 1);
             }
             else
             {
-                FriendsViewModel.Friends.Add(friend);
+                friend = new Friend() { UserId = LoginViewModel.loggedInUserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
+                Friends.Add(friend);
 
                 var optionsBuilder = new DbContextOptionsBuilder<PodbaseContext>();
                 optionsBuilder.UseSqlServer(Misc.StringBuilder());
@@ -76,7 +81,7 @@ namespace Podbase.APP.ViewModels
                     db.Friends.Add(friend);
                     db.SaveChanges();
                 };
-                Debug.WriteLine(FriendsViewModel.Friends.Count);
+                Debug.WriteLine(Friends.Count);
                 Misc.ShowToastNotification("Notification", "Added " + FriendsViewModel.SelectedAccount.Username + " as friend", 1);
                 NavigationService.Navigate(typeof(FriendsPage));
                 FromFriendsPage = false;
@@ -168,6 +173,15 @@ namespace Podbase.APP.ViewModels
             {
                 _aboutMe = value;
                 OnPropertyChanged("AboutMe");
+            }
+        }
+
+        public static void WriteFriendsInDebug()
+        {
+            Debug.WriteLine("Friends Observable");
+            foreach (var friend in Friends)
+            {
+                Debug.WriteLine("ConnectionId: " + friend.ConnectionId + "UserId: " + friend.UserId + " FriendId: " + friend.FriendId);
             }
         }
     }

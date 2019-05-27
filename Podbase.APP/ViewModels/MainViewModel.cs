@@ -8,7 +8,7 @@ namespace Podbase.APP.ViewModels
 {
     public class MainViewModel : Observable
     {
-        public ObservableCollection<Friend> Friends { get; set; } = FriendsViewModel.Friends;
+        public ObservableCollection<Friend> Friends { get; set; } = AccountViewModel.Friends;
 
         public MainViewModel()
         {

@@ -10,6 +10,7 @@ using Podbase.APP.Services;
 using Podbase.APP.Views;
 
 using Windows.System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
@@ -48,7 +49,7 @@ namespace Podbase.APP.ViewModels
 
         public ShellViewModel()
         {
-        
+            
         }
 
         public void Initialize(Frame frame, WinUI.NavigationView navigationView, IList<KeyboardAccelerator> keyboardAccelerators)
