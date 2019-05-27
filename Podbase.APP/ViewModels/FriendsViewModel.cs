@@ -21,52 +21,36 @@ namespace Podbase.APP.ViewModels
             FriendsAccounts.Clear();
         }
 
+        // Gets Accounts and Friends from database and adds to ObservableCollection
         internal async Task LoadAccountsAsync()
         {
             var accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
+
             foreach (var account in accounts)
             {
                 if (account.UserId != LoginViewModel.loggedInUserId)
-                Accounts.Add(account);
-                Debug.WriteLine("accounts is set");
-                Debug.WriteLine("Accounts freinds count: " +  Accounts.Count);
-                WriteAccountsInDebug();
-            } 
+                    Accounts.Add(account);
+            }
 
             var friends = await FriendsDataAccess.GetFriendsAsync();
             var friendsAccountsQuery = from friend in friends where friend.UserId == LoginViewModel.loggedInUserId select friend.FriendId;
-            var friendsQuery = from queryFriend in friends where queryFriend.UserId == LoginViewModel.loggedInUserId select queryFriend;
-
+            
             foreach (int friendId in friendsAccountsQuery)
             {
                 foreach (Account account in accounts)
-                {
                     if (account.UserId == friendId)
-                    {
                         FriendsAccounts.Add(account);
-                    }
-                }
             }
 
+            var friendsQuery = from queryFriend in friends where queryFriend.UserId == LoginViewModel.loggedInUserId select queryFriend;
             foreach (Friend dbFriend in friendsQuery)
-            {
                 AccountViewModel.Friends.Add(dbFriend);
-                //AccountViewModel.WriteFriendsInDebug();
-            }
         }
 
-        public void WriteAccountsInDebug()
-        {
-            foreach (var account in Accounts)
-            {
-                Debug.WriteLine(account.Username + " " + account.UserId);
-            }
-        }
-
+        // Navigates to selected account when selected account is double clicked
         public void GoToSelectedAccount(Account account)
         {
             SelectedAccount = account;
-            Debug.WriteLine("friendsviewodel selcetedAccount: " + SelectedAccount.Username);
             AccountViewModel.FromFriendsPage = true;
             NavigationService.Navigate(typeof(AccountPage));
         }
