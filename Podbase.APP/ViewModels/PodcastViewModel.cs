@@ -13,7 +13,6 @@ namespace Podbase.APP.ViewModels
 {
     public class PodcastViewModel : ViewModelBase
     {
-        // Variables
         public ICommand SortCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }
@@ -34,7 +33,7 @@ namespace Podbase.APP.ViewModels
         internal async Task LoadPodcastsAsync()
         {
             var podcasts = await AddPodcastViewModel.PodcastsDataAccess.GetPodcastsAsync();
-            var query = from pod in podcasts where pod.UserId == LoginViewModel.loggedInUserId select pod;
+            var query = from pod in podcasts where pod.UserId == LoginViewModel.LoggedInAccount.UserId select pod;
             foreach (Podcast podcast in query)
                 Podcasts.Add(podcast);
         }

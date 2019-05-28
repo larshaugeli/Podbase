@@ -75,7 +75,7 @@ namespace Podbase.APP.Helpers
                         break;
                     case "exists":
                         dialog.Title = "Welcome";
-                        dialog.Content = "Welcome " + LoginViewModel.loggedInUsername;
+                        dialog.Content = "Welcome " + LoginViewModel.LoggedInAccount.Username;
                         break;
                     case "invalidPassword":
                         dialog.Title = "Error";

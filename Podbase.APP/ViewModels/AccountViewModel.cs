@@ -12,13 +12,12 @@ namespace Podbase.APP.ViewModels
 {
     public class AccountViewModel : ViewModelBase
     {
-        public RelayCommand SaveTextCommand { get; set; }
+        public ICommand SaveTextCommand { get; set; }
         public ICommand AddFriendCommand { get; set; }
 
         public static ObservableCollection<Friend> Friends { get; set; } = new ObservableCollection<Friend>();
         public static string LoggedInAboutMe;
         public static bool FromFriendsPage { get; set; }
-        public Account LoggedInAccount;
 
         private string _username, _firstName, _lastName, _aboutMe;
         
@@ -31,9 +30,9 @@ namespace Podbase.APP.ViewModels
                 CreateAccountViewModel.Accounts.Clear();
 
                 // sets TextBlocks to be the logged in user
-                _username = LoginViewModel.loggedInUsername;
-                _firstName = LoginViewModel.loggedInFirstName;
-                _lastName = LoginViewModel.loggedInLastName;
+                _username = LoginViewModel.LoggedInAccount.Username;
+                _firstName = LoginViewModel.LoggedInAccount.FirstName;
+                _lastName = LoginViewModel.LoggedInAccount.LastName;
                 _aboutMe = LoggedInAboutMe;
             }
             // If AccountPage is opened by double clicking on a user in FriendPage
@@ -52,7 +51,7 @@ namespace Podbase.APP.ViewModels
         internal async Task LoadAccountsAsync()
         {
             var accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
-            var query = from acc in accounts where acc.UserId == LoginViewModel.loggedInUserId select acc;
+            var query = from acc in accounts where acc.UserId == LoginViewModel.LoggedInAccount.UserId select acc;
             foreach (Account account in query)
                 LoggedInAboutMe = account.AboutMe;
         }
@@ -60,7 +59,7 @@ namespace Podbase.APP.ViewModels
         // Adds a user as friend with another user. Adds the user to a ObservableCollection and to database
         private void AddFriend()
         {
-            Friend selectedFriend = new Friend() { UserId = LoginViewModel.loggedInUserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
+            Friend selectedFriend = new Friend() { UserId = LoginViewModel.LoggedInAccount.UserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
             bool alreadyInFriends = Friends.Any(x => x.UserId == selectedFriend.UserId && x.FriendId == selectedFriend.FriendId);
 
             if (alreadyInFriends)
@@ -85,37 +84,23 @@ namespace Podbase.APP.ViewModels
         // Saves text from AboutMe TextBox to database and displays it in AboutMe TextBlock
         public async void SaveText()
         {
-            Account[] accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
-            foreach (Account acc in accounts)
-            {
-                if (acc.UserId == LoginViewModel.loggedInUserId)
-                    LoggedInAccount = acc;
-            }
+            LoginViewModel.LoggedInAccount.AboutMe = AboutMe;
 
-            LoggedInAccount = new Account()
-            {
-                UserId = LoggedInAccount.UserId,
-                Username = LoggedInAccount.Username,
-                Password = LoggedInAccount.Password,
-                FirstName = LoggedInAccount.FirstName,
-                LastName = LoggedInAccount.LastName,
-                AboutMe = LoggedInAccount.AboutMe
-            };
-
-            // Modifies table row
+            // Modifies table row in database
             using (var db = new PodbaseContext(Misc.OptionsBuilder().Options))
             {
-                var result = db.Accounts.SingleOrDefault(b => b.UserId == LoginViewModel.loggedInUserId);
+                var result = db.Accounts.SingleOrDefault(b => b.UserId == LoginViewModel.LoggedInAccount.UserId);
                 if (result != null)
                 {
-                    CreateAccountViewModel.Accounts.Add(LoggedInAccount);
+                    CreateAccountViewModel.Accounts.Add(LoginViewModel.LoggedInAccount);
                     result.AboutMe = AboutMe;
                     LoggedInAboutMe = AboutMe;
                     db.SaveChanges();
                 }
             }
 
-            var query = from acc in accounts where acc.UserId == LoginViewModel.loggedInUserId select acc;
+            Account[] accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
+            var query = from acc in accounts where acc.UserId == LoginViewModel.LoggedInAccount.UserId select acc;
             foreach (Account account in query)
             {
                 account.AboutMe = LoggedInAboutMe;

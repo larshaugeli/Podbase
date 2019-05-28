@@ -3,34 +3,36 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+using System.Windows.Input;
 using Podbase.APP.Helpers;
 using Podbase.APP.Services;
 using Podbase.APP.Views;
 using Podbase.Model;
-using NavigationViewPaneDisplayMode = Microsoft.UI.Xaml.Controls.NavigationViewPaneDisplayMode;
 
 namespace Podbase.APP.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        // Variables
-        public static string loggedInUsername, loggedInFirstName, loggedInLastName;
-        public static int loggedInUserId;
         public RelayCommand LoginCommand { get; set; }
-        public RelayCommand CreateAccount { get; set; }
+        public ICommand CreateAccount { get; set; }
         public static ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
+        public static Account LoggedInAccount;
 
-        // Constructor
         public LoginViewModel()
         {
             LoginCommand = new RelayCommand(LoginUser);
             CreateAccount = new RelayCommand(GoToCreateAccount);
         }
 
-        // Methods
-        // Logs in user, checks if username and password is in database
+        // Gets accounts from database and fills ObservableCollection Accounts
+        internal async Task LoadAccountsAsync()
+        {
+            var accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
+            foreach (Account account in accounts)
+                Accounts.Add(account);
+        }
+
+        // Logs in user if an account with typed in username and password is in database
         private void LoginUser()
         {
             var account = new Account
@@ -39,20 +41,25 @@ namespace Podbase.APP.ViewModels
                 Password = Password
             };
 
-            Debug.WriteLine("Account count: " + Accounts.Count);
+            bool accountInAccounts = Accounts.Any(x => x.Username == Username && x.Password == Password);
 
-            bool accountInAccountsList = Accounts.Any(x => x.Username == Username && x.Password == Password);
-
-            if (accountInAccountsList)
+            if (accountInAccounts)
             {
-                loggedInUsername = account.Username;
-                var query = from acc in Accounts where acc.Username == loggedInUsername select acc;
+                var query = from acc in Accounts where acc.Username == account.Username select acc;
 
                 foreach (Account acc in query)
                 {
-                    loggedInFirstName = acc.FirstName;
-                    loggedInLastName = acc.LastName;
-                    loggedInUserId = acc.UserId;
+                    LoggedInAccount = new Account()
+                    {
+                        Username = account.Username,
+                        Password = account.Password,
+                        FirstName = acc.FirstName,
+                        LastName = acc.LastName,
+                        UserId = acc.UserId
+                    };
+                    //TODO remove
+                    Debug.WriteLine("Username: " + LoggedInAccount.Username + " Password: " + LoggedInAccount.Password
+                                    + " FirstName: " + LoggedInAccount.FirstName + " LastName: " + LoggedInAccount.LastName + " UsedId: " + LoggedInAccount.UserId);
                 }   
                 Misc.CreateDialog("exists");
                 NavigationService.Navigate<ShellPage>();
@@ -62,26 +69,15 @@ namespace Podbase.APP.ViewModels
                 Misc.CreateDialog("notExists");}
         }
 
-        // 
-        internal async Task LoadAccountsAsync()
-        {
-            var accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
-            foreach (Account account in accounts)
-                Accounts.Add(account);
-        }
-
         // Goes to CreateAccountPage when "Create Account"-button is pressed
-        public void GoToCreateAccount()
-        {
-            NavigationService.Navigate(typeof(CreateAccount));
-        }
+        public void GoToCreateAccount() { NavigationService.Navigate(typeof(CreateAccount)); }
 
         // Input strings
-        private String _username, _password;
+        private string _username, _password;
 
         public string Username
         {
-            get { return _username; }
+            get => _username;
             set
             {
                 _username = value;
@@ -91,12 +87,13 @@ namespace Podbase.APP.ViewModels
 
         public string Password
         {
-            get { return _password; }
+            get => _password;
             set
             {
                 _password = value;
                 OnPropertyChanged("Password");
             }
         }
+
     }
 }

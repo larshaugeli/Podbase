@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
 using Podbase.APP.Services;
@@ -11,7 +12,7 @@ namespace Podbase.APP.ViewModels
     {
         public static ObservableCollection<Podcast> AddedPodcasts = new ObservableCollection<Podcast>();
         public static Podcasts PodcastsDataAccess = new Podcasts();
-        public RelayCommand CreatePodcastCommand { get; set; }
+        public ICommand CreatePodcastCommand { get; set; }
 
         public AddPodcastViewModel()
         {
@@ -21,13 +22,13 @@ namespace Podbase.APP.ViewModels
         // Add new podcast, executes when pressed "Add podcast"-button
         public async void AddNewPodcast()
         {
-            Podcast podcast = new Podcast()
+            var podcast = new Podcast()
             {
                 Name = Name,
                 Creator = Creator,
                 Genre = Genre,
                 Description = Description,
-                UserId = LoginViewModel.loggedInUserId
+                UserId = LoginViewModel.LoggedInAccount.UserId
             };
             if (await PodcastsDataAccess.AddPodcastAsync(podcast))
             {

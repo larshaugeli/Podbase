@@ -8,17 +8,15 @@ namespace Podbase.APP.ViewModels
 {
     public class MainViewModel : Observable
     {
-        public ObservableCollection<Friend> Friends { get; set; } = AccountViewModel.Friends;
-
         public MainViewModel()
         {
         }
 
-        private string _username = LoginViewModel.loggedInUsername;
+        private string _username = LoginViewModel.LoggedInAccount.Username;
 
         public string Username
         {
-            get { return "Welcome " + _username; }
+            get => "Welcome " + _username;
             set
             {
                 _username = value;

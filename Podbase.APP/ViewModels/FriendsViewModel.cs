@@ -24,16 +24,18 @@ namespace Podbase.APP.ViewModels
         // Gets Accounts and Friends from database and adds to ObservableCollection
         internal async Task LoadAccountsAsync()
         {
+            // Fills Accounts ObservableCollection
             var accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
 
             foreach (var account in accounts)
             {
-                if (account.UserId != LoginViewModel.loggedInUserId)
+                if (account.UserId != LoginViewModel.LoggedInAccount.UserId)
                     Accounts.Add(account);
             }
 
+            // Fills FriendsAccounts ObservableCollection
             var friends = await FriendsDataAccess.GetFriendsAsync();
-            var friendsAccountsQuery = from friend in friends where friend.UserId == LoginViewModel.loggedInUserId select friend.FriendId;
+            var friendsAccountsQuery = from friend in friends where friend.UserId == LoginViewModel.LoggedInAccount.UserId select friend.FriendId;
             
             foreach (int friendId in friendsAccountsQuery)
             {
@@ -42,7 +44,8 @@ namespace Podbase.APP.ViewModels
                         FriendsAccounts.Add(account);
             }
 
-            var friendsQuery = from queryFriend in friends where queryFriend.UserId == LoginViewModel.loggedInUserId select queryFriend;
+            // Fills Friends ObservableCollection
+            var friendsQuery = from queryFriend in friends where queryFriend.UserId == LoginViewModel.LoggedInAccount.UserId select queryFriend;
             foreach (Friend dbFriend in friendsQuery)
                 AccountViewModel.Friends.Add(dbFriend);
         }

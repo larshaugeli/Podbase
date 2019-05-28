@@ -28,7 +28,7 @@ namespace Podbase.APP.ViewModels
                 Creator = Creator,
                 Genre = Genre,
                 Description = Description,
-                UserId = LoginViewModel.loggedInUserId,
+                UserId = LoginViewModel.LoggedInAccount.UserId,
                 PodcastId = SelectedPodcastId
             };
 
