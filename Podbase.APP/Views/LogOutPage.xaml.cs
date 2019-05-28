@@ -5,8 +5,6 @@ namespace Podbase.APP.Views
 {
     public sealed partial class LogOutPage : Page
     {
-        public static bool HideNavigation;
-
         public LogOutPage()
         {
             InitializeComponent();

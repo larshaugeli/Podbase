@@ -1,11 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using Podbase.APP.ViewModels;
-
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Podbase.APP.Services;
 using Podbase.Model;
 
 namespace Podbase.APP.Views
@@ -13,7 +9,6 @@ namespace Podbase.APP.Views
     public sealed partial class FriendsPage : Page
     {
         public FriendsViewModel ViewModel { get; } = new FriendsViewModel();
-
 
         public FriendsPage()
         {
@@ -30,9 +25,10 @@ namespace Podbase.APP.Views
 
         private void UIElement_OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            Account selectedAccount = ((Grid) sender).DataContext as Account;
-            if (selectedAccount == null) Debug.WriteLine("no item selected");
-            ViewModel.GoToSelectedAccount(selectedAccount);
+            if (((Grid) sender).DataContext is Account selectedAccount)
+            {
+                ViewModel.GoToSelectedAccount(selectedAccount);
+            }
         }
     }
 }
