@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Text.RegularExpressions;
-using Windows.UI.Xaml.Controls;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
 using Podbase.APP.Services;
@@ -14,7 +10,7 @@ namespace Podbase.APP.ViewModels
 {
     public class CreateAccountViewModel : ViewModelBase
     {
-        public RelayCommand CreateAccountCommand { get; set; }
+        public ICommand CreateAccountCommand { get; set; }
         public static ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
         public static Accounts AccountDataAccess = new Accounts();
         private string _firstName, _lastName, _username, _password;

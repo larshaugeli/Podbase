@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
 using Podbase.APP.Services;
 using Podbase.APP.Views;
@@ -13,23 +12,22 @@ namespace Podbase.APP.ViewModels
 {
     public class PodcastViewModel : ViewModelBase
     {
-        public ICommand SortCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand SortCommand { get; set; }
         public static ObservableCollection<Podcast> Podcasts { get; set; } = new ObservableCollection<Podcast>();
 
-        // Constructor
         public PodcastViewModel()
         {
             Podcasts.Clear();
-            SortCommand = new RelayCommand(Sort);
-            DeleteCommand = new RelayCommand<Podcast>(async podcast => await DeletePodcast(podcast));
             AddCommand = new RelayCommand(GoToAddPodcastPage);
-            EditCommand = new RelayCommand<Podcast>(podcast => GoToEditPodcastPage(podcast));
+            DeleteCommand = new RelayCommand<Podcast>(DeletePodcast);
+            EditCommand = new RelayCommand<Podcast>(GoToEditPodcastPage);
+            SortCommand = new RelayCommand(Sort);
         }
 
-        // Methods
+        // Gets podcasts from database and fills ObservableCollection Podcasts
         internal async Task LoadPodcastsAsync()
         {
             var podcasts = await AddPodcastViewModel.PodcastsDataAccess.GetPodcastsAsync();
@@ -38,50 +36,28 @@ namespace Podbase.APP.ViewModels
                 Podcasts.Add(podcast);
         }
 
-        // Goes to Edit Podcast page when pressed 
-        private async Task DeletePodcast(Podcast pod)
-        {
-            EditPodcastViewModel.SelectedPodcast = pod;
-            if (pod == null)
-            {
-                Misc.ShowToastNotification("Error", "No podcast selected.", 1);
-            }
-            else
-            {
-                if (await AddPodcastViewModel.PodcastsDataAccess.DeletePodcastAsync(pod))
-                {
-                    Podcasts.Remove(pod);
-                }
-                Misc.ShowToastNotification("Alert", pod.Name + " deleted.", 1);
-            }
-        }
-
-        // Goes to Add podcast page when pressed "+"-button
-        private void GoToAddPodcastPage()
+        // Goes to AddPodcastPage when pressed "+"-button
+        private static void GoToAddPodcastPage()
         {
             NavigationService.Navigate(typeof(AddPodcastPage));
         }
 
-        // Sorts podcasts list
-        //TODO: if sorted asc, sort desc
-        private void Sort()
+        // Deletes selected podcast from ObservableCollection and database
+        private static async void DeletePodcast(Podcast pod)
         {
-            SortPodcasts(Podcasts, podcast => podcast.Name);
+            EditPodcastViewModel.SelectedPodcast = pod;
+            if (pod == null)
+                Misc.ShowToastNotification("Error", "No podcast selected.", 1);
+            else
+                if (await AddPodcastViewModel.PodcastsDataAccess.DeletePodcastAsync(pod))
+                {
+                    Podcasts.Remove(pod);
+                    Misc.ShowToastNotification("Alert", pod.Name + " deleted.", 1);
+                }
         }
 
-        // Helping method to sorting
-        public void SortPodcasts<TSource, TKey>(ObservableCollection<TSource> observableCollection, Func<TSource, TKey> keySelector)
-        {
-            var a = observableCollection.OrderBy(keySelector).ToList();
-            observableCollection.Clear();
-            foreach (var b in a)
-            {
-                observableCollection.Add(b);
-            }
-        }
-
-        // Goes to Edit Podcast page when pressed 
-        private void GoToEditPodcastPage(Podcast pod)
+        // Goes to EditPodcastPage when pressed "Edit"-symbol 
+        private static void GoToEditPodcastPage(Podcast pod)
         {
             EditPodcastViewModel.SelectedPodcast = pod;
             if (pod == null)
@@ -92,6 +68,24 @@ namespace Podbase.APP.ViewModels
             {
                 Misc.ShowToastNotification("Alert", pod.Name + " selected.", 1);
                 NavigationService.Navigate(typeof(EditPodcastPage));
+            }
+        }
+
+
+        // Sorts podcasts list when pressed "Sort"-button
+        private void Sort()
+        {
+            SortPodcasts(Podcasts, podcast => podcast.Name);
+        }
+
+        // Sorts podcasts list
+        public void SortPodcasts<TSource, TKey>(ObservableCollection<TSource> observableCollection, Func<TSource, TKey> keySelector)
+        {
+            var a = observableCollection.OrderBy(keySelector).ToList();
+            observableCollection.Clear();
+            foreach (var b in a)
+            {
+                observableCollection.Add(b);
             }
         }
     }

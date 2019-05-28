@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Windows.Input;
 using Podbase.APP.Helpers;
 using Podbase.APP.Services;
 using Podbase.APP.Views;
@@ -10,7 +11,7 @@ namespace Podbase.APP.ViewModels
 {
     public class EditPodcastViewModel : ViewModelBase
     {
-        public RelayCommand EditPodcastCommand { get; set; }
+        public ICommand EditPodcastCommand { get; set; }
         public static Podcast SelectedPodcast;
         public int SelectedPodcastId = SelectedPodcast.PodcastId;
 

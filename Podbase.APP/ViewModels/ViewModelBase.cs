@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Podbase.APP.Annotations;
+﻿using System.ComponentModel;
 
 namespace Podbase.APP.ViewModels
 {

@@ -13,7 +13,7 @@ namespace Podbase.APP.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        public RelayCommand LoginCommand { get; set; }
+        public ICommand LoginCommand { get; set; }
         public ICommand CreateAccount { get; set; }
         public static ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
         public static Account LoggedInAccount;
