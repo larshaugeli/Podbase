@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Controls;
 using Microsoft.EntityFrameworkCore;
 using Podbase.APP.ViewModels;
 using Podbase.DataAccess;
+using Podbase.Model;
 
 namespace Podbase.APP.Helpers
 {
@@ -89,6 +90,29 @@ namespace Podbase.APP.Helpers
             }
             dialog.CloseButtonText = "OK";
             dialog.ShowAsync();
+        }
+
+        public static void CreateDummyAccounts()
+        {
+            TruncateTables();
+            using (var db = new PodbaseContext(OptionsBuilder().Options))
+            {
+                db.Accounts.Add(new Account() { FirstName = "Lars", LastName = "Haugeli", Username = "larshaugeli", Password = "Test123" });
+                db.Accounts.Add(new Account() { FirstName = "Sansa", LastName = "Stark", Username = "sansastark", Password = "Test123" });
+                db.Accounts.Add(new Account() { FirstName = "Arya", LastName = "Stark", Username = "aryastark", Password = "Test123" });
+                db.Accounts.Add(new Account() { FirstName = "Ned", LastName = "Stark", Username = "nedstark", Password = "Test123" });
+                db.Accounts.Add(new Account() { FirstName = "Bran", LastName = "Stark", Username = "branstark", Password = "Test123" });
+
+                db.Podcasts.Add(new Podcast() { Name = "Radioresepsjonen", Creator = "NRK", Genre = "Comedy", Description = "Funny podcast", UserId = 1 });
+                db.Podcasts.Add(new Podcast() { Name = "Misjonen", Creator = "P4", Genre = "Comedy", Description = "Funny podcast", UserId = 1 });
+                db.Podcasts.Add(new Podcast() { Name = "Serial", Creator = "This American Life", Genre = "True Crime", Description = "Podcast about a murder", UserId = 2 });
+
+                db.Friends.Add(new Friend() { UserId = 1, FriendId = 2 });
+                db.Friends.Add(new Friend() { UserId = 2, FriendId = 3 });
+                db.Friends.Add(new Friend() { UserId = 2, FriendId = 4 });
+                db.Friends.Add(new Friend() { UserId = 3, FriendId = 1 });
+                db.SaveChanges();
+            }  
         }
     }
 }

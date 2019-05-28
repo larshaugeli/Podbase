@@ -59,7 +59,11 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <ListView Name="YourFriends" ItemsSource="{Binding FriendsAccounts}" Height="224" Margin="10,383,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965">
+            <CommandBar x:Name="AllUsersCommands" OverflowButtonVisibility="Collapsed" Height="48" Margin="809,55,1,0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                <AppBarButton x:Name="SortAllUsers" Icon="Sort" Label="Sort" Command="{Binding SortAllUsersCommand}"/>
+            </CommandBar>
+
+            <ListView Name="FriendsListView" ItemsSource="{Binding FriendsAccounts}" Height="224" Margin="10,383,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965">
                 <ListView.HeaderTemplate >
                     <DataTemplate>
                         <Grid Background="Gray" Padding="10">
@@ -98,6 +102,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <CommandBar x:Name="FriendsCommands" OverflowButtonVisibility="Collapsed" Height="55" Margin="809,343,1,0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                <AppBarButton x:Name="DeleteFriend" Icon="Delete" Label="Delete" Command="{x:Bind ViewModel.DeleteCommand}" CommandParameter="{Binding ElementName=FriendsListView, Path=SelectedItem}" />
+            </CommandBar>
 
             <TextBlock HorizontalAlignment="Left" Margin="26,64,0,0" Text="All users:" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="25,351,0,0" Text="Your friends:" FontSize="20"  TextWrapping="Wrap" VerticalAlignment="Top"/>

@@ -15,7 +15,7 @@ namespace Podbase.APP.Views
             InitializeComponent();
             Loaded += FriendsPage_LoadedAsync;
             AccountsListView.ItemsSource = ViewModel.Accounts;
-            YourFriends.ItemsSource = FriendsViewModel.FriendsAccounts;
+            FriendsListView.ItemsSource = FriendsViewModel.FriendsAccounts;
         }
 
         private async void FriendsPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)

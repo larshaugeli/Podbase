@@ -24,7 +24,7 @@ namespace Podbase.APP.ViewModels
             AddCommand = new RelayCommand(GoToAddPodcastPage);
             DeleteCommand = new RelayCommand<Podcast>(DeletePodcast);
             EditCommand = new RelayCommand<Podcast>(GoToEditPodcastPage);
-            SortCommand = new RelayCommand(Sort);
+            SortCommand = new RelayCommand(SortPodcasts);
         }
 
         // Gets podcasts from database and fills ObservableCollection Podcasts
@@ -73,13 +73,13 @@ namespace Podbase.APP.ViewModels
 
 
         // Sorts podcasts list when pressed "Sort"-button
-        private void Sort()
+        private void SortPodcasts()
         {
-            SortPodcasts(Podcasts, podcast => podcast.Name);
+            Sort(Podcasts, podcast => podcast.Name);
         }
 
         // Sorts podcasts list
-        public void SortPodcasts<TSource, TKey>(ObservableCollection<TSource> observableCollection, Func<TSource, TKey> keySelector)
+        public void Sort<TSource, TKey>(ObservableCollection<TSource> observableCollection, Func<TSource, TKey> keySelector)
         {
             var a = observableCollection.OrderBy(keySelector).ToList();
             observableCollection.Clear();
