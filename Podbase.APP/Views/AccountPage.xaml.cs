@@ -16,7 +16,6 @@ namespace Podbase.APP.Views
         public AccountPage()
         {
             InitializeComponent();
-
             if (AccountViewModel.FromFriendsPage == false)
             {
                 AboutMeTextBox.Visibility = Visibility.Collapsed;

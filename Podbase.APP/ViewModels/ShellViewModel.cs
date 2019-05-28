@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -45,7 +46,6 @@ namespace Podbase.APP.ViewModels
 
         public ShellViewModel()
         {
-            
         }
 
         public void Initialize(Frame frame, WinUI.NavigationView navigationView, IList<KeyboardAccelerator> keyboardAccelerators)
@@ -78,6 +78,13 @@ namespace Podbase.APP.ViewModels
             var item = _navigationView.MenuItems
                             .OfType<WinUI.NavigationViewItem>()
                             .First(menuItem => (string)menuItem.Content == (string)args.InvokedItem);
+
+            // If Account in navigation menu is pressed, logged in users information shows
+            if (item.Name == "Account")
+            {
+                AccountViewModel.FromFriendsPage = false;
+            }
+
             var pageType = item.GetValue(NavHelper.NavigateToProperty) as Type;
             NavigationService.Navigate(pageType);
         }
