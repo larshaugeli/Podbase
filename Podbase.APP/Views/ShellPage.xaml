@@ -37,7 +37,7 @@
             <winui:NavigationViewItem x:Uid="Shell_Search" Icon="Document" helpers:NavHelper.NavigateTo="views:SearchPage" />
             <winui:NavigationViewItem x:Uid="Shell_Account" Icon="Document" helpers:NavHelper.NavigateTo="views:AccountPage" />
             <winui:NavigationViewItem x:Uid="Shell_Friends" Icon="Document" helpers:NavHelper.NavigateTo="views:FriendsPage" />
-            <winui:NavigationViewItem Content="Log out" Icon="Document" helpers:NavHelper.NavigateTo="views:LoginPage" />
+            <winui:NavigationViewItem Content="Log out" Icon="Document" helpers:NavHelper.NavigateTo="views:LogOutPage" />
         </winui:NavigationView.MenuItems>
         <i:Interaction.Behaviors>
             <behaviors:NavigationViewHeaderBehavior
