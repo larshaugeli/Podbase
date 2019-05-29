@@ -22,9 +22,14 @@ namespace Podbase.APP.ViewModels
         {
             Podcasts.Clear();
             AddCommand = new RelayCommand(GoToAddPodcastPage);
-            DeleteCommand = new RelayCommand<Podcast>(DeletePodcast);
-            EditCommand = new RelayCommand<Podcast>(GoToEditPodcastPage);
-            SortCommand = new RelayCommand(SortPodcasts);
+            DeleteCommand = new RelayCommand<Podcast>(async podcast =>
+                                                    {
+                                                        if (await AddPodcastViewModel.PodcastsDataAccess.DeletePodcastAsync(podcast))
+                                                            Podcasts.Remove(podcast);
+                                                    }, podcast => podcast != null);
+
+            EditCommand = new RelayCommand<Podcast>(GoToEditPodcastPage,podcast => podcast != null);
+            SortCommand = new RelayCommand<Podcast>(pod => Sort(Podcasts, podcast => podcast.Name));
         }
 
         // Gets podcasts from database and fills ObservableCollection Podcasts
@@ -36,47 +41,16 @@ namespace Podbase.APP.ViewModels
                 Podcasts.Add(podcast);
         }
 
-        // Goes to AddPodcastPage when pressed "+"-button
-        private static void GoToAddPodcastPage()
-        {
-            NavigationService.Navigate(typeof(AddPodcastPage));
-        }
-
-        // Deletes selected podcast from ObservableCollection and database
-        private static async void DeletePodcast(Podcast pod)
-        {
-            EditPodcastViewModel.SelectedPodcast = pod;
-            if (pod == null)
-                Misc.ShowToastNotification("Error", "No podcast selected.", 1);
-            else
-                if (await AddPodcastViewModel.PodcastsDataAccess.DeletePodcastAsync(pod))
-                {
-                    Podcasts.Remove(pod);
-                    Misc.ShowToastNotification("Alert", pod.Name + " deleted.", 1);
-                }
-        }
-
         // Goes to EditPodcastPage when pressed "Edit"-symbol 
         private static void GoToEditPodcastPage(Podcast pod)
         {
             EditPodcastViewModel.SelectedPodcast = pod;
-            if (pod == null)
-            {
-                Misc.ShowToastNotification("Error", "No podcast selected.", 1);
-            }
-            else
-            {
-                Misc.ShowToastNotification("Alert", pod.Name + " selected.", 1);
-                NavigationService.Navigate(typeof(EditPodcastPage));
-            }
+            Misc.ShowToastNotification("Alert", pod.Name + " selected.", 1);
+            NavigationService.Navigate(typeof(EditPodcastPage));
         }
 
-
-        // Sorts podcasts list when pressed "Sort"-button
-        private void SortPodcasts()
-        {
-            Sort(Podcasts, podcast => podcast.Name);
-        }
+        // Goes to AddPodcastPage when pressed "+"-button
+        private static void GoToAddPodcastPage() { NavigationService.Navigate(typeof(AddPodcastPage)); }
 
         // Sorts podcasts list
         public static void Sort<TSource, TKey>(ObservableCollection<TSource> observableCollection, Func<TSource, TKey> keySelector)
@@ -88,5 +62,25 @@ namespace Podbase.APP.ViewModels
                 observableCollection.Add(b);
             }
         }
+
+        //// Deletes selected podcast from ObservableCollection and database
+        //private static async void DeletePodcast(Podcast pod)
+        //{
+        //    EditPodcastViewModel.SelectedPodcast = pod;
+        //    if (pod == null)
+        //        Misc.ShowToastNotification("Error", "No podcast selected.", 1);
+        //    else
+        //        if (await AddPodcastViewModel.PodcastsDataAccess.DeletePodcastAsync(pod))
+        //        {
+        //            Podcasts.Remove(pod);
+        //            Misc.ShowToastNotification("Alert", pod.Name + " deleted.", 1);
+        //        }
+        //}
+
+        //// Sorts podcasts list when pressed "Sort"-button
+        //private void SortPodcasts()
+        //{
+        //    Sort(Podcasts, podcast => podcast.Name);
+        //}
     }
 }

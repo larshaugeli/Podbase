@@ -20,7 +20,7 @@ namespace Podbase.APP.ViewModels
 
         public LoginViewModel()
         {
-            Misc.CreateDummyAccounts();
+            //Misc.CreateDummyAccounts();
             LoginCommand = new RelayCommand(LoginUser);
             CreateAccount = new RelayCommand(GoToCreateAccount);
         }
@@ -45,7 +45,7 @@ namespace Podbase.APP.ViewModels
             bool accountInAccounts = Accounts.Any(x => x.Username == Username && x.Password == Password);
 
             if (accountInAccounts)
-            {
+                {
                 var query = from acc in Accounts where acc.Username == account.Username select acc;
 
                 foreach (Account acc in query)
@@ -58,16 +58,21 @@ namespace Podbase.APP.ViewModels
                         LastName = acc.LastName,
                         UserId = acc.UserId
                     };
-                    //TODO remove
-                    Debug.WriteLine("Username: " + LoggedInAccount.Username + " Password: " + LoggedInAccount.Password
-                                    + " FirstName: " + LoggedInAccount.FirstName + " LastName: " + LoggedInAccount.LastName + " UsedId: " + LoggedInAccount.UserId);
-                }   
+                        //TODO remove
+                    Debug.WriteLine("Username: " + LoggedInAccount.Username + " Password: " +
+                                       LoggedInAccount.Password
+                                        + " FirstName: " + LoggedInAccount.FirstName + " LastName: " +
+                                        LoggedInAccount.LastName + " UsedId: " + LoggedInAccount.UserId);
+                }
                 Misc.CreateDialog("exists");
                 NavigationService.Navigate<ShellPage>();
                 NavigationService.Navigate(typeof(MainPage));
+            }
+            else
+            {
+                Misc.CreateDialog("notExists");
 
-            } else {
-                Misc.CreateDialog("notExists");}
+            }
         }
 
         // Goes to CreateAccountPage when "Create Account"-button is pressed

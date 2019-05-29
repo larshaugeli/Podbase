@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows.Input;
 using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
@@ -17,38 +18,48 @@ namespace Podbase.APP.ViewModels
 
         public CreateAccountViewModel()
         {
-            CreateAccountCommand = new RelayCommand(AddNewAccount);
+            CreateAccountCommand = new RelayCommand<string>(async input =>
+                                                            {
+                                                                var account = new Account() { FirstName = FirstName, LastName = LastName, Username = Username, Password = Password };
+                                                                Debug.WriteLine(account.Username + " " + account.FirstName + " " + account.LastName + " " + account.Password);
+                                                                {
+                                                                    if (await AccountDataAccess.AddAccountAsync(account))
+                                                                        Debug.WriteLine("added");
+                                                                        Accounts.Add(account);
+                                                                    NavigationService.Navigate(typeof(LoginPage));
+                                                                }
+                                                            });
         }
 
-        // Creates a new account when "Create Account" is pressed
-        public async void AddNewAccount()
-        {
-            var account = new Account()
-            {
-                FirstName = FirstName,
-                LastName = LastName,
-                Username = Username,
-                Password = Password
-            };
+        //// Creates a new account when "Create Account" is pressed
+        //public async void AddNewAccount()
+        //{
+        //    var account = new Account()
+        //    {
+        //        FirstName = FirstName,
+        //        LastName = LastName,
+        //        Username = Username,
+        //        Password = Password
+        //    };
 
-            // Adds to database and to ObservableCollection
-            if (Account.ValidPassword.IsMatch(account.Password))
-            {
-                //if (Account.UsernameNotTaken(account.Username))
-                //{
-                if (await AccountDataAccess.AddAccountAsync(account))
-                {
-                    Accounts.Add(account);
-                }
-                NavigationService.Navigate(typeof(LoginPage));
-                //}
-                //else
-                //    LoginViewModel.CreateDialog("taken");
+        //    // Adds to database and to ObservableCollection
+        //    if (Account.ValidPassword.IsMatch(account.Password))
+        //    {
+        //        //if (Account.UsernameNotTaken(account.Username))
+        //        //{
+        //        if (await AccountDataAccess.AddAccountAsync(account))
+        //        {
+        //            Accounts.Add(account);
+        //        }
+        //        NavigationService.Navigate(typeof(LoginPage));
+        //        //}
+        //        //else
+        //        //    LoginViewModel.CreateDialog("taken");
 
-            }
-            else
-                Misc.CreateDialog("invalidPassword");
-        }
+        //    }
+        //    else
+        //        Misc.CreateDialog("invalidPassword");
+        //}
 
         // Input strings
         public string FirstName

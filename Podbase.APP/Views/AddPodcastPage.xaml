@@ -18,7 +18,7 @@
         <Grid
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
             <TextBlock HorizontalAlignment="Left" Margin="182,10,0,0" Text="Create Account" TextAlignment="Center" FontSize="20" FontWeight="ExtraBold" TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Width="223"/>
-            <TextBox HorizontalAlignment="Left" Text="{Binding Name, Mode=TwoWay}" Margin="130,137,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
+            <TextBox Name="PodcastName" HorizontalAlignment="Left" Text="{Binding Name, Mode=TwoWay}" Margin="130,137,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
             <TextBox HorizontalAlignment="Left" Text="{Binding Creator, Mode=TwoWay}" Margin="131,203,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
             <TextBox HorizontalAlignment="Left" Text="{Binding Genre, Mode=TwoWay}" Margin="130,280,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
             <TextBox HorizontalAlignment="Left" Text="{Binding Description, Mode=TwoWay}" Margin="130,357,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
@@ -26,7 +26,7 @@
             <TextBlock HorizontalAlignment="Left" Margin="11,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Creator: " />
             <TextBlock HorizontalAlignment="Left" Margin="11,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Genre: " />
             <TextBlock HorizontalAlignment="Left" Margin="11,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Description: " />
-            <Button Content="Add podcast" Command="{Binding CreatePodcastCommand}" FontSize="24" HorizontalAlignment="Left" Margin="131,498,0,0" VerticalAlignment="Top" Height="64" Width="193"/>
-        </Grid>
+            <Button Content="Add podcast" Command="{Binding CreatePodcastCommand}" CommandParameter="{Binding ElementName=PodcastName, Path=Text}" FontSize="24" HorizontalAlignment="Left" Margin="131,498,0,0" VerticalAlignment="Top" Height="64" Width="193"/>
+            </Grid>
     </Grid>
 </Page>

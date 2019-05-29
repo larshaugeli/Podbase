@@ -23,8 +23,18 @@ namespace Podbase.APP.ViewModels
         
         public AccountViewModel()
         {
+            // If AccountPage is opened by double clicking on a user in FriendPage
+            if (FromFriendsPage)
+            {
+                AddFriendCommand = new RelayCommand(AddFriend);
+                // sets TextBlocks to be the selected user from FriendPage
+                _username = FriendsViewModel.SelectedAccount.Username;
+                _firstName = FriendsViewModel.SelectedAccount.FirstName;
+                _lastName = FriendsViewModel.SelectedAccount.LastName;
+                _aboutMe = FriendsViewModel.SelectedAccount.AboutMe;
+            }
             // If AccountPage is opened from anywhere but when double click on a user in FriendPage
-            if (FromFriendsPage == false)
+            else
             {
                 SaveTextCommand = new RelayCommand(SaveText);
                 CreateAccountViewModel.Accounts.Clear();
@@ -34,16 +44,6 @@ namespace Podbase.APP.ViewModels
                 _firstName = LoginViewModel.LoggedInAccount.FirstName;
                 _lastName = LoginViewModel.LoggedInAccount.LastName;
                 _aboutMe = LoggedInAboutMe;
-            }
-            // If AccountPage is opened by double clicking on a user in FriendPage
-            else
-            {
-                AddFriendCommand = new RelayCommand(AddFriend);
-                // sets TextBlocks to be the selected user from FriendPage
-                _username = FriendsViewModel.SelectedAccount.Username;
-                _firstName = FriendsViewModel.SelectedAccount.FirstName;
-                _lastName = FriendsViewModel.SelectedAccount.LastName;
-                _aboutMe = FriendsViewModel.SelectedAccount.AboutMe;
             }
         }
 
