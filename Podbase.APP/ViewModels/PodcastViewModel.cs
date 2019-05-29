@@ -22,14 +22,14 @@ namespace Podbase.APP.ViewModels
         {
             Podcasts.Clear();
             AddCommand = new RelayCommand(GoToAddPodcastPage);
+            EditCommand = new RelayCommand<Podcast>(GoToEditPodcastPage, podcast => podcast != null);
+            SortCommand = new RelayCommand<Podcast>(pod => Sort(Podcasts, podcast => podcast.Name));
+
             DeleteCommand = new RelayCommand<Podcast>(async podcast =>
                                                     {
                                                         if (await AddPodcastViewModel.PodcastsDataAccess.DeletePodcastAsync(podcast))
                                                             Podcasts.Remove(podcast);
                                                     }, podcast => podcast != null);
-
-            EditCommand = new RelayCommand<Podcast>(GoToEditPodcastPage,podcast => podcast != null);
-            SortCommand = new RelayCommand<Podcast>(pod => Sort(Podcasts, podcast => podcast.Name));
         }
 
         // Gets podcasts from database and fills ObservableCollection Podcasts
@@ -62,25 +62,5 @@ namespace Podbase.APP.ViewModels
                 observableCollection.Add(b);
             }
         }
-
-        //// Deletes selected podcast from ObservableCollection and database
-        //private static async void DeletePodcast(Podcast pod)
-        //{
-        //    EditPodcastViewModel.SelectedPodcast = pod;
-        //    if (pod == null)
-        //        Misc.ShowToastNotification("Error", "No podcast selected.", 1);
-        //    else
-        //        if (await AddPodcastViewModel.PodcastsDataAccess.DeletePodcastAsync(pod))
-        //        {
-        //            Podcasts.Remove(pod);
-        //            Misc.ShowToastNotification("Alert", pod.Name + " deleted.", 1);
-        //        }
-        //}
-
-        //// Sorts podcasts list when pressed "Sort"-button
-        //private void SortPodcasts()
-        //{
-        //    Sort(Podcasts, podcast => podcast.Name);
-        //}
     }
 }

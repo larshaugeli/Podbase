@@ -16,7 +16,6 @@ namespace Podbase.APP.ViewModels
 
         public AddPodcastViewModel()
         {
-            //CreatePodcastCommand = new RelayCommand(AddNewPodcast);
             CreatePodcastCommand = new RelayCommand<string>(async input =>
                                                             {
                                                                 var pod = new Podcast() {
@@ -27,24 +26,6 @@ namespace Podbase.APP.ViewModels
                                                                 NavigationService.Navigate(typeof(PodcastPage));
                                                             }, input => !string.IsNullOrEmpty(input));
         }
-
-        //Add new podcast, executes when pressed "Add podcast"-button
-        //public async void AddNewPodcast()
-        //{
-        //    var podcast = new Podcast()
-        //    {
-        //        Name = Name,
-        //        Creator = Creator,
-        //        Genre = Genre,
-        //        Description = Description,
-        //        UserId = LoginViewModel.LoggedInAccount.UserId
-        //    };
-        //    if (await PodcastsDataAccess.AddPodcastAsync(podcast))
-        //    {
-        //        AddedPodcasts.Add(podcast);
-        //    }
-        //    NavigationService.Navigate(typeof(PodcastPage));
-        //}
 
         // Input strings
         private string _name, _creator, _genre, _description;

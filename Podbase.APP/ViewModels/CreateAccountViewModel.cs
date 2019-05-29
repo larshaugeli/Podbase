@@ -37,9 +37,6 @@ namespace Podbase.APP.ViewModels
                 Accounts.Add(account);
                 NavigationService.Navigate(typeof(LoginPage));
             }
-            
-            //else
-            //    Misc.CreateDialog("invalidPassword");
         }
 
         // Input strings

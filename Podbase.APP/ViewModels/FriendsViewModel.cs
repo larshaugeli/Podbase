@@ -20,22 +20,23 @@ namespace Podbase.APP.ViewModels
         public ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
         public ObservableCollection<Account> FriendsAccounts { get; set; } = new ObservableCollection<Account>();
         public static ObservableCollection<Friend> Friends { get; set; } = new ObservableCollection<Friend>();
+        public static Friends FriendsDataAccess = new Friends();
         public static Account SelectedAccount;
         public static Friend SelectedFriend;
-        public static Friends FriendsDataAccess = new Friends();
 
         public FriendsViewModel()
         {
             FriendsAccounts.Clear();
-            SortAllUsersCommand = new RelayCommand(SortUsers);
-            AddToFriendsCommand = new RelayCommand<Account>(async account =>
-                                                            {
+            SortAllUsersCommand = new RelayCommand<Account>(acc => PodcastViewModel.Sort(Accounts, account => account.FirstName));
+            DeleteCommand = new RelayCommand<Account>(DeleteFriendFromFrendsList, account => account != null);
+
+            AddToFriendsCommand = new RelayCommand<Account>(async account => {
                                                                 Friend newFriend = new Friend() { UserId = LoginViewModel.LoggedInAccount.UserId, FriendId = account.UserId};
+
                                                                 if (await FriendsDataAccess.AddFriendAsync(newFriend))
                                                                     Friends.Add(newFriend);
                                                                     FriendsAccounts.Add(account);
-                                                            }, account => !FriendsAccounts.Contains(account));
-            DeleteCommand = new RelayCommand<Account>(DeleteFriendFromFrendsList);
+                                                            }, account => account != null & !FriendsAccounts.Contains(account));
         }
 
         // Gets Accounts and Friends from database and adds to ObservableCollection
@@ -70,31 +71,17 @@ namespace Podbase.APP.ViewModels
         // Deletes friend from FriendsListView and Friend in database
         public async void DeleteFriendFromFrendsList(Account friendAccount)
         {
-
             var friends = await FriendsDataAccess.GetFriendsAsync();
-            Debug.WriteLine("Friends: " + friends.Length);
-            Debug.WriteLine("friendacccount: " + friendAccount.UserId);
-
             var friendQuery = from aFriend in friends where aFriend.UserId == LoginViewModel.LoggedInAccount.UserId && aFriend.FriendId == friendAccount.UserId select aFriend;
 
             foreach (var friend in friendQuery)
-            {
                 SelectedFriend = friend;
-                Debug.WriteLine("connid: " + friend.ConnectionId + " userid: " + friend.UserId + " friendid: " + friend.FriendId);
-                Debug.WriteLine("selectedfriendconnid: " + friend.ConnectionId + " userid: " + friend.UserId + " friendid: " + friend.FriendId);
-            }
 
             if (await FriendsDataAccess.DeleteFriendAsync(SelectedFriend))
             {
                 FriendsAccounts.Remove(friendAccount);
                 Misc.ShowToastNotification("Alert", friendAccount.Username + " deleted.", 1);
             }
-        }
-
-        // Sorts AccountsFriendsList
-        private void SortUsers()
-        {
-            PodcastViewModel.Sort(Accounts, account => account.FirstName);
         }
 
         // Navigates to selected account when selected account is double clicked
