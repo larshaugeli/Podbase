@@ -55,7 +55,7 @@ namespace Podbase.APP.ViewModels
         }
 
         // Input strings
-        private String _name, _creator, _genre, _description;
+        private string _name, _creator, _genre, _description;
 
         public string Name
         {

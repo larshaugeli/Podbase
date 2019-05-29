@@ -9,13 +9,6 @@ namespace Podbase.Model
     public class Account
     {
         private string _username, _password;
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string AboutMe { get; set; }
-        public static ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
-
-        // password must be minimum 4 characters, minimum 1 upper case letter and minimum 1 number
-        public static Regex ValidPassword = new Regex("(?=.*[A-Z])(?=.*[0-9])(?=.{4,})");
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -42,6 +35,14 @@ namespace Podbase.Model
                 _password = value;
             }
         }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string AboutMe { get; set; }
+        public static ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
+
+        // password must be minimum 4 characters, minimum 1 upper case letter and minimum 1 number
+        public static Regex ValidPassword = new Regex("(?=.*[A-Z])(?=.*[0-9])(?=.{4,})");
 
         public bool IsValid(string password)
         {
