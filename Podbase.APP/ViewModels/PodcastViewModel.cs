@@ -79,7 +79,7 @@ namespace Podbase.APP.ViewModels
         }
 
         // Sorts podcasts list
-        public void Sort<TSource, TKey>(ObservableCollection<TSource> observableCollection, Func<TSource, TKey> keySelector)
+        public static void Sort<TSource, TKey>(ObservableCollection<TSource> observableCollection, Func<TSource, TKey> keySelector)
         {
             var a = observableCollection.OrderBy(keySelector).ToList();
             observableCollection.Clear();

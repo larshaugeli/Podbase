@@ -15,6 +15,7 @@ namespace Podbase.APP.Views
             InitializeComponent();
             Loaded += FriendsPage_LoadedAsync;
             AccountsListView.ItemsSource = ViewModel.Accounts;
+            SortAllUsers.Command = ViewModel.SortAllUsersCommand;
             FriendsListView.ItemsSource = FriendsViewModel.FriendsAccounts;
         }
 

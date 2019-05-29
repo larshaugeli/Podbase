@@ -25,8 +25,8 @@ namespace Podbase.APP.ViewModels
         public FriendsViewModel()
         {
             FriendsAccounts.Clear();
-            DeleteCommand = new RelayCommand<Account>(DeleteFriendFromFrendsList);
             SortAllUsersCommand = new RelayCommand(SortUsers);
+            DeleteCommand = new RelayCommand<Account>(DeleteFriendFromFrendsList);
         }
 
         // Gets Accounts and Friends from database and adds to ObservableCollection
@@ -82,21 +82,7 @@ namespace Podbase.APP.ViewModels
         // Sorts AccountsFriendsList
         private void SortUsers()
         {
-            Debug.WriteLine("hmm");
-            Sort(Accounts, account => account.FirstName);
-        }
-
-        // Sorts ObservableCollection Accounts
-        public void Sort<TSource, TKey>(ObservableCollection<TSource> observableCollection, Func<TSource, TKey> keySelector)
-        {
-            Debug.WriteLine("3");
-            var a = observableCollection.OrderBy(keySelector).ToList();
-            observableCollection.Clear();
-            foreach (var b in a)
-            {
-                observableCollection.Add(b);
-                Debug.WriteLine("lool");
-            }
+            PodcastViewModel.Sort(Accounts, account => account.FirstName);
         }
 
         // Navigates to selected account when selected account is double clicked
