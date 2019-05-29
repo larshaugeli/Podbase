@@ -11,7 +11,7 @@ namespace Podbase.APP.DataAccess
     public class Friends
     {
         readonly HttpClient _httpClient = new HttpClient();
-        static readonly Uri FriendsBaseUri = new Uri("http://localhost:62289/api/friends");
+        private static readonly Uri FriendsBaseUri = new Uri("http://localhost:62289/api/friends");
 
         public async Task<Friend[]> GetFriendsAsync()
         {
@@ -32,7 +32,7 @@ namespace Podbase.APP.DataAccess
             {
                 json = await result.Content.ReadAsStringAsync();
                 var returnedFriend = JsonConvert.DeserializeObject<Friend>(json);
-                friend.UserId = returnedFriend.UserId;
+                friend.ConnectionId = returnedFriend.ConnectionId;
                 return true;
             }
             else
@@ -42,7 +42,7 @@ namespace Podbase.APP.DataAccess
         internal async Task<bool> DeleteFriendAsync(Friend friend)
         {
             HttpResponseMessage result =
-                await _httpClient.DeleteAsync(new Uri(FriendsBaseUri, "friends/" + friend.UserId.ToString()));
+                await _httpClient.DeleteAsync(new Uri(FriendsBaseUri, "friends/" + friend.ConnectionId.ToString()));
             return result.IsSuccessStatusCode;
         }
     }

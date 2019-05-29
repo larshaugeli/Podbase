@@ -15,7 +15,6 @@ namespace Podbase.APP.Views
             {
                 AboutMeTextBox.Visibility = Visibility.Collapsed;
                 SaveButton.Visibility = Visibility.Collapsed;
-                AddFriendButton.Visibility = Visibility.Collapsed;
                 Loaded += AccountPage_LoadedAsync;
             }
             else

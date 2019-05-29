@@ -59,7 +59,8 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <CommandBar x:Name="AllUsersCommands" OverflowButtonVisibility="Collapsed" Height="48" Margin="809,55,1,0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <CommandBar x:Name="AllUsersCommands"  Height="48" Margin="747,55,1,0" VerticalAlignment="Top">
+                <AppBarButton x:Name="AddToFriends" Icon="Add" Label="Add" Command="{Binding AddToFriendsCommand}" CommandParameter="{Binding ElementName=AccountsListView, Path=SelectedItem}"/>
                 <AppBarButton x:Name="SortAllUsers" Icon="Sort" Label="Sort" Command="{Binding SortAllUsersCommand}"/>
             </CommandBar>
 

@@ -16,8 +16,10 @@ namespace Podbase.APP.ViewModels
     {
         public ICommand DeleteCommand { get; set; }
         public ICommand SortAllUsersCommand { get; set; }
+        public ICommand AddToFriendsCommand { get; set; }
         public ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
-        public static ObservableCollection<Account> FriendsAccounts { get; set; } = new ObservableCollection<Account>();
+        public ObservableCollection<Account> FriendsAccounts { get; set; } = new ObservableCollection<Account>();
+        public static ObservableCollection<Friend> Friends { get; set; } = new ObservableCollection<Friend>();
         public static Account SelectedAccount;
         public static Friend SelectedFriend;
         public static Friends FriendsDataAccess = new Friends();
@@ -26,6 +28,13 @@ namespace Podbase.APP.ViewModels
         {
             FriendsAccounts.Clear();
             SortAllUsersCommand = new RelayCommand(SortUsers);
+            AddToFriendsCommand = new RelayCommand<Account>(async account =>
+                                                            {
+                                                                Friend newFriend = new Friend() { UserId = LoginViewModel.LoggedInAccount.UserId, FriendId = account.UserId};
+                                                                if (await FriendsDataAccess.AddFriendAsync(newFriend))
+                                                                    Friends.Add(newFriend);
+                                                                    FriendsAccounts.Add(account);
+                                                            }, account => !FriendsAccounts.Contains(account));
             DeleteCommand = new RelayCommand<Account>(DeleteFriendFromFrendsList);
         }
 
@@ -55,23 +64,26 @@ namespace Podbase.APP.ViewModels
             // Fills Friends ObservableCollection
             var friendsQuery = from queryFriend in friends where queryFriend.UserId == LoginViewModel.LoggedInAccount.UserId select queryFriend;
             foreach (Friend dbFriend in friendsQuery)
-                AccountViewModel.Friends.Add(dbFriend);
+                Friends.Add(dbFriend);
         }
 
         // Deletes friend from FriendsListView and Friend in database
-        private static async void DeleteFriendFromFrendsList(Account friendAccount)
+        public async void DeleteFriendFromFrendsList(Account friendAccount)
         {
-            var friends = await FriendsDataAccess.GetFriendsAsync();
-            var friendQuery = from aFriend in friends where aFriend.UserId == friendAccount.UserId select aFriend;
 
-            foreach (Friend friendInQuery in friendQuery)
+            var friends = await FriendsDataAccess.GetFriendsAsync();
+            Debug.WriteLine("Friends: " + friends.Length);
+            Debug.WriteLine("friendacccount: " + friendAccount.UserId);
+
+            var friendQuery = from aFriend in friends where aFriend.UserId == LoginViewModel.LoggedInAccount.UserId && aFriend.FriendId == friendAccount.UserId select aFriend;
+
+            foreach (var friend in friendQuery)
             {
-                SelectedFriend = friendInQuery;
+                SelectedFriend = friend;
+                Debug.WriteLine("connid: " + friend.ConnectionId + " userid: " + friend.UserId + " friendid: " + friend.FriendId);
+                Debug.WriteLine("selectedfriendconnid: " + friend.ConnectionId + " userid: " + friend.UserId + " friendid: " + friend.FriendId);
             }
 
-            if (friendAccount == null)
-                Misc.ShowToastNotification("Error", "No friend selected.", 1);
-            else
             if (await FriendsDataAccess.DeleteFriendAsync(SelectedFriend))
             {
                 FriendsAccounts.Remove(friendAccount);

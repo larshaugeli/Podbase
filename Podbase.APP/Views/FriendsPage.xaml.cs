@@ -16,7 +16,8 @@ namespace Podbase.APP.Views
             Loaded += FriendsPage_LoadedAsync;
             AccountsListView.ItemsSource = ViewModel.Accounts;
             SortAllUsers.Command = ViewModel.SortAllUsersCommand;
-            FriendsListView.ItemsSource = FriendsViewModel.FriendsAccounts;
+            AddToFriends.Command = ViewModel.AddToFriendsCommand;
+            FriendsListView.ItemsSource = ViewModel.FriendsAccounts;
         }
 
         private async void FriendsPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)

@@ -26,7 +26,7 @@ namespace Podbase.APP.ViewModels
             // If AccountPage is opened by double clicking on a user in FriendPage
             if (FromFriendsPage)
             {
-                AddFriendCommand = new RelayCommand(AddFriend);
+                //AddFriendCommand = new RelayCommand(AddFriend);
                 // sets TextBlocks to be the selected user from FriendPage
                 _username = FriendsViewModel.SelectedAccount.Username;
                 _firstName = FriendsViewModel.SelectedAccount.FirstName;
@@ -54,32 +54,36 @@ namespace Podbase.APP.ViewModels
             var query = from acc in accounts where acc.UserId == LoginViewModel.LoggedInAccount.UserId select acc;
             foreach (Account account in query)
                 LoggedInAboutMe = account.AboutMe;
+
+            var friends = await FriendsViewModel.FriendsDataAccess.GetFriendsAsync();
+            foreach (Friend friend in friends)
+                Friends.Add(friend);
         }
 
         // Adds a user as friend with another user. Adds the user to a ObservableCollection and to database
-        private void AddFriend()
-        {
-            Friend selectedFriend = new Friend() { UserId = LoginViewModel.LoggedInAccount.UserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
-            bool alreadyInFriends = Friends.Any(x => x.UserId == selectedFriend.UserId && x.FriendId == selectedFriend.FriendId);
+        //private void AddFriend()
+        //{
+        //    Friend selectedFriend = new Friend() { UserId = LoginViewModel.LoggedInAccount.UserId, FriendId = FriendsViewModel.SelectedAccount.UserId };
+        //    bool alreadyInFriends = Friends.Any(x => x.UserId == selectedFriend.UserId && x.FriendId == selectedFriend.FriendId);
 
-            if (alreadyInFriends)
-                Misc.ShowToastNotification("Notification", "You are already friend with " + FriendsViewModel.SelectedAccount.Username, 1);
-            else
-            {
-                // Adds selected friend to ObservableCollection
-                Friends.Add(selectedFriend);
-                // Adds selected friend to database
-                using (var db = new PodbaseContext(Misc.OptionsBuilder().Options))
-                {
-                    db.Friends.Add(selectedFriend);
-                    db.SaveChanges();
-                }
+        //    if (alreadyInFriends)
+        //        Misc.ShowToastNotification("Notification", "You are already friend with " + FriendsViewModel.SelectedAccount.Username, 1);
+        //    else
+        //    {
+        //        // Adds selected friend to ObservableCollection
+        //        Friends.Add(selectedFriend);
+        //        // Adds selected friend to database
+        //        using (var db = new PodbaseContext(Misc.OptionsBuilder().Options))
+        //        {
+        //            db.Friends.Add(selectedFriend);
+        //            db.SaveChanges();
+        //        }
 
-                Misc.ShowToastNotification("Notification","Added " + FriendsViewModel.SelectedAccount.Username + " as friend", 1);
-                NavigationService.Navigate(typeof(FriendsPage));
-                FromFriendsPage = false;
-            }
-        }
+        //        Misc.ShowToastNotification("Notification","Added " + FriendsViewModel.SelectedAccount.Username + " as friend", 1);
+        //        NavigationService.Navigate(typeof(FriendsPage));
+        //        FromFriendsPage = false;
+        //    }
+        //}
 
         // Saves text from AboutMe TextBox to database and displays it in AboutMe TextBlock
         public async void SaveText()
