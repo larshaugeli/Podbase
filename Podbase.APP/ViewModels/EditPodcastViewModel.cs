@@ -17,6 +17,10 @@ namespace Podbase.APP.ViewModels
 
         public EditPodcastViewModel()
         {
+            Name = SelectedPodcast.Name;
+            Creator = SelectedPodcast.Creator;
+            Genre = SelectedPodcast.Genre;
+            Description = SelectedPodcast.Description;
             EditPodcastCommand = new RelayCommand(EditPodcast);
         }
 
