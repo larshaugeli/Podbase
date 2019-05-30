@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Podbase.APP.DataAccess;
 using Podbase.APP.Helpers;
@@ -21,22 +23,55 @@ namespace Podbase.APP.ViewModels
             CreateAccountCommand = new RelayCommand(AddNewAccount);
         }
 
+        // Gets accounts from database and fills ObservableCollection Accounts in Account model
+        internal async Task LoadAccountsAsync()
+        {
+            var accounts = await AccountDataAccess.GetAccountsAsync();
+            foreach (Account account in accounts)
+                Accounts.Add(account);
+                Debug.WriteLine(Accounts.Count);
+        }
+
         // Creates a new account when "Create Account" is pressed
         public async void AddNewAccount()
         {
-            var account = new Account()
+            try
             {
-                FirstName = FirstName,
-                LastName = LastName,
-                Username = Username,
-                Password = Password
-            };
+                var account = new Account()
+                {
+                    FirstName = FirstName,
+                    LastName = LastName,
+                    Username = Username,
+                    Password = Password
+                };
+                if (UsernameTaken(account.Username))
+                    throw new ArgumentException("This username is already taken.");
 
-            if (await AccountDataAccess.AddAccountAsync(account))
-            {
-                Accounts.Add(account);
-                NavigationService.Navigate(typeof(LoginPage));
+                if (await AccountDataAccess.AddAccountAsync(account))
+                    {
+                        Accounts.Add(account);
+                        NavigationService.Navigate(typeof(LoginPage));
+                    }
             }
+            catch (ArgumentException exception)
+            {
+                Misc.CreateDialog("Error", exception.Message);
+            }
+        }
+
+        public bool UsernameTaken(string username)
+        {
+            if (Accounts.Count == 0)
+                return false;
+
+            foreach (Account account in Accounts)
+            {
+                if (username.Equals(account.Username))
+
+                    return true;
+            }
+
+            return false;
         }
 
         // Input strings

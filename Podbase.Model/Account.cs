@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Podbase.Model
 {
@@ -19,8 +21,10 @@ namespace Podbase.Model
             get => _username;
             set
             {
-                if (UsernameTaken(value))
-                    throw new ArgumentException("This username is already taken.");
+                if (value == null)
+                    throw new ArgumentException("Username cannot be null");
+                //if (UsernameTaken(value))
+                //    throw new ArgumentException("This username is already taken.");
                 _username = value;
             }
         }
@@ -30,16 +34,17 @@ namespace Podbase.Model
             get => _password;
             set
             {
-                if (!IsValid(value))
-                    throw new ArgumentException("Password must contain minimum 4 characters, 1 upper case letter and 1 number.");
-                _password = value;
+                if (IsValid(value))
+                    _password = value;
+                else throw new ArgumentException("Password must contain minimum 4 characters, 1 upper case letter and 1 number.");
+                
             }
         }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string AboutMe { get; set; }
-        public static ObservableCollection<Account> Accounts { get; set; } = new ObservableCollection<Account>();
+        public static List<Account> Accounts { get; set; } = new List<Account>();
 
         // password must be minimum 4 characters, minimum 1 upper case letter and minimum 1 number
         public static Regex ValidPassword = new Regex("(?=.*[A-Z])(?=.*[0-9])(?=.{4,})");

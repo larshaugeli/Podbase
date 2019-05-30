@@ -28,50 +28,64 @@ namespace Podbase.APP.ViewModels
         // Gets accounts from database and fills ObservableCollection Accounts
         internal async Task LoadAccountsAsync()
         {
-            var accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
-            foreach (Account account in accounts)
-                Accounts.Add(account);
+            try
+            {
+                var accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
+                foreach (Account account in accounts)
+                    Accounts.Add(account);
+            }
+            catch (ArgumentException exception)
+            {
+                Misc.CreateDialog("Error", exception.Message);
+            }
         }
 
         // Logs in user if an account with typed in username and password is in database
         private void LoginUser()
         {
-            var account = new Account
+            try
             {
-                Username = Username,
-                Password = Password
-            };
-
-            bool accountInAccounts = Accounts.Any(x => x.Username == Username && x.Password == Password);
-
-            if (accountInAccounts)
+                var account = new Account
                 {
-                var query = from acc in Accounts where acc.Username == account.Username select acc;
+                    Username = Username,
+                    Password = Password
+                };
 
-                foreach (Account acc in query)
+                bool accountInAccounts = Accounts.Any(x => x.Username == Username && x.Password == Password);
+
+                if (accountInAccounts)
                 {
-                    LoggedInAccount = new Account()
+                    var query = from acc in Accounts where acc.Username == account.Username select acc;
+
+                    foreach (Account acc in query)
                     {
-                        Username = account.Username,
-                        Password = account.Password,
-                        FirstName = acc.FirstName,
-                        LastName = acc.LastName,
-                        UserId = acc.UserId
-                    };
+                        LoggedInAccount = new Account()
+                        {
+                            Username = account.Username,
+                            Password = account.Password,
+                            FirstName = acc.FirstName,
+                            LastName = acc.LastName,
+                            UserId = acc.UserId
+                        };
                         //TODO remove
-                    Debug.WriteLine("Username: " + LoggedInAccount.Username + " Password: " +
-                                       LoggedInAccount.Password
+                        Debug.WriteLine("Username: " + LoggedInAccount.Username + " Password: " +
+                                        LoggedInAccount.Password
                                         + " FirstName: " + LoggedInAccount.FirstName + " LastName: " +
                                         LoggedInAccount.LastName + " UsedId: " + LoggedInAccount.UserId);
-                }
-                Misc.CreateDialog("exists");
-                NavigationService.Navigate<ShellPage>();
-                NavigationService.Navigate(typeof(MainPage));
-            }
-            else
-            {
-                Misc.CreateDialog("notExists");
+                    }
 
+                    Misc.CreateDialog("Welcome", "Welcome " + LoggedInAccount.Username);
+                    NavigationService.Navigate<ShellPage>();
+                    NavigationService.Navigate(typeof(MainPage));
+                }
+                else
+                {
+                    Misc.CreateDialog("Error", "Username and password combination does not exists");
+                }
+            }
+            catch (ArgumentException exception)
+            {
+                Misc.CreateDialog("Error", exception.Message);
             }
         }
 

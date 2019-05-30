@@ -64,29 +64,31 @@ namespace Podbase.APP.Helpers
             ToastNotifier.Show(toast);
         }
 
-        public static void CreateDialog(string situation)
+        public static void CreateDialog(string title, string message)
         {
             ContentDialog dialog = new ContentDialog();
             {
-                switch (situation)
-                {
-                    case "notExists":
-                        dialog.Title = "Error";
-                        dialog.Content = "Username and password combination does not exists";
-                        break;
-                    case "exists":
-                        dialog.Title = "Welcome";
-                        dialog.Content = "Welcome " + LoginViewModel.LoggedInAccount.Username;
-                        break;
-                    case "invalidPassword":
-                        dialog.Title = "Error";
-                        dialog.Content = "Invalid password. Password must include one number, one upper case letter and must be 4 or more characters.";
-                        break;
-                    case "taken":
-                        dialog.Title = "Error";
-                        dialog.Content = "Username already taken.";
-                        break;
-                }
+                dialog.Title = title;
+                dialog.Content = message;
+                //switch (situation)
+                //{
+                //    case "notExists":
+                //        dialog.Title = "Error";
+                //        dialog.Content = "Username and password combination does not exists";
+                //        break;
+                //    case "exists":
+                //        dialog.Title = "Welcome";
+                //        dialog.Content = "Welcome " + LoginViewModel.LoggedInAccount.Username;
+                //        break;
+                //    case "invalidPassword":
+                //        dialog.Title = "Error";
+                //        dialog.Content = "Invalid password. Password must include one number, one upper case letter and must be 4 or more characters.";
+                //        break;
+                //    case "taken":
+                //        dialog.Title = "Error";
+                //        dialog.Content = "Username already taken.";
+                //        break;
+                //}
             }
             dialog.CloseButtonText = "OK";
             dialog.ShowAsync();

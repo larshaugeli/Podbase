@@ -1,4 +1,6 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using System.Net.Http;
+using Windows.UI.Xaml.Controls;
+using Podbase.APP.Helpers;
 using Podbase.APP.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -17,7 +19,14 @@ namespace Podbase.APP.Views
 
         private async void LoginPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            await ViewModel.LoadAccountsAsync();
+            try
+            {
+                await ViewModel.LoadAccountsAsync();
+            }
+            catch (HttpRequestException exception)
+            {
+                Misc.CreateDialog("Error", exception.Message);
+            }
         }
     }
 }
