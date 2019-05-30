@@ -20,10 +20,10 @@
         <TextBlock HorizontalAlignment="Left" Margin="11,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Creator: " />
         <TextBlock HorizontalAlignment="Left" Margin="11,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Genre: " />
         <TextBlock HorizontalAlignment="Left" Margin="11,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Description: " />
-        <TextBox Name="PodcastName" HorizontalAlignment="Left" Text="{Binding Name, Mode=TwoWay}" Margin="130,137,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
-        <TextBox Name="Creator" HorizontalAlignment="Left" Text="{Binding Creator, Mode=TwoWay}" Margin="131,203,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
-        <TextBox Name="Genre" HorizontalAlignment="Left" Text="{Binding Genre, Mode=TwoWay}" Margin="130,280,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
-        <TextBox Name="Description" HorizontalAlignment="Left" Text="{Binding Description, Mode=TwoWay}" Margin="130,357,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
-        <Button Content="Edit podcast" Command="{Binding EditPodcastCommand}" FontSize="24" HorizontalAlignment="Left" Margin="131,498,0,0" VerticalAlignment="Top" Height="64" Width="193"/>
+        <TextBox Name="PodcastName" HorizontalAlignment="Left" Text="{x:Bind ViewModel.Name, Mode=TwoWay}" Margin="130,137,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
+        <TextBox Name="Creator" HorizontalAlignment="Left" Text="{x:Bind ViewModel.Creator , Mode=TwoWay}" Margin="131,203,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
+        <TextBox Name="Genre" HorizontalAlignment="Left" Text="{x:Bind ViewModel.Genre, Mode=TwoWay}" Margin="130,280,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
+        <TextBox Name="Description" HorizontalAlignment="Left" Text="{x:Bind ViewModel.Description, Mode=TwoWay}" Margin="130,357,0,0" VerticalAlignment="Top" Height="40" Width="311"/>
+        <Button Content="Edit podcast" Command="{x:Bind ViewModel.EditPodcastCommand}" FontSize="24" HorizontalAlignment="Left" Margin="131,498,0,0" VerticalAlignment="Top" Height="64" Width="193"/>
     </Grid>
 </Page>

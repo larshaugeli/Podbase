@@ -23,10 +23,10 @@
         <TextBlock HorizontalAlignment="Left" Margin="80,200,0,0" Text="Creator:" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="80,262,0,0" Text="Genre:" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="80,329,0,0" Text="Description:" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="287,140,0,0" Text="{Binding Name, Mode=TwoWay}" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="287,200,0,0" Text="{Binding Creator, Mode=TwoWay}" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="287,262,0,0" Text="{Binding Genre, Mode=TwoWay}" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock Name="Description" HorizontalAlignment="Left" Margin="287,329,0,0" Text="{Binding Description, Mode=TwoWay}" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="287,140,0,0" Text="{x:Bind ViewModel.Name, Mode=TwoWay}" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="287,200,0,0" Text="{x:Bind ViewModel.Creator, Mode=TwoWay}" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="287,262,0,0" Text="{x:Bind ViewModel.Genre, Mode=TwoWay}" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock Name="Description" HorizontalAlignment="Left" Margin="287,329,0,0" Text="{x:Bind ViewModel.Description, Mode=TwoWay}" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 </Page>
