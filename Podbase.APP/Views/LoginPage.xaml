@@ -14,11 +14,11 @@
 
     <Grid>
         <TextBlock Text="Login" TextAlignment="Left" Margin="429,62,387,500" FontSize="30" FontWeight="ExtraBold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        <TextBox Text="{Binding Username, Mode=TwoWay}" HorizontalAlignment="Left" Margin="366,176,0,0" VerticalAlignment="Top" Height="46" Width="385"/>
-        <PasswordBox Password="{Binding Password, Mode=TwoWay}" HorizontalAlignment="Left" Margin="367,303,0,0" VerticalAlignment="Top" Height="46" Width="383"/>
+        <TextBox Text="{x:Bind ViewModel.Username, Mode=TwoWay}" HorizontalAlignment="Left" Margin="366,176,0,0" VerticalAlignment="Top" Height="46" Width="385"/>
+        <PasswordBox Password="{x:Bind ViewModel.Password, Mode=TwoWay}" HorizontalAlignment="Left" Margin="367,303,0,0" VerticalAlignment="Top" Height="46" Width="383"/>
         <TextBlock HorizontalAlignment="Left" Margin="172,176,0,0" Text="Username:" FontSize="24" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="140"/>
         <TextBlock HorizontalAlignment="Left" Margin="172,310,0,0" Text="Password:" FontSize="24" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="140" />
-        <Button Content="Log in" Command="{Binding LoginCommand}" FontSize="24"  HorizontalAlignment="Left" Margin="259,467,0,0" VerticalAlignment="Top" Height="60" Width="158"/>
-        <Button Content="Create Account" Command="{Binding CreateAccount}" FontSize="24" HorizontalAlignment="Left" Margin="549,467,0,0" VerticalAlignment="Top" Height="60" Width="202"/>
+        <Button Content="Log in" Command="{x:Bind ViewModel.LoginCommand}" FontSize="24"  HorizontalAlignment="Left" Margin="259,467,0,0" VerticalAlignment="Top" Height="60" Width="158"/>
+        <Button Content="Create Account" Command="{x:Bind ViewModel.CreateAccount}" FontSize="24" HorizontalAlignment="Left" Margin="549,467,0,0" VerticalAlignment="Top" Height="60" Width="202"/>
     </Grid>
 </Page>

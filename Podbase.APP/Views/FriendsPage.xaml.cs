@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Podbase.APP.ViewModels;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;

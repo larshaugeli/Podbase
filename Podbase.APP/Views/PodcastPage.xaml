@@ -17,7 +17,7 @@
         Margin="24,0,0,0">
         <Grid
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" Margin="0,0,25,0">
-            <ListView Name="PodcastsListView" ItemsSource="{Binding Podcasts, UpdateSourceTrigger=PropertyChanged}"  Height="487" Margin="10,112,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965">
+            <ListView Name="PodcastsListView" ItemsSource="{x:Bind ViewModel.Podcasts}"  Height="487" Margin="10,112,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965">
                 <ListView.HeaderTemplate >
                     <DataTemplate>
                         <Grid Background="LightSteelBlue" Padding="10">
@@ -56,7 +56,7 @@
                 <AppBarButton x:Name="Add" Icon="Add" Label="Add" Command="{x:Bind ViewModel.AddCommand}" />
                 <AppBarButton x:Name="Delete" Icon="Delete" Label="Delete" Command="{x:Bind ViewModel.DeleteCommand}" CommandParameter="{Binding ElementName=PodcastsListView, Path=SelectedItem}" />
                 <AppBarButton x:Name="Edit" Icon="Edit" Label="Edit" Command="{x:Bind ViewModel.EditCommand}" CommandParameter="{Binding ElementName=PodcastsListView, Path=SelectedItem}" />
-                <AppBarButton x:Name="Sort" Icon="Sort" Label="Sort" Command="{Binding SortCommand}"/>
+                <AppBarButton x:Name="Sort" Icon="Sort" Label="Sort" Command="{x:Bind ViewModel.SortCommand}"/>
             </CommandBar>
 
         </Grid>

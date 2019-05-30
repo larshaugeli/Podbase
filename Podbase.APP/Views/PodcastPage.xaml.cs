@@ -16,6 +16,7 @@ namespace Podbase.APP.Views
         {
             InitializeComponent();
             Loaded += PodcastPage_LoadedAsync;
+            PodcastsListView.ItemsSource = ViewModel.Podcasts;
         }
 
         private async void PodcastPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)

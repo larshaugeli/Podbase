@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Net.Http;
 using Windows.UI.Xaml.Controls;
 using Newtonsoft.Json;
 using Podbase.APP.Helpers;
 using Podbase.APP.ViewModels;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Podbase.APP.Views
 {
