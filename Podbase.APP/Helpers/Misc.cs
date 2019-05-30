@@ -68,7 +68,7 @@ namespace Podbase.APP.Helpers
 
         public static IAsyncOperation<IUICommand> CreateMessageDialog(string title, string message)
         {
-            MessageDialog messageDialog = new MessageDialog(title, message);
+            MessageDialog messageDialog = new MessageDialog(message, title);
             return messageDialog.ShowAsync();
         }
 

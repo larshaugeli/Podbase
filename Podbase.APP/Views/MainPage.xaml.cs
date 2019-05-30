@@ -1,7 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Podbase.APP.ViewModels;
 
 using Windows.UI.Xaml.Controls;
+using Newtonsoft.Json;
+using Podbase.APP.Helpers;
 
 namespace Podbase.APP.Views
 {
@@ -18,7 +21,15 @@ namespace Podbase.APP.Views
 
         private async void AccountPage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            await AccountViewModel.LoadAccountsAsync();
+            try
+            {
+                await AccountViewModel.LoadAccountsAsync();
+            }
+            catch (JsonReaderException)
+            {
+                await Misc.CreateMessageDialog("Error",
+                    "Could not read Json from database, please check your internet or database connection.");
+            }
         }
     }
 }
