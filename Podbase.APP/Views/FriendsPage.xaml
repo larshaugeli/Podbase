@@ -19,7 +19,7 @@
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
             <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" Text="Friends" FontSize="40" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
-            <ListView Name="AccountsListView" ItemsSource="{Binding Accounts, UpdateSourceTrigger=PropertyChanged}" Height="250" Margin="10,96,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965">
+            <ListView Name="AccountsListView" ItemsSource="{x:Bind ViewModel.Accounts}" Height="250" Margin="10,96,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965">
                 <ListView.HeaderTemplate >
                     <DataTemplate>
                         <Grid Background="LightSteelBlue" Padding="10">
@@ -55,11 +55,11 @@
             </ListView>
 
             <CommandBar x:Name="AllUsersCommands"  Height="48" Margin="700,55,1,0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                <AppBarButton x:Name="AddToFriends" Icon="Add" Label="Add" Command="{Binding AddToFriendsCommand}" CommandParameter="{Binding ElementName=AccountsListView, Path=SelectedItem}"/>
-                <AppBarButton x:Name="SortAllUsers" Icon="Sort" Label="Sort" Command="{Binding SortAllUsersCommand}"/>
+                <AppBarButton x:Name="AddToFriends" Icon="Add" Label="Add" Command="{x:Bind ViewModel.AddToFriendsCommand}" CommandParameter="{Binding ElementName=AccountsListView, Path=SelectedItem}"/>
+                <AppBarButton x:Name="SortAllUsers" Icon="Sort" Label="Sort" Command="{x:Bind ViewModel.SortAllUsersCommand}"/>
             </CommandBar>
 
-            <ListView Name="FriendsListView" ItemsSource="{Binding FriendsAccounts}" Height="224" Margin="10,383,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965">
+            <ListView Name="FriendsListView" ItemsSource="{x:Bind ViewModel.FriendsAccounts}" Height="224" Margin="10,383,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965">
                 <ListView.HeaderTemplate >
                     <DataTemplate>
                         <Grid Background="LightSteelBlue" Padding="10">

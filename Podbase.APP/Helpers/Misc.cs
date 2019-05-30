@@ -6,12 +6,14 @@ using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Microsoft.EntityFrameworkCore;
-using Podbase.APP.ViewModels;
 using Podbase.DataAccess;
 using Podbase.Model;
 
 namespace Podbase.APP.Helpers
 {
+    /// <summary>
+    /// Miscellaneous class. Contains helping methods to make less and simplier code.
+    /// </summary>
     public class Misc
     {
         public static DbContextOptionsBuilder<PodbaseContext> OptionsBuilder()
