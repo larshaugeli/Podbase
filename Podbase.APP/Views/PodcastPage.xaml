@@ -22,34 +22,30 @@
                     <DataTemplate>
                         <Grid Background="Gray" Padding="10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="300" />
+                                <ColumnDefinition Width="300" />
                                 <ColumnDefinition Width="300" />
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="Podcast name" />
                             <TextBlock Grid.Column="1" Text="Creator" />
                             <TextBlock Grid.Column="2" Text="Genre" />
-                            <TextBlock Grid.Column="3" Text="Description" />
                         </Grid>
                     </DataTemplate>
                 </ListView.HeaderTemplate>
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Background="AliceBlue">
+                        <Grid DoubleTapped="UIElement_OnDoubleTapped" Background="AliceBlue">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="300" />
+                                <ColumnDefinition Width="300" />
                                 <ColumnDefinition Width="300" />
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Name}"/>
                             <TextBlock Grid.Column="1" Text="{Binding Creator}" />
                             <TextBlock Grid.Column="2" Text="{Binding Genre}" />
-                            <TextBlock Grid.Column="3" Text="{Binding Description}" TextWrapping="Wrap" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -62,5 +62,11 @@ namespace Podbase.APP.ViewModels
                 observableCollection.Add(b);
             }
         }
+
+        public void GoToSelectedPodcast(Podcast podcast)
+        {
+            ChosenPodcastViewModel.SelectedPodcast = podcast;
+            NavigationService.Navigate(typeof(ChosenPodcastPage));
+        }
     }
 }

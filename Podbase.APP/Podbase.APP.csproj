@@ -128,6 +128,7 @@
     <Compile Include="Services\ThemeSelectorService.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\AddPodcastViewModel.cs" />
+    <Compile Include="ViewModels\ChosenPodcastViewModel.cs" />
     <Compile Include="ViewModels\CreateAccountViewModel.cs" />
     <Compile Include="ViewModels\EditPodcastViewModel.cs" />
     <Compile Include="ViewModels\FriendsViewModel.cs" />
@@ -143,6 +144,9 @@
     </Compile>
     <Compile Include="Views\AddPodcastPage.xaml.cs">
       <DependentUpon>AddPodcastPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChosenPodcastPage.xaml.cs">
+      <DependentUpon>ChosenPodcastPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreateAccountPage.xaml.cs">
       <DependentUpon>CreateAccountPage.xaml</DependentUpon>
@@ -207,6 +211,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AddPodcastPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChosenPodcastPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
