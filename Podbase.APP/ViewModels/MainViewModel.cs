@@ -5,8 +5,8 @@ using Podbase.APP.Helpers;
 namespace Podbase.APP.ViewModels
 {
     /// <summary>
-    /// 
-    /// 
+    /// This view model contain code relevant to the home page.
+    /// This class displays text on the home page.
     /// </summary>
     public class MainViewModel : Observable
     {

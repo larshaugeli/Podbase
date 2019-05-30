@@ -11,8 +11,8 @@ using Podbase.Model;
 namespace Podbase.APP.ViewModels
 {
     /// <summary>
-    /// 
-    /// 
+    /// This view model contains methods relevant to the friend function.
+    /// This class can add another user as a friend.
     /// </summary>
     public class FriendsViewModel : ViewModelBase
     {

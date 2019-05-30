@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,8 +15,8 @@ using WinUI = Microsoft.UI.Xaml.Controls;
 namespace Podbase.APP.ViewModels
 {
     /// <summary>
-    /// 
-    /// 
+    /// This view model contains methods relevant to the navigation pane.
+    /// This class navigates the user to different pages.
     /// </summary>
     public class ShellViewModel : Observable
     {

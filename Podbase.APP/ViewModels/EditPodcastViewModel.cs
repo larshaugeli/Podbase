@@ -9,8 +9,8 @@ using Podbase.Model;
 namespace Podbase.APP.ViewModels
 {
     /// <summary>
-    /// 
-    /// 
+    /// This view model contains methods used to edit a podcast.
+    /// This class edits a podcasts and updates it in the database.
     /// </summary>
     public class EditPodcastViewModel : ViewModelBase
     {
