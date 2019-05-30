@@ -13,7 +13,7 @@
     </Page.DataContext>
 
     <Grid>
-        <TextBlock Text="Login" TextAlignment="Left" Margin="484,10,469,552" FontSize="20" FontWeight="ExtraBold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <TextBlock Text="Login" TextAlignment="Left" Margin="429,62,387,500" FontSize="30" FontWeight="ExtraBold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <TextBox Text="{Binding Username, Mode=TwoWay}" HorizontalAlignment="Left" Margin="366,176,0,0" VerticalAlignment="Top" Height="46" Width="385"/>
         <PasswordBox Password="{Binding Password, Mode=TwoWay}" HorizontalAlignment="Left" Margin="367,303,0,0" VerticalAlignment="Top" Height="46" Width="383"/>
         <TextBlock HorizontalAlignment="Left" Margin="172,176,0,0" Text="Username:" FontSize="24" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="140"/>
