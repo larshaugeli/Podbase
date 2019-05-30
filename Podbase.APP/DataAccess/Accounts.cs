@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Podbase.APP.Helpers;
 using Podbase.Model;
 
 namespace Podbase.APP.DataAccess
@@ -26,22 +25,18 @@ namespace Podbase.APP.DataAccess
         internal async Task<bool> AddAccountAsync(Account account)
         {
             string json = JsonConvert.SerializeObject(account);
-            Debug.WriteLine(json);
             HttpResponseMessage result = await _httpClient.PostAsync(AccountsBaseUri,
                 new StringContent(json, Encoding.UTF8, "application/json"));
-            Debug.WriteLine(result.IsSuccessStatusCode);
 
             if (result.IsSuccessStatusCode)
             {
                 json = await result.Content.ReadAsStringAsync();
                 var returnedAccount = JsonConvert.DeserializeObject<Account>(json);
                 account.UserId = returnedAccount.UserId;
-                Debug.WriteLine("added account");
                 return true;
                 
             }
             else
-            Debug.WriteLine("failed to add account");
                 return false;
         }
 
