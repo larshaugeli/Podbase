@@ -4,6 +4,10 @@ using Podbase.APP.Helpers;
 
 namespace Podbase.APP.ViewModels
 {
+    /// <summary>
+    /// 
+    /// 
+    /// </summary>
     public class MainViewModel : Observable
     {
         public static List<string> QuotesList = new List<string>();

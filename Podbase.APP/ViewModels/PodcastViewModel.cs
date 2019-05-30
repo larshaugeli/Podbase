@@ -10,6 +10,10 @@ using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
 {
+    /// <summary>
+    /// 
+    /// 
+    /// </summary>
     public class PodcastViewModel : ViewModelBase
     {
         public ICommand AddCommand { get; set; }

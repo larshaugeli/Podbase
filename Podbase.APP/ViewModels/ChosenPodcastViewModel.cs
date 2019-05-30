@@ -2,6 +2,10 @@
 
 namespace Podbase.APP.ViewModels
 {
+    /// <summary>
+    /// 
+    /// 
+    /// </summary>
     public class ChosenPodcastViewModel : ViewModelBase
     {
         public static Podcast SelectedPodcast;

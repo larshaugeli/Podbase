@@ -8,6 +8,10 @@ using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
 {
+    /// <summary>
+    /// 
+    /// 
+    /// </summary>
     public class AddPodcastViewModel : ViewModelBase
     {
         public static ObservableCollection<Podcast> AddedPodcasts = new ObservableCollection<Podcast>();

@@ -11,6 +11,10 @@ using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
 {
+    /// <summary>
+    /// 
+    /// 
+    /// </summary>
     public class CreateAccountViewModel : ViewModelBase
     {
         public ICommand CreateAccountCommand { get; set; }

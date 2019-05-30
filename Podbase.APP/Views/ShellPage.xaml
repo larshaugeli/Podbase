@@ -32,11 +32,11 @@
             Or to use an IconElement instead of a Symbol see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/projectTypes/navigationpane.md
             Edit String/en-US/Resources.resw: Add a menu item title for each page
             -->
-            <winui:NavigationViewItem x:Uid="Shell_Main" Icon="Document" helpers:NavHelper.NavigateTo="views:MainPage" />
-            <winui:NavigationViewItem x:Uid="Shell_Podcast" Icon="Document" helpers:NavHelper.NavigateTo="views:PodcastPage" />
-            <winui:NavigationViewItem x:Name="Account"  x:Uid="Shell_Account" Icon="Document" helpers:NavHelper.NavigateTo="views:AccountPage" />
-            <winui:NavigationViewItem x:Uid="Shell_Friends" Icon="Document" helpers:NavHelper.NavigateTo="views:FriendsPage" />
-            <winui:NavigationViewItem Content="Log out" Icon="Document" helpers:NavHelper.NavigateTo="views:LogOutPage" />
+            <winui:NavigationViewItem x:Uid="Shell_Main" Icon="Home" helpers:NavHelper.NavigateTo="views:MainPage" />
+            <winui:NavigationViewItem x:Uid="Shell_Podcast" Icon="Audio" helpers:NavHelper.NavigateTo="views:PodcastPage" />
+            <winui:NavigationViewItem x:Name="Account"  x:Uid="Shell_Account" Icon="Contact" helpers:NavHelper.NavigateTo="views:AccountPage" />
+            <winui:NavigationViewItem x:Uid="Shell_Friends" Icon="People" helpers:NavHelper.NavigateTo="views:FriendsPage" />
+            <winui:NavigationViewItem Content="Log out" Icon="Cancel" helpers:NavHelper.NavigateTo="views:LogOutPage" />
         </winui:NavigationView.MenuItems>
         <i:Interaction.Behaviors>
             <behaviors:NavigationViewHeaderBehavior

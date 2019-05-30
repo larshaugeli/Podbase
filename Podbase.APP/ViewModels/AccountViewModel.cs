@@ -8,6 +8,10 @@ using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
 {
+    /// <summary>
+    /// 
+    /// 
+    /// </summary>
     public class AccountViewModel : ViewModelBase
     {
         public ICommand SaveTextCommand { get; set; }

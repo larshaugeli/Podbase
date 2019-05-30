@@ -8,6 +8,10 @@ using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
 {
+    /// <summary>
+    /// 
+    /// 
+    /// </summary>
     public class EditPodcastViewModel : ViewModelBase
     {
         public ICommand EditPodcastCommand { get; set; }

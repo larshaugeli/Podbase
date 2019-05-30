@@ -10,6 +10,10 @@ using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
 {
+    /// <summary>
+    /// 
+    /// 
+    /// </summary>
     public class LoginViewModel : ViewModelBase
     {
         public ICommand LoginCommand { get; set; }

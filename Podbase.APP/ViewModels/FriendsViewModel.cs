@@ -10,6 +10,10 @@ using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
 {
+    /// <summary>
+    /// 
+    /// 
+    /// </summary>
     public class FriendsViewModel : ViewModelBase
     {
         public ICommand DeleteCommand { get; set; }

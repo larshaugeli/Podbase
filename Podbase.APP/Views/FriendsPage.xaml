@@ -55,7 +55,7 @@
             </ListView>
 
             <CommandBar x:Name="AllUsersCommands"  Height="48" Margin="700,55,1,0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                <AppBarButton x:Name="AddToFriends" Icon="Add" Label="Add" Command="{x:Bind ViewModel.AddToFriendsCommand}" CommandParameter="{Binding ElementName=AccountsListView, Path=SelectedItem}"/>
+                <AppBarButton x:Name="AddToFriends" Icon="AddFriend" Label="Add" Command="{x:Bind ViewModel.AddToFriendsCommand}" CommandParameter="{Binding ElementName=AccountsListView, Path=SelectedItem}"/>
                 <AppBarButton x:Name="SortAllUsers" Icon="Sort" Label="Sort" Command="{x:Bind ViewModel.SortAllUsersCommand}"/>
             </CommandBar>
 

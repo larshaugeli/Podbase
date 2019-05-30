@@ -65,7 +65,7 @@
                     Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}"
                     Style="{ThemeResource BodyTextBlockStyle}" />
                 <TextBlock
-                    x:Uid="Settings_AboutDescription"
+                    Text="Podbase is a podcast database application."
                     Margin="{StaticResource XSmallTopMargin}"
                     Style="{ThemeResource BodyTextBlockStyle}" />
 
