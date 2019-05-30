@@ -20,7 +20,7 @@
             <ListView Name="PodcastsListView" ItemsSource="{Binding Podcasts, UpdateSourceTrigger=PropertyChanged}"  Height="487" Margin="10,112,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965">
                 <ListView.HeaderTemplate >
                     <DataTemplate>
-                        <Grid Background="Gray" Padding="10">
+                        <Grid Background="LightSteelBlue" Padding="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="300" />
                                 <ColumnDefinition Width="300" />

@@ -22,7 +22,7 @@
             <ListView Name="AccountsListView" ItemsSource="{Binding Accounts, UpdateSourceTrigger=PropertyChanged}" Height="250" Margin="10,96,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965">
                 <ListView.HeaderTemplate >
                     <DataTemplate>
-                        <Grid Background="Gray" Padding="10">
+                        <Grid Background="LightSteelBlue" Padding="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="200" />
                                 <ColumnDefinition Width="200" />
@@ -67,7 +67,7 @@
             <ListView Name="FriendsListView" ItemsSource="{Binding FriendsAccounts}" Height="224" Margin="10,383,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="965">
                 <ListView.HeaderTemplate >
                     <DataTemplate>
-                        <Grid Background="Gray" Padding="10">
+                        <Grid Background="LightSteelBlue" Padding="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="200" />
                                 <ColumnDefinition Width="200" />

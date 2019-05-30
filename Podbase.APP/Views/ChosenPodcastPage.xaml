@@ -6,14 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewModels="using:Podbase.APP.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
 
     <Page.DataContext>
         <viewModels:ChosenPodcastViewModel/>
     </Page.DataContext>
 
-    <Grid>
+    <Grid
+        x:Name="ContentArea"
+        Margin="{StaticResource MediumLeftRightMargin}">
+        <Grid
+        Background="AliceBlue">
         <TextBlock Text="Podcast" HorizontalAlignment="Left" TextAlignment="Center" FontSize="30" FontWeight="ExtraBold" Margin="367,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="80,140,0,0" Text="Podcast name:" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="80,200,0,0" Text="Creator:" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top"/>
@@ -23,5 +27,6 @@
         <TextBlock HorizontalAlignment="Left" Margin="287,200,0,0" Text="{Binding Creator, Mode=TwoWay}" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="287,262,0,0" Text="{Binding Genre, Mode=TwoWay}" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock Name="Description" HorizontalAlignment="Left" Margin="287,329,0,0" Text="{Binding Description, Mode=TwoWay}" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        </Grid>
     </Grid>
 </Page>
