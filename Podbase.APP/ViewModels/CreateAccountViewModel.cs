@@ -50,8 +50,8 @@ namespace Podbase.APP.ViewModels
                 if (await AccountDataAccess.AddAccountAsync(account))
                     {
                         Accounts.Add(account);
-                        NavigationService.Navigate(typeof(LoginPage));
                     }
+                NavigationService.Navigate(typeof(LoginPage));
             }
             catch (ArgumentException exception)
             {
@@ -70,7 +70,6 @@ namespace Podbase.APP.ViewModels
 
                     return true;
             }
-
             return false;
         }
 

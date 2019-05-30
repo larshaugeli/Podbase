@@ -1,5 +1,7 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using Windows.UI.Xaml.Controls;
+using Newtonsoft.Json;
 using Podbase.APP.Helpers;
 using Podbase.APP.ViewModels;
 
@@ -23,9 +25,9 @@ namespace Podbase.APP.Views
             {
                 await ViewModel.LoadAccountsAsync();
             }
-            catch (HttpRequestException exception)
+            catch (JsonReaderException)
             {
-                Misc.CreateDialog("Error", exception.Message);
+                await Misc.CreateMessageDialog("Error", "Could not read Json from database, please check your internet or database connection.");
             }
         }
     }

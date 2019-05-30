@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using Windows.Foundation;
 using Windows.UI.Notifications;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Microsoft.EntityFrameworkCore;
 using Podbase.APP.ViewModels;
@@ -64,31 +66,18 @@ namespace Podbase.APP.Helpers
             ToastNotifier.Show(toast);
         }
 
+        public static IAsyncOperation<IUICommand> CreateMessageDialog(string title, string message)
+        {
+            MessageDialog messageDialog = new MessageDialog(title, message);
+            return messageDialog.ShowAsync();
+        }
+
         public static void CreateDialog(string title, string message)
         {
             ContentDialog dialog = new ContentDialog();
             {
                 dialog.Title = title;
                 dialog.Content = message;
-                //switch (situation)
-                //{
-                //    case "notExists":
-                //        dialog.Title = "Error";
-                //        dialog.Content = "Username and password combination does not exists";
-                //        break;
-                //    case "exists":
-                //        dialog.Title = "Welcome";
-                //        dialog.Content = "Welcome " + LoginViewModel.LoggedInAccount.Username;
-                //        break;
-                //    case "invalidPassword":
-                //        dialog.Title = "Error";
-                //        dialog.Content = "Invalid password. Password must include one number, one upper case letter and must be 4 or more characters.";
-                //        break;
-                //    case "taken":
-                //        dialog.Title = "Error";
-                //        dialog.Content = "Username already taken.";
-                //        break;
-                //}
             }
             dialog.CloseButtonText = "OK";
             dialog.ShowAsync();

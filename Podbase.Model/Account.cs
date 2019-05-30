@@ -19,14 +19,7 @@ namespace Podbase.Model
         public string Username
         {
             get => _username;
-            set
-            {
-                if (value == null)
-                    throw new ArgumentException("Username cannot be null");
-                //if (UsernameTaken(value))
-                //    throw new ArgumentException("This username is already taken.");
-                _username = value;
-            }
+            set => _username = value ?? throw new ArgumentException("Username cannot be null");
         }
 
         public string Password

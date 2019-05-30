@@ -2,8 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Newtonsoft.Json;
 using Podbase.APP.Helpers;
 using Podbase.APP.Services;
 using Podbase.APP.Views;
@@ -28,16 +30,9 @@ namespace Podbase.APP.ViewModels
         // Gets accounts from database and fills ObservableCollection Accounts
         internal async Task LoadAccountsAsync()
         {
-            try
-            {
-                var accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
-                foreach (Account account in accounts)
-                    Accounts.Add(account);
-            }
-            catch (ArgumentException exception)
-            {
-                Misc.CreateDialog("Error", exception.Message);
-            }
+            var accounts = await CreateAccountViewModel.AccountDataAccess.GetAccountsAsync();
+            foreach (Account account in accounts)
+                Accounts.Add(account);
         }
 
         // Logs in user if an account with typed in username and password is in database
