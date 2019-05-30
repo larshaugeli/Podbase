@@ -22,7 +22,6 @@ namespace Podbase.APP.ViewModels
 
         public LoginViewModel()
         {
-            //Misc.CreateDummyAccounts();
             LoginCommand = new RelayCommand(LoginUser);
             CreateAccount = new RelayCommand(GoToCreateAccount);
         }
