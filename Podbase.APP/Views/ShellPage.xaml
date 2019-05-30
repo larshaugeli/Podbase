@@ -34,7 +34,6 @@
             -->
             <winui:NavigationViewItem x:Uid="Shell_Main" Icon="Document" helpers:NavHelper.NavigateTo="views:MainPage" />
             <winui:NavigationViewItem x:Uid="Shell_Podcast" Icon="Document" helpers:NavHelper.NavigateTo="views:PodcastPage" />
-            <winui:NavigationViewItem x:Uid="Shell_Search" Icon="Document" helpers:NavHelper.NavigateTo="views:SearchPage" />
             <winui:NavigationViewItem x:Name="Account"  x:Uid="Shell_Account" Icon="Document" helpers:NavHelper.NavigateTo="views:AccountPage" />
             <winui:NavigationViewItem x:Uid="Shell_Friends" Icon="Document" helpers:NavHelper.NavigateTo="views:FriendsPage" />
             <winui:NavigationViewItem Content="Log out" Icon="Document" helpers:NavHelper.NavigateTo="views:LogOutPage" />
