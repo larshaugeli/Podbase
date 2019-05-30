@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Newtonsoft.Json;
 using Podbase.APP.Helpers;
 using Podbase.APP.Services;
 using Podbase.APP.Views;
@@ -61,11 +58,6 @@ namespace Podbase.APP.ViewModels
                             LastName = acc.LastName,
                             UserId = acc.UserId
                         };
-                        //TODO remove
-                        Debug.WriteLine("Username: " + LoggedInAccount.Username + " Password: " +
-                                        LoggedInAccount.Password
-                                        + " FirstName: " + LoggedInAccount.FirstName + " LastName: " +
-                                        LoggedInAccount.LastName + " UsedId: " + LoggedInAccount.UserId);
                     }
 
                     Misc.CreateDialog("Welcome", "Welcome " + LoggedInAccount.Username);
@@ -83,7 +75,7 @@ namespace Podbase.APP.ViewModels
             }
         }
 
-        // Goes to CreateAccountPage when "Create Account"-button is pressed
+        // Navigates to CreateAccountPage when "Create Account"-button is pressed
         public void GoToCreateAccount() { NavigationService.Navigate(typeof(CreateAccount)); }
 
         // Input strings

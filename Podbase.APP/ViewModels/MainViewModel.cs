@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using Podbase.APP.Helpers;
-using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
 {

@@ -3,8 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Podbase.APP.Helpers;
-using Podbase.APP.Services;
-using Podbase.APP.Views;
 using Podbase.DataAccess;
 using Podbase.Model;
 

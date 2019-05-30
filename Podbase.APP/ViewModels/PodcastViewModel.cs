@@ -41,7 +41,7 @@ namespace Podbase.APP.ViewModels
                 Podcasts.Add(podcast);
         }
 
-        // Goes to EditPodcastPage when pressed "Edit"-symbol 
+        // Navigates to EditPodcastPage when pressed "Edit"-symbol 
         private static void GoToEditPodcastPage(Podcast pod)
         {
             EditPodcastViewModel.SelectedPodcast = pod;
@@ -49,7 +49,7 @@ namespace Podbase.APP.ViewModels
             NavigationService.Navigate(typeof(EditPodcastPage));
         }
 
-        // Goes to AddPodcastPage when pressed "+"-button
+        // Navigates to AddPodcastPage when pressed "+"-button
         private static void GoToAddPodcastPage() { NavigationService.Navigate(typeof(AddPodcastPage)); }
 
         // Sorts podcasts list
@@ -63,6 +63,7 @@ namespace Podbase.APP.ViewModels
             }
         }
 
+        // Navigates to specific podcast
         public void GoToSelectedPodcast(Podcast podcast)
         {
             ChosenPodcastViewModel.SelectedPodcast = podcast;

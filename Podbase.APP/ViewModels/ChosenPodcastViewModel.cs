@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Podbase.APP.Services;
-using Podbase.APP.Views;
-using Podbase.Model;
+﻿using Podbase.Model;
 
 namespace Podbase.APP.ViewModels
 {
