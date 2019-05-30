@@ -74,7 +74,7 @@ namespace Podbase.APP.Helpers
             return messageDialog.ShowAsync();
         }
 
-        public static void CreateDialog(string title, string message)
+        public static async void CreateDialog(string title, string message)
         {
             ContentDialog dialog = new ContentDialog();
             {
@@ -82,7 +82,7 @@ namespace Podbase.APP.Helpers
                 dialog.Content = message;
             }
             dialog.CloseButtonText = "OK";
-            dialog.ShowAsync();
+            await dialog.ShowAsync();
         }
 
         public static void CreateDummyAccounts()
