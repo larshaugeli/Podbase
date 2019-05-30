@@ -12,7 +12,7 @@ namespace Podbase.APP.ViewModels
 {
     /// <summary>
     /// This view model contain methods relevant to logging in to the application.
-    /// This class logs a user into the application.
+    /// This class logs a user into the application. 
     /// </summary>
     public class LoginViewModel : ViewModelBase
     {
