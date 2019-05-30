@@ -3,8 +3,8 @@
 namespace Podbase.APP.ViewModels
 {
     /// <summary>
-    /// 
-    /// 
+    /// This view model contains code relevant to the ChosenPodcast page.
+    /// This class displays info about a podcast.
     /// </summary>
     public class ChosenPodcastViewModel : ViewModelBase
     {

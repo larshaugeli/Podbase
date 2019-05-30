@@ -11,8 +11,8 @@ using Podbase.Model;
 namespace Podbase.APP.ViewModels
 {
     /// <summary>
-    /// 
-    /// 
+    /// The view model contains methods relevant to the podcast page.
+    /// This class can add, edit, sort and delete podcasts and get podcast from database.
     /// </summary>
     public class PodcastViewModel : ViewModelBase
     {

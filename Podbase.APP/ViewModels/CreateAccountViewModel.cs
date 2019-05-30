@@ -12,8 +12,8 @@ using Podbase.Model;
 namespace Podbase.APP.ViewModels
 {
     /// <summary>
-    /// 
-    /// 
+    /// This view model contains methods relevant to creating an account.
+    /// This class creates an account and adds it to the database.
     /// </summary>
     public class CreateAccountViewModel : ViewModelBase
     {

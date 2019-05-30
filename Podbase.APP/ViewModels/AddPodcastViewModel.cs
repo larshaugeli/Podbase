@@ -9,8 +9,8 @@ using Podbase.Model;
 namespace Podbase.APP.ViewModels
 {
     /// <summary>
-    /// 
-    /// 
+    /// This view model contains code relevant to adding a podcast.
+    /// This class adds a podcast to the list in Podcast page.
     /// </summary>
     public class AddPodcastViewModel : ViewModelBase
     {

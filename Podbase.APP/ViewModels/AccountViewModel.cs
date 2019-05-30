@@ -9,8 +9,8 @@ using Podbase.Model;
 namespace Podbase.APP.ViewModels
 {
     /// <summary>
-    /// 
-    /// 
+    /// This view model contain methods relevant to the Account page.
+    /// This class gets info about a user and displays it.
     /// </summary>
     public class AccountViewModel : ViewModelBase
     {
