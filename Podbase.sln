@@ -7,13 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Podbase.APP", "Podbase.APP\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Podbase.APP.Core", "Podbase.APP.Core\Podbase.APP.Core.csproj", "{0994A928-5B0A-4B6C-A235-FC815AF889BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Podbase.DataAccess", "Podbase.DataAccess\Podbase.DataAccess.csproj", "{628B9ADA-13EB-4350-830E-AC1011A0AFBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Podbase.DataAccess", "Podbase.DataAccess\Podbase.DataAccess.csproj", "{628B9ADA-13EB-4350-830E-AC1011A0AFBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Podbase.MaintainDatabase.ConsoleApp", "Podbase.MaintainDatabase.ConsoleApp\Podbase.MaintainDatabase.ConsoleApp.csproj", "{5B40C2C3-3390-4FE9-B6C8-F4D1645D2212}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Podbase.MaintainDatabase.ConsoleApp", "Podbase.MaintainDatabase.ConsoleApp\Podbase.MaintainDatabase.ConsoleApp.csproj", "{5B40C2C3-3390-4FE9-B6C8-F4D1645D2212}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Podbase.Model", "Podbase.Model\Podbase.Model.csproj", "{94442A40-ACA7-4E9F-9942-E6FAD3A25B34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Podbase.Model", "Podbase.Model\Podbase.Model.csproj", "{94442A40-ACA7-4E9F-9942-E6FAD3A25B34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Podbase.API", "Podbase.API\Podbase.API.csproj", "{E43A2107-13A2-4697-8BC7-0799CA5B2F5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Podbase.API", "Podbase.API\Podbase.API.csproj", "{E43A2107-13A2-4697-8BC7-0799CA5B2F5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +28,7 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1C168891-461B-4E65-9532-64A2ED767A46}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{1C168891-461B-4E65-9532-64A2ED767A46}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{1C168891-461B-4E65-9532-64A2ED767A46}.Debug|ARM.ActiveCfg = Debug|ARM
 		{1C168891-461B-4E65-9532-64A2ED767A46}.Debug|ARM.Build.0 = Debug|ARM
 		{1C168891-461B-4E65-9532-64A2ED767A46}.Debug|ARM.Deploy.0 = Debug|ARM
